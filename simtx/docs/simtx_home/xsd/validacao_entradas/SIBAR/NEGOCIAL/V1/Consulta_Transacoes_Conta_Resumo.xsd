@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--File Consulta_Transacoes_Conta_Resumo.xsd, application BAR_CONSULTA_TRANSACOES_CONTA -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://caixa.gov.br/sibar/consulta_transacoes_conta/resumo"
+	xmlns:resumo="http://caixa.gov.br/sibar/consulta_transacoes_conta/resumo"
+	xmlns:sibar_base="http://caixa.gov.br/sibar">
+	
+	<xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../../MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd"/>
+
+
+	<xsd:complexType name="servico_entrada_negocial_Type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="DADOS" type="resumo:dados_entrada_Type">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="servico_saida_negocial_Type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="0" name="DADOS" type="resumo:dados_saida_type"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="SERVICO_ENTRADA" type="resumo:servico_entrada_negocial_Type"/>
+
+    <xsd:element name="SERVICO_SAIDA" type="resumo:servico_saida_negocial_Type"/>
+
+    
+    <xsd:complexType name="dados_entrada_Type">
+    	<xsd:sequence>
+    		<xsd:choice maxOccurs="1" minOccurs="1">
+    			<xsd:element maxOccurs="1" minOccurs="0" name="CONTA" type="resumo:conta_Type">
+    			</xsd:element>
+    			<xsd:element maxOccurs="1" minOccurs="0" name="CARTAO" type="xsd:string"/>
+    		</xsd:choice>
+            <xsd:element maxOccurs="1" minOccurs="0" name="PERIODO" type="resumo:periodo_Type">
+    		</xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="SOLICITACOES" type="resumo:dados_entrada_solicitacoes_Type">
+    		</xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+
+    <xsd:complexType name="conta_Type">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="UNIDADE">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:integer">
+    					<xsd:minInclusive value="0"/>
+    					<xsd:maxInclusive value="99999"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="PRODUTO">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:int">
+    					<xsd:minInclusive value="0"/>
+    					<xsd:maxInclusive value="9999"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="NUMERO">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:long">
+    					<xsd:minInclusive value="0"/>
+    					<xsd:maxInclusive value="999999999999"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="DV">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:minInclusive value="0"/>
+    					<xsd:maxInclusive value="9"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="periodo_Type">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="INICIO" type="xsd:date">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="FIM" type="xsd:date"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="dados_entrada_solicitacoes_Type">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="30" minOccurs="0" name="SOLICITACAO">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="IPVA_SP"/>
+    					<xsd:enumeration value="DPVAT_SP"/>
+    					<xsd:enumeration value="MULTAS_SP"/>
+    					<xsd:enumeration value="LICENCIAMENTO_SP"/>
+    					<xsd:enumeration value="SEGUNDA_VIA_LICENCIAMENTO_SP"/>
+    					<xsd:enumeration value="PRIMEIRO_REGISTRO_ESTADO_SP"/>
+    					<xsd:enumeration value="DEBITOS_PENDENTES_SP"/>
+    					<xsd:enumeration value="TRANSFERENCIA_SP"/>
+    					<xsd:enumeration value="SEGUNDA_VIA_TRANSFERENCIA_SP"/>
+    					<xsd:enumeration value="PEC_GENERICO"/>
+    					<xsd:enumeration value="MULTAS_RENAINFO_SP"/>
+    					<xsd:enumeration value="BOLETO_DDA"/>
+    					<xsd:enumeration value="DARF_COM_CODIGO_BARRAS"/>
+    					<xsd:enumeration value="MEGASENA"/>
+    					<xsd:enumeration value="RECEBIMENTO_ELETRONICO"/>
+    					<xsd:enumeration value="CARTEIRA_ELETRONICA"/>
+    					<xsd:enumeration value="DAED"/>
+    					<xsd:enumeration value="TAXAS_VEICULOS_MG"/>
+    					<xsd:enumeration value="IPVA_RS"/>
+    					<xsd:enumeration value="DPVAT_RS"/>
+    					<xsd:enumeration value="MULTAS_RS"/>
+    					<xsd:enumeration value="LICENCIAMENTO_RS"/>
+    					<xsd:enumeration value="PAGAMENTO_UNIFICADO_RS"/>
+    					<xsd:enumeration value="IPVA_MG"/>
+    					<xsd:enumeration value="DPVAT_MG"/>
+    					<xsd:enumeration value="LICENCIAMENTO_MG"/>
+    					<xsd:enumeration value="TAXAS_DETRAN_SP"/>
+    					<xsd:enumeration value="HABITACAO"/>
+    					<xsd:enumeration value="BOLETO"/>
+    					<xsd:enumeration value="TAXAS_CONDUTOR_MG"/>
+
+
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="dados_saida_type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+    			<xsd:sequence>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="CONTA" type="resumo:conta_Type"/>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="IPVA_SP" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="DPVAT_SP" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="MULTAS_SP" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="LICENCIAMENTO_SP" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="SEGUNDA_VIA_LICENCIAMENTO_SP" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="PRIMEIRO_REGISTRO_ESTADO_SP" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="DEBITOS_PENDENTES_SP" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="TRANSFERENCIAS_SP" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="SEGUNDA_VIA_TRANSFERENCIA_SP" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="PEC_GENERICO" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="MULTAS_RENAINF_SP" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="BOLETO_DDA" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="DARF_CODIGO_BARRAS" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="MEGASENA" type="resumo:dados_saida_mega_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="RECEBIMENTO_ELETRONICO" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="CARTEIRA_ELETRONICA" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="DAED" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="TAXAS_VEICULOS_MG" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="IPVA_RS" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="DPVAT_RS" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="MULTAS_RS" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="LICENCIAMENTO_RS" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="PAGAMENTO_UNIFICADO_RS" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="IPVA_MG" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="DPVAT_MG" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="LICENCIAMENTO_MG" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="TAXAS_DETRAN_SP" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="HABITACAO" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="BOLETO" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="TAXAS_CONDUTOR_MG" type="resumo:dados_saida_geral_Type">
+    				</xsd:element>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="dados_saida_transacao_geral_Type">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="NSU">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:unsignedLong">
+    					<xsd:minInclusive value="0"/>
+    					<xsd:maxInclusive value="999999999"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="DATA_PAGAMENTO" type="xsd:date">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="DATA_EFETIVACAO" type="xsd:date">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="VALOR">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:decimal">
+    					<xsd:minInclusive value="0"/>
+    					<xsd:maxInclusive value="999999999.99"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="IDENTIFICADOR">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:minLength value="0"/>
+    					<xsd:maxLength value="25"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="SITUACAO">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="Confirmado"/>
+    					<xsd:enumeration value="Estornado"/>
+    					<xsd:enumeration value="Agendado"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="dados_saida_transacoes_geral_Type">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="unbounded" minOccurs="1" name="TRANSACAO" type="resumo:dados_saida_transacao_geral_Type"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="dados_saida_geral_Type">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="TRANSACOES" type="resumo:dados_saida_transacoes_geral_Type"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="dados_saida_transacao_mega_Type">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="NSU">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:unsignedLong">
+    					<xsd:minInclusive value="0"/>
+    					<xsd:maxInclusive value="999999999"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="DATA_APOSTA" type="xsd:date">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="DATA_CONCURSO" type="xsd:date">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="VALOR" type="xsd:decimal">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="CONCURSO">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:unsignedShort">
+    					<xsd:minInclusive value="0"/>
+    					<xsd:maxInclusive value="9999"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="dados_saida_transacoes_mega_Type">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="unbounded" minOccurs="1" name="TRANSACAO" type="resumo:dados_saida_transacao_mega_Type"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="dados_saida_mega_Type">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="TRANSACOES" type="resumo:dados_saida_transacoes_mega_Type"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.gov.caixa.simtx</groupId>
+	<artifactId>simtx</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>simtx</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- 		<jboss_core_api_module_dependency>br.gov.caixa.simtx.core.api</jboss_core_api_module_dependency> -->
+
+		<!-- maven-compiler-plugin -->
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>1.7</maven.compiler.source>
+
+		<!-- other plugin versions -->
+		<version.compiler.plugin>3.7.0</version.compiler.plugin>
+		<version.ear.plugin>2.10</version.ear.plugin>
+		<version.ejb.plugin>2.5.1</version.ejb.plugin>
+		<version.maven-war-plugin>2.3</version.maven-war-plugin>
+		<version.surefire.plugin>2.16</version.surefire.plugin>
+
+		<version.javaee-api>6.0</version.javaee-api>
+		<version.org.jboss.ejb3>2.1.0.redhat-1</version.org.jboss.ejb3>
+		<version.log4j>1.2.17</version.log4j>
+		<version.junit>4.11</version.junit>
+	</properties>
+
+
+	<modules>
+		<module>simtx-persistencia</module>
+		<module>simtx-util</module>
+		<module>simtx-assinatura-multipla</module>
+		<module>simtx-agendamento</module>
+		<module>simtx-cancelamento</module>
+		<module>simtx-comprovante</module>
+		<module>simtx-core</module>
+		<module>simtx-integrador</module>
+		<module>simtx-mensageria</module>
+		<module>simtx-roteador-api</module>
+		<module>simtx-manutencao</module>
+	
+		<!-- projects -->
+		<module>simtx-ear</module>
+		<module>simtx-processador-lote</module>
+		<module>simtx-processador-lote-ear</module>
+		<module>simtx-web-api</module>
+		
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<dependencyManagement>
+		<dependencies>
+		
+			<dependency>
+				<groupId>br.gov.caixa.simtx</groupId>
+				<artifactId>simtx-persistencia</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.gov.caixa.simtx</groupId>
+				<artifactId>simtx-util</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>br.gov.caixa.simtx</groupId>
+				<artifactId>simtx-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.gov.caixa.simtx</groupId>
+				<artifactId>simtx-mensageria</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.gov.caixa.simtx</groupId>
+				<artifactId>simtx-expurgo</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>br.gov.caixa.simtx</groupId>
+				<artifactId>simtx-integrador</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>br.gov.caixa.simtx</groupId>
+				<artifactId>simtx-assinatura-multipla</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.gov.caixa.simtx</groupId>
+				<artifactId>simtx-agendamento</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.gov.caixa.simtx</groupId>
+				<artifactId>simtx-comprovante</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>br.gov.caixa.simtx</groupId>
+				<artifactId>simtx-web-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>br.gov.caixa.simtx</groupId>
+				<artifactId>simtx-cancelamento</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>br.gov.caixa.simtx</groupId>
+				<artifactId>simtx-roteador-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.gov.caixa.simtx</groupId>
+				<artifactId>simtx-manutencao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>${version.javaee-api}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.ejb3</groupId>
+				<artifactId>jboss-ejb3-ext-api</artifactId>
+				<version>${version.org.jboss.ejb3}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${version.log4j}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${version.junit}</version>
+				<scope>test</scope>
+			</dependency>
+			
+			<dependency>
+               <groupId>org.jacoco</groupId>
+               <artifactId>jacoco-maven-plugin</artifactId>
+               <version>0.7.4.201502262128</version>
+            </dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+</project>

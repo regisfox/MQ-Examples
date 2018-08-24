@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<controlelimite:SERVICO_ENTRADA
+	xmlns:controlelimite="http://caixa.gov.br/sibar/controle_limite/consulta"
+	xmlns:sibar_base="http://caixa.gov.br/sibar" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://caixa.gov.br/sibar/controle_limite/consulta Controle_Limite_Consulta.xsd ">
+	<sibar_base:HEADER>
+		<VERSAO>1.0</VERSAO>
+		<OPERACAO>CONSULTA</OPERACAO>
+		<DATA_HORA>20180405124900</DATA_HORA>
+	</sibar_base:HEADER>
+	<DADOS>
+		<TIPO_PAGAMENTO>BOLETO</TIPO_PAGAMENTO>
+		<CONTA>
+			<UNIDADE>682</UNIDADE>
+			<PRODUTO>1288</PRODUTO>
+			<NUMERO>990011127</NUMERO>
+			<DV>9</DV>
+		</CONTA>
+		<VALOR_TRANSACAO>275.00</VALOR_TRANSACAO>
+		<DATA_EFETIVACAO>2018-04-05</DATA_EFETIVACAO>
+		<TIPO_AUTENTICACAO>AUTENTICACAO_SIMPLES</TIPO_AUTENTICACAO>
+	</DADOS>
+</controlelimite:SERVICO_ENTRADA>

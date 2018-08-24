@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao"
+	xmlns:sibar_base="http://caixa.gov.br/sibar" 
+	xmlns:valida_permissao="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	
+	<xsd:element name="PERMISSAO_ENTRADA" type="valida_permissao:dados_entrada_Type" />
+	<xsd:element name="PERMISSAO_SAIDA" type="valida_permissao:dados_saida_Type" />
+	<xsd:element name="TOKEN" type="valida_permissao:dados_token_Type" />
+	
+	<xsd:complexType name="dados_entrada_Type">
+		<xsd:sequence>
+			<xsd:element name="OPCAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:minInclusive value="0" />
+						<xsd:maxInclusive value="99" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>			<xsd:element name="SERVICO_SIPER" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:totalDigits value="3" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DT_MOVTO_SIPER" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:totalDigits value="8" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="dados_saida_Type">
+		<xsd:sequence>
+			<xsd:element name="OPCAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:totalDigits value="1" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>			<xsd:element minOccurs="0" name="SERVICO_SIPER">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:totalDigits value="3" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="DT_MOVTO_SIPER">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:totalDigits value="8" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="NSU_SIPER">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:totalDigits value="9" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="FLAG_TP_LOGIN">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="dados_token_Type">
+		<xsd:sequence>
+			<xsd:element name="ACAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="SESSAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="32" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CODIGO_SESSAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="80" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType></xsd:schema>

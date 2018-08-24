@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<xsd:schema 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://caixa.gov.br/sicco/comuns/header" 
+	xmlns:header="http://caixa.gov.br/sicco/comuns/header">
+	
+	
+	<xsd:element name="HEADER_ENTRADA"	type="header:HEADER_ENTRADA_Type" />
+	<xsd:element name="HEADER_SAIDA"	type="header:HEADER_SAIDA_Type" />
+	
+	<xsd:complexType name="HEADER_ENTRADA_Type">
+		<xsd:sequence>
+			<xsd:element name="SERVICO" type="header:SERVICOType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="CANAL" type="header:CANALType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="DATAHORA" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>DATAHORA deve estar no padrao yyyyMMddHHmmss</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType> 
+					<xsd:restriction base="xsd:long">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="99999999999999" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	<xsd:complexType name="HEADER_SAIDA_Type">
+		<xsd:complexContent>
+			<xsd:extension base="header:HEADER_ENTRADA_Type">
+				<xsd:sequence>
+					<xsd:element name="COD_RETORNO" minOccurs="1" maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="5" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="ORIGEM_RETORNO" minOccurs="1" maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="50" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="MENSAGENS" type="header:MENSAGEMType"	minOccurs="1" maxOccurs="1" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="SERVICOType">
+		<xsd:sequence>
+			<xsd:element name="CODIGO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:minInclusive value="110000"/>
+						<xsd:maxInclusive value="999999"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="VERSAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:minInclusive value="1" />
+						<xsd:maxInclusive value="999" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="CANALType">
+		<xsd:sequence>
+			<xsd:element name="SIGLA" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="SICAQ" />
+						<xsd:enumeration value="SIIBC" />
+						<xsd:enumeration value="SIMAA" />
+						<xsd:enumeration value="SIMAI" />
+						<xsd:enumeration value="SISAG" />
+						<xsd:enumeration value="SISPL" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="MENSAGEMType">
+		<xsd:sequence>
+			<xsd:element name="RETORNO" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="INSTITUCIONAL" type="xsd:string"	minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="INFORMATIVA" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="TELA" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="MENSAGEM" type="xsd:string" minOccurs="0" maxOccurs="30"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

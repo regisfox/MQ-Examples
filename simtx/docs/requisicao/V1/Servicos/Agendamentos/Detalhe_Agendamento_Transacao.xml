@@ -1,0 +1,42 @@
+<ns:DETALHE_AGENDAMENTO_BOLETO_ENTRADA xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:h="http://caixa.gov.br/simtx/comuns/header" xmlns:ns="http://caixa.gov.br/simtx/detalhe_agendamento_transacao/boleto/v1/ns" xmlns:pagamento="http://caixa.gov.br/simtx/negocial/pagamento/v1/pagamento" xmlns:valida_cartao="http://caixa.gov.br/simtx/meios_de_entrada/valida_cartao/v1/valida_cartao" xmlns:valida_permissao="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao" xmlns:valida_senha="http://caixa.gov.br/simtx/meios_de_entrada/valida_senha/v1/valida_senha" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://caixa.gov.br/simtx/detalhe_agendamento_transacao/boleto/v1/ns Detalhe_Agendamento_Boleto.xsd ">
+	<HEADER xsi:type="h:HEADER_ENTRADA_Type">
+		<SERVICO>
+			<CODIGO>110041</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO>
+		<CANAL>
+			<SIGLA>SIMAA</SIGLA>
+			<NSU>123</NSU>
+			<DATAHORA>20180214115100</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>0</MEIOENTRADA>
+		<IDENTIFICADOR_ORIGEM>
+			<ENDERECO_IP>127.0.0.1</ENDERECO_IP>
+		</IDENTIFICADOR_ORIGEM>
+		<DATA_REFERENCIA>20180807</DATA_REFERENCIA>
+	</HEADER>
+	<CONTA>
+		<CONTA_NSGD>
+			<UNIDADE>612</UNIDADE>
+			<PRODUTO>1288</PRODUTO>
+			<CONTA>990010354</CONTA>
+			<DV>3</DV>
+		</CONTA_NSGD>
+		<TITULAR_CONTA>1</TITULAR_CONTA>
+	</CONTA>
+	<PERMISSAO>
+		<OPCAO>0.0</OPCAO>
+		<SERVICO_SIPER>0.0</SERVICO_SIPER>
+		<DT_MOVTO_SIPER>0.0</DT_MOVTO_SIPER>
+	</PERMISSAO>
+	<TOKEN>
+		<ACAO>0</ACAO>
+		<SESSAO>0</SESSAO>
+		<CODIGO_SESSAO>0</CODIGO_SESSAO>
+	</TOKEN>
+	<DETALHE_AGENDAMENTO_TRANSACAO>
+		<SISTEMA_ORIGEM>SIMTX</SISTEMA_ORIGEM>
+		<NSU>150594</NSU>
+		<DATA_EFETIVACAO>2018-08-07</DATA_EFETIVACAO>
+	</DETALHE_AGENDAMENTO_TRANSACAO>
+</ns:DETALHE_AGENDAMENTO_BOLETO_ENTRADA>

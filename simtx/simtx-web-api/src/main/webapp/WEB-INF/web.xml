@@ -1,0 +1,15 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+                       http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+                        version="3.0">
+     <filter>
+        <filter-name>jwtFilter</filter-name>
+        <filter-class>br.gov.caixa.simtx.web.configuracao.JWTFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>jwtFilter</filter-name>
+        <url-pattern>/web/sessao/*</url-pattern>
+    </filter-mapping>
+</web-app>

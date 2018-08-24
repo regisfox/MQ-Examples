@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:DETALHE_COMPROVANTE_BOLETO_ENTRADA
+	xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:h="http://caixa.gov.br/simtx/comuns/header"
+	xmlns:ns="http://caixa.gov.br/simtx/detalhe_comprovante_transacao/boleto/v1/ns"
+	xmlns:pagamento="http://caixa.gov.br/simtx/negocial/pagamento/v1/pagamento"
+	xmlns:valida_cartao="http://caixa.gov.br/simtx/meios_de_entrada/valida_cartao/v1/valida_cartao"
+	xmlns:valida_permissao="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao"
+	xmlns:valida_senha="http://caixa.gov.br/simtx/meios_de_entrada/valida_senha/v1/valida_senha"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://caixa.gov.br/simtx/detalhe_comprovante_transacao/boleto/v1/ns Detalhe_Comprovante_Boleto.xsd ">
+	<HEADER>
+		<SERVICO>
+			<CODIGO>110027</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO>
+		<CANAL>
+			<SIGLA>SIMAA</SIGLA>
+			<DATAHORA>20180420163000</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>4</MEIOENTRADA>
+		<DATA_REFERENCIA>20180420</DATA_REFERENCIA>
+	</HEADER>
+	<CONTA>
+		<CONTA_NSGD>
+			<UNIDADE>0682</UNIDADE>
+			<PRODUTO>1288</PRODUTO>
+			<CONTA>990011127</CONTA>
+			<DV>9</DV>
+		</CONTA_NSGD>
+	</CONTA>
+	<CARTAO>
+		<TRILHA>6277809990222884=20076208321906901040</TRILHA>
+		<TP_ENTRADA>021</TP_ENTRADA>
+		<NUMERO_SEQUENCIAL>0</NUMERO_SEQUENCIAL>
+		<INFORMACOES_CHIP>123</INFORMACOES_CHIP>
+	</CARTAO>
+	<SENHA>
+		<SENHA>M0A3E4F066B6A</SENHA>
+		<FLAG_CONSULTA_IP>S</FLAG_CONSULTA_IP>
+		<VERSAO>3</VERSAO>
+		<ACAO>17</ACAO>
+	</SENHA>
+	<DETALHE_COMPROVANTE_TRANSACAO>
+		<NSU_SIMTX>150666</NSU_SIMTX>
+	</DETALHE_COMPROVANTE_TRANSACAO>
+</ns:DETALHE_COMPROVANTE_TRANSACAO_ENTRADA>

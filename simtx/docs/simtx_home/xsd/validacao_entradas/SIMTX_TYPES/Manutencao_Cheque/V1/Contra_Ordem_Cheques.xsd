@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:h="http://caixa.gov.br/simtx/comuns/header" 
+	xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns"  
+	xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns"
+	xmlns:validaassinatura="http://caixa.gov.br/simtx/meios_de_entrada/valida_assinatura/v1/valida_assinatura" 
+	xmlns:contraordemcheques="http://caixa.gov.br/simtx/negocial/manutencao_cheque/v1/ns" 
+	xmlns:ns="http://caixa.gov.br/simtx/manutencao_cheque/v1/ns" 
+	targetNamespace="http://caixa.gov.br/simtx/manutencao_cheque/v1/ns">
+
+	<!-- Inicio Imports Communs e Header -->
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/header" schemaLocation="../../../SIMTX/COMUNS/V1/Header.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/comuns" schemaLocation="../../../SIMTX/COMUNS/V1/Comuns_Simtx.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/enuns" schemaLocation="../../../SIMTX/COMUNS/V1/Enuns_Type_Simtx.xsd" />
+	<!-- Fim Imports Communs e Header -->
+
+	<!-- Inicio imports Meios de entrada -->
+	<xsd:import namespace="http://caixa.gov.br/simtx/meios_de_entrada/valida_assinatura/v1/valida_assinatura" schemaLocation="../../../SIMTX/MEIOS_DE_ENTRADA/VALIDA_ASSINATURA/V1/Valida_Assinatura_Simtx.xsd" />
+	<!-- Fim imports Meios de entrada -->
+	
+	<!-- Inicio imports Negocial -->
+	<xsd:import namespace="http://caixa.gov.br/simtx/negocial/manutencao_cheque/v1/ns" schemaLocation="../../../SIMTX/NEGOCIAL/Contra_Ordem_Cheques/V1/Contra_Ordem_Cheques_Simtx.xsd" />
+	<!-- Fim imports Negocial -->
+	
+
+	<!-- Inicio Bloco Dados de entrada -->
+	<xsd:element name="CONTRA_ORDEM_CHEQUE_ENTRADA" type="ns:contra_ordem_cheque_entrada_type" />
+	<xsd:complexType name="contra_ordem_cheque_entrada_type">
+		<xsd:sequence>
+			<xsd:element name="HEADER" type="h:HEADER_ENTRADA_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="CPF" type="comuns:cpf_format_type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="CONTA" type="comuns:CONTA_entrada_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="TOKEN" type="comuns:token_validacao_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:choice minOccurs="1" maxOccurs="1">
+				<xsd:element name="ASSINATURA_SIMPLES" type="validaassinatura:assinatura_simples_e_type" />
+				<xsd:element name="ASSINATURA_MULTIPLA" type="validaassinatura:assinatura_multipla_e_type" />
+			</xsd:choice>
+			<xsd:element name="CONTRA_ORDEM_CHEQUE" type="contraordemcheques:contra_ordem_cheque_envio_type" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Inicio Bloco Dados de saida -->
+	<xsd:element name="CONTRA_ORDEM_CHEQUE_SAIDA" type="ns:contra_ordem_cheque_saida_type" />
+	<xsd:complexType name="contra_ordem_cheque_saida_type">
+		<xsd:sequence>
+			<xsd:element name="HEADER" type="h:HEADER_SAIDA_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="TOKEN" type="comuns:token_autenticacao_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="ASSINATURA_MULTIPLA" type="validaassinatura:valida_assinatura_saida_type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="CONTRA_ORDEM_CHEQUE" type="contraordemcheques:contra_ordem_cheque_dados_retorno_type" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- Fim Bloco Dados de saida -->
+	
+</xsd:schema>

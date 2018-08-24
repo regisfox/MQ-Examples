@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    	
+<xsd:schema
+	targetNamespace="http://caixa.gov.br/siiso/consulta_documento"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:sibar_base="http://caixa.gov.br/sibar"
+	xmlns:consulta_doc="http://caixa.gov.br/siiso/consulta_documento">
+	
+	<xsd:annotation>
+		<xsd:documentation>
+			O encoding do XML pode ser aquele que o canal utiliza: UTF-8, ISO-8859-1, etc.
+			Campos importantes do HEADER:
+			- VERSAO: deve ser preenchido com o valor da última versão;
+			- USUARIO_SERVICO: informar o usuário de serviço do sistema cliente;
+			- OPERACAO: informar CONSULTA_DOCUMENTO;
+			- SISTEMA_ORIGEM: informar a sigla do sistema cliente;
+			- DATA_HORA: informar data e hora no formato yyyyMMddHHmmss. 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:import schemaLocation="../MensagensBarramento.xsd" namespace="http://caixa.gov.br/sibar"/>
+
+    <xsd:element name="SERVICO_ENTRADA" type="consulta_doc:servico_entrada_type" />
+    
+	<xsd:complexType name="servico_entrada_type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="DADOS" type="consulta_doc:dados_entrada_type"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+    <xsd:complexType name="dados_entrada_type">
+        <xsd:sequence>
+    		<xsd:element name="CONSULTA_DOCUMENTOS" type="consulta_doc:consulta_documentos_entrada_type" minOccurs="1" maxOccurs="1"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+	<xsd:complexType name="consulta_documentos_entrada_type">
+		<xsd:sequence>
+			<xsd:element name="TIPO_BUSCA" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Informar:
+						- 1: para uma busca por documentos. Informe os dados no elemento DOCUMENTOS;
+						- 2: para uma busca por pessoa. Informe os dados no elemento PESSOA. 
+					</xsd:documentation>
+				</xsd:annotation>			
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DOCUMENTOS" type="consulta_doc:documentos_entrada_type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="PESSOA" type="consulta_doc:pessoa_type" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="documentos_entrada_type">
+		<xsd:sequence>
+			<xsd:element name="DOCUMENTO" type="consulta_doc:documento_type" minOccurs="1" maxOccurs="3"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="pessoa_type">
+		<xsd:sequence>		
+			<xsd:element name="NOME" type="consulta_doc:nome_type" minOccurs="1" maxOccurs="1"/>			
+			<xsd:element name="DATA_NASCIMENTO" type="consulta_doc:data_type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="NOME_PAI" type="consulta_doc:nome_type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="NOME_MAE" type="consulta_doc:nome_type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="SEXO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="documento_type">
+		<xsd:sequence>
+			<xsd:element name="TIPO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="1"/>
+						<xsd:maxInclusive value="999"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="COMPLEMENTO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="20"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ORGAO_EMISSOR" minOccurs="0"	maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="UF" type="consulta_doc:uf_type" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="nome_type">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="120"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="data_type">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="10"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="uf_type">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>	
+
+    <xsd:element name="SERVICO_SAIDA" type="consulta_doc:servico_saida_type"/>
+    
+	<xsd:complexType name="servico_saida_type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="DADOS" type="consulta_doc:dados_saida_type" minOccurs="1" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_type">
+		<xsd:complexContent>
+            <xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+                <xsd:sequence>
+					<xsd:element name="CONSULTA_DOCUMENTOS" type="consulta_doc:consulta_documentos_saida_type" minOccurs="0" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+    <xsd:complexType name="consulta_documentos_saida_type">
+    	<xsd:sequence>
+    		<xsd:element name="OCORRENCIAS" type="consulta_doc:ocorrencias_saida_type" minOccurs="1" maxOccurs="1"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+	<xsd:complexType name="ocorrencias_saida_type">
+		<xsd:sequence>
+			<xsd:element name="OCORRENCIA" type="consulta_doc:ocorrencia_saida_type" minOccurs="1" maxOccurs="30"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ocorrencia_saida_type">
+		<xsd:sequence>
+			<xsd:element name="PESSOA" type="consulta_doc:pessoa_saida_type"/>
+			<xsd:element name="SITUACAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="20"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="FLAG_ELOS" type="consulta_doc:flag_type" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="FLAG_HISTORICO" type="consulta_doc:flag_type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="FLAG_RELACIONAMENTO" type="consulta_doc:flag_type" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="FLAG_INCONSISTENCIA" type="consulta_doc:flag_type" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="FLAG_FINANCIAMENTO" type="consulta_doc:flag_type" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="DOCUMENTOS" type="consulta_doc:documentos_saida_type" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="pessoa_saida_type">
+		<xsd:complexContent>
+			<xsd:extension	base="consulta_doc:pessoa_type">
+				<xsd:sequence>
+					<xsd:element name="NUMERO_NATURAL" minOccurs="1" maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:long">
+								<xsd:minInclusive value="0"/>
+								<xsd:maxInclusive value="9999999999999"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>				
+					<xsd:element name="NOME_FONETICO" minOccurs="1"	maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="28"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="NATURALIDADE" type="consulta_doc:naturalidade_type" minOccurs="1" maxOccurs="1"/>
+					<xsd:element name="NIS" minOccurs="1" maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:long">
+								<xsd:minInclusive value="0"/>
+								<xsd:maxInclusive value="99999999999"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="SIGLA_ORIGEM" minOccurs="1"	maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="10"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="naturalidade_type">
+		<xsd:sequence>
+			<xsd:element name="NUMERO_MUNICIPIO" minOccurs="1"	maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="999999"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="UF" type="consulta_doc:uf_type" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="flag_type">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="documentos_saida_type">
+		<xsd:sequence>
+			<xsd:element name="DOCUMENTO" type="consulta_doc:documento_saida_type" minOccurs="1" maxOccurs="5"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="documento_saida_type">
+		<xsd:complexContent>
+			<xsd:extension	base="consulta_doc:documento_type">
+				<xsd:sequence>
+					<xsd:element name="DATA_EMISSAO" type="consulta_doc:data_type" minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="SITUACAO" minOccurs="1"	maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="1"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="ESTADO" minOccurs="1" maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="1"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+</xsd:schema>

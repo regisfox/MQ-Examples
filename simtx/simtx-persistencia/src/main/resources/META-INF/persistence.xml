@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://java.sun.com/xml/ns/persistence
+        http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="simtx_dao" transaction-type="JTA">
+
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:jboss/jdbc/SIMTX04</jta-data-source>
+
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb001Servico</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb003ServicoTarefa</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb002Tarefa</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb003ServicoTarefaPK</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb004Canal</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb005ServicoCanal</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb005ServicoCanalPK</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb006Mensagem</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb007TarefaMensagem</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb007TarefaMensagemPK</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb008MeioEntrada</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb010VrsoTarfaMeioEntra</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb010VrsoTarfaMeioEntraPK</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb011VersaoServico</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb011VersaoServicoPK</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb012VersaoTarefa</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb012VersaoTarefaPK</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb013PrmtoSrvcoCanal</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb014Transacao</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb015SrvcoTrnsoTrfa</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb015SrvcoTrnsoTrfaPK</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb016IteracaoCanal</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb016IteracaoCanalPK</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb017VersaoSrvcoTrnso</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb017VersaoSrvcoTrnsoPK</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb018VrsoMeioEntraSrvco</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb018VrsoMeioEntraSrvcoPK</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb020SrvcoTarfaCanal</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb020SrvcoTarfaCanalPK</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb023Parametro</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb024TarefaFila</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb024TarefaFilaPK</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb025RegraProcessamento</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb026ServicoTarefaRegras</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb026ServicoTarefaRegrasPK</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb029SituacaoVersaoServico</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb030SituacaoCanal</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb031SituacaoServicoCanal</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb032MarcaConta</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb033ServicoMarcaConta</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb035TransacaoConta</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb036TransacaoAuditada</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb038GrupoAcesso</class> 
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb037Funcionalidade</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb039PermissaoAcesso</class> 
+		<class>br.gov.caixa.simtx.persistencia.assinaturamultipla.entidade.Mtxtb027TransacaoAssinaturaMultipla</class>
+		<class>br.gov.caixa.simtx.persistencia.assinaturamultipla.entidade.Mtxtb028ControleAssinaturaMultipla</class>
+		<class>br.gov.caixa.simtx.persistencia.assinaturamultipla.entidade.MtxtbAssinaturaPK</class>
+		<class>br.gov.caixa.simtx.persistencia.agendamento.entidade.Mtxtb034TransacaoAgendamento</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb040PrmtoPgtoContingencia</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb040PrmtoPgtoContingenciaPK</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb041HistoricoPrmtoPgtoContingencia</class>
+		<class>br.gov.caixa.simtx.persistencia.core.entidade.Mtxtb041HistoricoPrmtoPgtoContingenciaPK</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+<!-- 			Properties for Hibernate -->
+			<property name="hibernate.hbm2ddl.auto" value="validate" /> 
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.generate_statistics" value="false" />
+			<property name="hibernate.temp.use_jdbc_metadata_defaults"
+				value="false" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
+			<property name="hibernate.default_schema" value="MTX" />
+			
+			<property name="hibernate.cache.use_second_level_cache" value="true" />
+			<property name="hibernate.cache.provider_class" value="net.sf.ehcache.hibernate.EhCacheProvider" />
+		</properties>
+	</persistence-unit>
+</persistence>

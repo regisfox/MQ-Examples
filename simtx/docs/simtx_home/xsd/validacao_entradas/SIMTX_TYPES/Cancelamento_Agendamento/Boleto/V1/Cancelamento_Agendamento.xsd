@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://caixa.gov.br/simtx/cancelamento_agendamento/v1/ns"
+	xmlns:ns="http://caixa.gov.br/simtx/cancelamento_agendamento/v1/ns"
+	xmlns:header="http://caixa.gov.br/simtx/comuns/header"
+	xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns"
+	xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns"
+	xmlns:pagamento="http://caixa.gov.br/simtx/negocial/pagamento/v1/pagamento"
+	xmlns:validaassinatura="http://caixa.gov.br/simtx/meios_de_entrada/valida_assinatura/v1/valida_assinatura"
+	xmlns:valida_cartao="http://caixa.gov.br/simtx/meios_de_entrada/valida_cartao/v1/valida_cartao"
+	xmlns:valida_senha="http://caixa.gov.br/simtx/meios_de_entrada/valida_senha/v1/valida_senha">
+	
+	<!-- ============================= IMPORTS ======================= -->
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/header" schemaLocation="../../../../SIMTX/COMUNS/V1/Header.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/comuns" schemaLocation="../../../../SIMTX/COMUNS/V1/Comuns_Simtx.xsd"/>
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/enuns" schemaLocation="../../../../SIMTX/COMUNS/V1/Enuns_Type_Simtx.xsd"/>
+	<xsd:import namespace="http://caixa.gov.br/simtx/meios_de_entrada/valida_cartao/v1/valida_cartao" schemaLocation="../../../../SIMTX/MEIOS_DE_ENTRADA/VALIDA_CARTAO/V1/Valida_Cartao_Simtx.xsd"/>
+	<xsd:import namespace="http://caixa.gov.br/simtx/meios_de_entrada/valida_senha/v1/valida_senha" schemaLocation="../../../../SIMTX/MEIOS_DE_ENTRADA/VALIDA_SENHA/V1/Valida_Senha_Simtx.xsd"/>
+	<xsd:import namespace="http://caixa.gov.br/simtx/meios_de_entrada/valida_assinatura/v1/valida_assinatura" schemaLocation="../../../../SIMTX/MEIOS_DE_ENTRADA/VALIDA_ASSINATURA/V1/Valida_Assinatura_Simtx.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/negocial/pagamento/v1/pagamento" schemaLocation="../../../../SIMTX/NEGOCIAL/Pagamento/V1/Pagamento.xsd"/>
+
+    
+    <!-- ============================= REQUISICAO ======================= -->
+    <xsd:element name="CANCELAMENTO_AGENDAMENTO_ENTRADA"	type="ns:CANCELAMENTO_AGENDAMENTO_ENTRADA_Type" />
+    
+	
+	<xsd:complexType name="CANCELAMENTO_AGENDAMENTO_ENTRADA_Type">
+		<xsd:sequence>
+			<xsd:element name="HEADER" type="header:HEADER_ENTRADA_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="CPF" minOccurs="0" maxOccurs="1" type="comuns:cpf_format_type"/>
+    		<xsd:element name="CONTA" type="comuns:CONTA_entrada_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="ASSINATURA_SIMPLES" 	type="validaassinatura:assinatura_simples_e_type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="TOKEN" type="comuns:token_validacao_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="CANCELAMENTO_AGENDAMENTO" type="ns:cancelamento_Entrada_Type" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="cancelamento_Entrada_Type">
+		<xsd:sequence>
+			<xsd:element name="SERVICO" type="comuns:servicos_SIAUT_Type" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="DATA_EFETIVACAO" type="xsd:date" minOccurs="1" maxOccurs="1" />
+			<xsd:choice>
+				<xsd:element name="SIAUT" type="ns:entrada_Type" minOccurs="1" maxOccurs="1"/>
+				<xsd:element name="SIMTX" type="ns:entrada_Type" minOccurs="1" maxOccurs="1"/>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="entrada_Type">
+		<xsd:sequence>
+			<xsd:element name="NSU" type="comuns:nsu_format_size_15_number_type" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	<!-- ============================= RESPOSTA ======================= -->
+	<xsd:element name="CANCELAMENTO_AGENDAMENTO_SAIDA"	type="ns:CANCELAMENTO_AGENDAMENTO_SAIDA_Type" />
+    
+    <xsd:complexType name="CANCELAMENTO_AGENDAMENTO_SAIDA_Type">
+    	<xsd:sequence>
+    		<xsd:element name="HEADER" type="header:HEADER_SAIDA_Type" minOccurs="1" maxOccurs="1" />
+    		<xsd:element name="CPF" minOccurs="0" maxOccurs="1" type="comuns:cpf_format_type"/>
+    		<xsd:element name="CONTA" type="comuns:CONTA_saida_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="TOKEN" type="comuns:token_autenticacao_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="INFORMACOES_AGENDAMENTO" minOccurs="0" maxOccurs="1" type="pagamento:dados_Comprovante_Type"></xsd:element>
+		</xsd:sequence>
+    </xsd:complexType>
+    
+</xsd:schema>

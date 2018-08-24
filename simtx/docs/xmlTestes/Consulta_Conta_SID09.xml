@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extrato:CONSULTA_EXTRATO_ENTRADA xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:extrato="http://caixa.gov.br/simtx/consulta_extrato/v1/ns" xmlns:h="http://caixa.gov.br/simtx/comuns/header" xmlns:valida_cartao="http://caixa.gov.br/simtx/meios_de_entrada/valida_cartao/v1/valida_cartao" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://caixa.gov.br/simtx/consulta_extrato/v1/ns Consulta_Extrato.xsd ">
+  <HEADER>
+    <SERVICO>
+      <CODIGO>110044</CODIGO>
+      <VERSAO>1</VERSAO>
+    </SERVICO>
+    <CANAL>
+      <SIGLA>SIMAA</SIGLA>
+      <DATAHORA>20180822115028</DATAHORA>
+    </CANAL>
+    <MEIOENTRADA>0</MEIOENTRADA>
+    <DATA_REFERENCIA>20180822</DATA_REFERENCIA>
+  </HEADER>
+  <CARTAO>
+    <TRILHA>6036899999870142390=21102201906900840</TRILHA>
+  </CARTAO>
+  <CONSULTA_EXTRATO>
+    <PERIODO_CONSULTA>
+      <DATA_INICIO>2018-08-20</DATA_INICIO>
+      <DATA_FIM>2018-08-23</DATA_FIM>
+    </PERIODO_CONSULTA>
+    <TIPO_CONSULTA>
+      <FLAG_DADOS_CADASTRAIS>true</FLAG_DADOS_CADASTRAIS>
+      <FLAG_LANCAMENTOS>true</FLAG_LANCAMENTOS>
+      <FLAG_SALDOS>true</FLAG_SALDOS>
+      <FLAG_COMPRAS>true</FLAG_COMPRAS>
+      <FLAG_AGENDAMENTO>true</FLAG_AGENDAMENTO>
+      <FLAG_VALORES_BLOQUEADOS>true</FLAG_VALORES_BLOQUEADOS>
+      <FLAG_SALDO_DATA_LIMITE>true</FLAG_SALDO_DATA_LIMITE>
+      <FLAG_LANCAMENTOS_DIA>true</FLAG_LANCAMENTOS_DIA>
+    </TIPO_CONSULTA>
+  </CONSULTA_EXTRATO>
+</extrato:CONSULTA_EXTRATO_ENTRADA>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<multicanal:SERVICO_ENTRADA
+	xmlns:calculaboleto="http://caixa.gov.br/sibar/rotinas_uso_comum/calcula_boleto"
+	xmlns:cc="http://caixa.gov.br/sibar/consulta_conta_sid09"
+	xmlns:consultacontasid09="http://caixa.gov.br/sibar/consulta_conta_sid09/valida_funcionalidades_especiais_impeditivas"
+	xmlns:consultacontasid10="http://caixa.gov.br/sibar/consulta_conta_sid09"
+	xmlns:controlelimite="http://caixa.gov.br/sibar/controle_limite/consulta"
+	xmlns:multicanal="http://caixa.gov.br/sibar/multicanal/orquestracao"
+	xmlns:sibar_base="http://caixa.gov.br/sibar" xmlns:valida="http://caixa.gov.br/simtx/valida_boleto/regras/v1/ns"
+	xmlns:validapermissao="http://caixa.gov.br/sibar/validapermissao"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://caixa.gov.br/simtx/multicanal/orquestracao Multicanal_Orquestracao.xsd">
+	<sibar_base:HEADER>
+		<VERSAO>1.0</VERSAO>
+		<USUARIO_SERVICO>SMTXSD01</USUARIO_SERVICO>
+		<OPERACAO>SERVICO_MIGRADO</OPERACAO>
+		<SISTEMA_ORIGEM>SIIBC</SISTEMA_ORIGEM>
+		<UNIDADE>682</UNIDADE>
+		<DATA_HORA>20180406083813</DATA_HORA>
+	</sibar_base:HEADER>
+	<ORQUESTRACAO>
+		<PASSOS>
+			<PASSO>
+				<SERVICO>controle_limite</SERVICO>
+				<OPERACAO>CONSULTA</OPERACAO>
+				<VERSAO>1</VERSAO>
+				<MODO_INTEGRACAO>MQ</MODO_INTEGRACAO>
+				<RECURSOS>
+					<FILA_REQUISICAO>SIBAR.REQ.CONTROLE_LIMITE</FILA_REQUISICAO>
+					<FILA_RESPOSTA>SIBAR.RSP.CONTROLE_LIMITE</FILA_RESPOSTA>
+				</RECURSOS>
+				<TEMPO_ESPERA>10</TEMPO_ESPERA>
+				<IMPEDIMENTO>S</IMPEDIMENTO>
+				<FORMA_INTEGRACAO>SINCRONA</FORMA_INTEGRACAO>
+				<REGRAS_RETORNO_SUCESSO>
+					<CAMPO>CONTROLE_NEGOCIAL.COD_RETORNO</CAMPO>
+					<RESULTADO_ESPERADO>00</RESULTADO_ESPERADO>
+				</REGRAS_RETORNO_SUCESSO>
+			</PASSO>
+		</PASSOS>
+	</ORQUESTRACAO>
+	<controlelimite:CONTROLE_LIMITE_ENTRADA>
+		<TIPO_PAGAMENTO>BOLETO</TIPO_PAGAMENTO>
+		<CONTA>
+			<UNIDADE>0625</UNIDADE> 
+			<PRODUTO>1288</PRODUTO> 
+			<NUMERO>990011127</NUMERO> 
+			<DV>9</DV> 
+		</CONTA>
+		<VALOR_TRANSACAO>5.000</VALOR_TRANSACAO>
+		<DATA_EFETIVACAO>2018-04-12</DATA_EFETIVACAO>
+		<TIPO_AUTENTICACAO>AUTENTICACAO_SIMPLES</TIPO_AUTENTICACAO>
+	</controlelimite:CONTROLE_LIMITE_ENTRADA>
+</multicanal:SERVICO_ENTRADA>

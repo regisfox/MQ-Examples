@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:consultacadastropositivo="http://caixa.gov.br/sibar/consulta_cadastro_positivo"
+	xmlns:sibar_base="http://caixa.gov.br/sibar" 
+	xmlns:validapermissao="http://caixa.gov.br/sibar/validapermissao"
+	targetNamespace="http://caixa.gov.br/sibar/consulta_cadastro_positivo">
+    
+	<!-- ============================= IMPORTS ======================= -->
+	<xsd:import schemaLocation="../../SIBAR/MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd" 							namespace="http://caixa.gov.br/sibar"/>    
+	<xsd:import schemaLocation="../../SIBAR/MEIOS_DE_ENTRADA/V1/VALIDA_PERMISSAO/VALIDA_PERMISSAO_FluxoCanal.xsd"	namespace="http://caixa.gov.br/sibar/validapermissao"/>
+    
+    
+    <xsd:complexType name="SERVICO_ENTRADA_TYPE">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+        <xsd:sequence>
+                    <xsd:element ref="validapermissao:VALIDA_PERMISSAO_ENTRADA"/>
+                    <xsd:element name="DADOS" type="consultacadastropositivo:DADOS_ENTRADA_TYPE"/>
+                </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="SERVICO_SAIDA_TYPE">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+        <xsd:sequence>
+                    <xsd:element ref="validapermissao:VALIDA_PERMISSAO_SAIDA"/>
+                    <xsd:element minOccurs="0" name="DADOS" type="consultacadastropositivo:DADOS_SAIDA_TYPE"/>
+                </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_ENTRADA_TYPE">
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="CONSULTA_SOLICITACAO" type="consultacadastropositivo:CONSULTA_SOLICITACOES_ENTRADA_TYPE"/>
+        <xsd:element name="CONSULTA_TABELA" type="consultacadastropositivo:TABELA_ENTRADA_TYPE"/>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element default="0" minOccurs="0" name="FLAG_RECEBIMENTO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" paddingCharacter="'0'" signed="false" stringJustification="rightJustify" typeName="MRCWFExternalDecimalRep" width="1"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:choice minOccurs="0">
+        <xsd:element name="SOLICITACOES" type="consultacadastropositivo:DADOS_SOLICITACOES_SAIDA_TYPE"/>
+        <xsd:element name="STATUS_SOLICITACAO" type="consultacadastropositivo:DADOS_STATUS_SAIDA_TYPE"/>
+        <xsd:element name="DETALHE_AUTORIZACAO" type="consultacadastropositivo:DADOS_DETALHE_AUTORIZACAO_SAIDA_TYPE"/>
+        <xsd:element name="TABELA" type="consultacadastropositivo:DADOS_TABELA_SAIDA_TYPE"/>
+                <xsd:element minOccurs="0" name="EXCECAO">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="10000"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+            </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TABELA_ENTRADA_TYPE">
+    <xsd:sequence>
+      <xsd:element default=" " minOccurs="0" name="IDENTIFICACAO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" mrLengthEncoding="fixedLength" paddingCharacter="SPACE" stringJustification="leftJustify" typeName="MRCWFStringRep"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="30"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CONSULTA_SOLICITACOES_ENTRADA_TYPE">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0">
+        <xsd:element default="0" name="CPF">
+          <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+              <cwfInclRep messageSetDefaultRep="CWF">
+                <cwfSimpleRep encodingNull="NullLogicalValue" paddingCharacter="'0'" signed="false" stringJustification="rightJustify" typeName="MRCWFExternalDecimalRep" width="11"/>
+              </cwfInclRep>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:long">
+              <xsd:minInclusive value="0"/>
+              <xsd:maxInclusive value="99999999999"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="CNPJ">
+          <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+              <cwfInclRep messageSetDefaultRep="CWF">
+                <cwfSimpleRep encodingNull="NullLogicalValue" paddingCharacter="'0'" signed="false" stringJustification="rightJustify" typeName="MRCWFExternalDecimalRep" width="14"/>
+              </cwfInclRep>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:long">
+              <xsd:minInclusive value="0"/>
+              <xsd:maxInclusive value="99999999999999"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:element default=" " minOccurs="0" name="NUMERO_AUTORIZACAO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" mrLengthEncoding="fixedLength" paddingCharacter="SPACE" stringJustification="leftJustify" typeName="MRCWFStringRep"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_SOLICITACAO_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element default="0" name="NUMERO_AUTORIZACAO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" paddingCharacter="'0'" signed="false" stringJustification="rightJustify" typeName="MRCWFExternalDecimalRep" virtualDecimalPoint="0" width="20"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999999999999999"/>
+            <xsd:fractionDigits value="0"/>
+            <xsd:totalDigits value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="DATA_AUTORIZACAO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <xmlInclRep format="yyyy-MM-dd'T'HH:mm:ss:SSS" messageSetDefaultRep="XML"/>
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" mrLengthEncoding="fixedLength" paddingCharacter="SPACE" stringJustification="leftJustify" typeName="MRCWFStringRep"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="23"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+            </xsd:element>
+      <xsd:element default="0" name="FLAG_SOLICITACAO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" paddingCharacter="'0'" signed="false" stringJustification="rightJustify" typeName="MRCWFExternalDecimalRep" width="1"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="PROTOCOLO_AUTORIZACAO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" mrLengthEncoding="fixedLength" paddingCharacter="SPACE" stringJustification="leftJustify" typeName="MRCWFStringRep"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="PROTOCOLO_CANCELAMENTO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" mrLengthEncoding="fixedLength" paddingCharacter="SPACE" stringJustification="leftJustify" typeName="MRCWFStringRep"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_SOLICITACOES_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element maxOccurs="20" name="SOLICITACAO" type="consultacadastropositivo:DADOS_SOLICITACAO_SAIDA_TYPE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_STATUS_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element name="SOLICITACAO" type="consultacadastropositivo:DADOS_SOLICITACAO_SAIDA_TYPE"/>
+      <xsd:element name="BIROS" type="consultacadastropositivo:DADOS_BIROS_TYPE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_BIRO_TYPE">
+    <xsd:sequence>
+      <xsd:element default=" " name="DESCRICAO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" mrLengthEncoding="fixedLength" paddingCharacter="SPACE" stringJustification="leftJustify" typeName="MRCWFStringRep"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="SITUACAO_SOLICITACAO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" mrLengthEncoding="fixedLength" paddingCharacter="SPACE" stringJustification="leftJustify" typeName="MRCWFStringRep"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="30"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="MSG_ERRO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" mrLengthEncoding="fixedLength" paddingCharacter="SPACE" stringJustification="leftJustify" typeName="MRCWFStringRep"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="60"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_BIROS_TYPE">
+    <xsd:sequence>
+      <xsd:element maxOccurs="10" name="BIRO" type="consultacadastropositivo:DADOS_BIRO_TYPE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_DETALHE_AUTORIZACAO_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element name="SOLICITACAO" type="consultacadastropositivo:DADOS_SOLICITACAO_SAIDA_TYPE"/>
+      <xsd:element name="ORIGEM" type="consultacadastropositivo:DADOS_ORIGEM_SAIDA_TYPE"/>
+      <xsd:element default=" " name="DATA_CANCELAMENTO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <xmlInclRep format="yyyy-MM-dd'T'HH:mm:ss:SSS" messageSetDefaultRep="XML"/>
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" mrLengthEncoding="fixedLength" paddingCharacter="SPACE" stringJustification="leftJustify" typeName="MRCWFStringRep"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="23"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+            </xsd:element>
+      <xsd:choice>
+        <xsd:element default="0" name="CPF">
+          <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+              <cwfInclRep messageSetDefaultRep="CWF">
+                <cwfSimpleRep encodingNull="NullLogicalValue" paddingCharacter="'0'" signed="false" stringJustification="rightJustify" typeName="MRCWFExternalDecimalRep" width="11"/>
+              </cwfInclRep>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:long">
+              <xsd:minInclusive value="0"/>
+              <xsd:maxInclusive value="99999999999"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element default="0" name="CNPJ">
+          <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+              <cwfInclRep messageSetDefaultRep="CWF">
+                <cwfSimpleRep encodingNull="NullLogicalValue" paddingCharacter="'0'" signed="false" stringJustification="rightJustify" typeName="MRCWFExternalDecimalRep" width="14"/>
+              </cwfInclRep>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:long">
+              <xsd:minInclusive value="0"/>
+              <xsd:maxInclusive value="99999999999999"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:element name="AUTORIZACAO" type="consultacadastropositivo:DADOS_AUTORIZACAO_SAIDA_TYPE"/>
+      <xsd:element name="BIROS" type="consultacadastropositivo:DADOS_AUTORIZACAO_BIROS_TYPE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_ORIGEM_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element default=" " name="CANAL">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" mrLengthEncoding="fixedLength" paddingCharacter="SPACE" stringJustification="leftJustify" typeName="MRCWFStringRep"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="MATRICULA">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" mrLengthEncoding="fixedLength" paddingCharacter="SPACE" stringJustification="leftJustify" typeName="MRCWFStringRep"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="7"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="TERMINAL">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" mrLengthEncoding="fixedLength" paddingCharacter="SPACE" stringJustification="leftJustify" typeName="MRCWFStringRep"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_AUTORIZACAO_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element default="0" name="FLAG_ADESAO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" paddingCharacter="'0'" signed="false" stringJustification="rightJustify" typeName="MRCWFExternalDecimalRep" width="1"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default="0" name="FLAG_COMPARTILHAR">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" paddingCharacter="'0'" signed="false" stringJustification="rightJustify" typeName="MRCWFExternalDecimalRep" width="1"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default="0" name="FLAG_NAO_IF">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" paddingCharacter="'0'" signed="false" stringJustification="rightJustify" typeName="MRCWFExternalDecimalRep" width="1"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_AUTORIZACAO_BIROS_TYPE">
+    <xsd:sequence>
+      <xsd:element maxOccurs="10" name="NUMERO_BIRO" type="consultacadastropositivo:DADOS_AUTORIZACAO_BIRO_TYPE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_AUTORIZACAO_BIRO_TYPE">
+    <xsd:sequence>
+      <xsd:element default="0" name="AUTORIZADO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" paddingCharacter="'0'" signed="false" stringJustification="rightJustify" typeName="MRCWFExternalDecimalRep" width="3"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default="0" minOccurs="0" name="COMPARTILHAR">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" paddingCharacter="'0'" signed="false" stringJustification="rightJustify" typeName="MRCWFExternalDecimalRep" width="3"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_TABELA_BIROS_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element maxOccurs="10" name="BIRO" type="consultacadastropositivo:DADOS_TABELA_BIRO_SAIDA_TYPE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_TABELA_BIRO_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element default="0" name="NUMERO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" paddingCharacter="'0'" signed="false" stringJustification="rightJustify" typeName="MRCWFExternalDecimalRep" width="3"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default="0" name="CNPJ">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" paddingCharacter="'0'" signed="false" stringJustification="rightJustify" typeName="MRCWFExternalDecimalRep" width="14"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="NOME">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" mrLengthEncoding="fixedLength" paddingCharacter="SPACE" stringJustification="leftJustify" typeName="MRCWFStringRep"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="SITUACAO">
+        <xsd:annotation>
+          <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF">
+              <cwfSimpleRep encodingNull="NullLogicalValue" mrLengthEncoding="fixedLength" paddingCharacter="SPACE" stringJustification="leftJustify" typeName="MRCWFStringRep"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_TABELA_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element name="BIROS" type="consultacadastropositivo:DADOS_TABELA_BIROS_SAIDA_TYPE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="SERVICO_ENTRADA" type="consultacadastropositivo:SERVICO_ENTRADA_TYPE">
+    <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/SERVICO_ENTRADA;XSDElementDeclaration$MRObject"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SERVICO_SAIDA" type="consultacadastropositivo:SERVICO_SAIDA_TYPE">
+    <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/SERVICO_SAIDA;XSDElementDeclaration=1$MRObject"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

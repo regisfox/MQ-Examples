@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://caixa.gov.br/sibar/manutencao_assinatura_eletronica/cancela_assinatura" xmlns:manutencaoassinaturaeletronica="http://caixa.gov.br/sibar/manutencao_assinatura_eletronica/cancela_assinatura" xmlns:sibar_base="http://caixa.gov.br/sibar">
+    <xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../../MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd"/>
+    <xsd:complexType name="servico_entrada_negocial_Type">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+        <xsd:sequence>
+          <xsd:element name="DADOS" type="manutencaoassinaturaeletronica:dados_entrada_Type"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+    <xsd:complexType name="servico_saida_negocial_Type">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="DADOS" type="manutencaoassinaturaeletronica:dados_saida_Type"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+    <xsd:complexType name="dados_entrada_Type">
+    <xsd:sequence>
+      <xsd:element name="CPF">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:maxInclusive value="99999999999"/>
+            <xsd:minInclusive value="0"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="NSU_SIPER">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="NSU_TRANSACAO_ORIGEM">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999999999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DATA_TRANSACAO" type="xsd:date"/>
+      <xsd:choice>
+        <xsd:element name="CONTA_SIDEC" type="manutencaoassinaturaeletronica:conta_Type"/>
+        <xsd:element name="CONTA_NSGD" type="manutencaoassinaturaeletronica:conta_Type"/>
+      </xsd:choice>
+      <xsd:element name="TIPO_ASSINATURA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="MULTIPLA"/>
+            <xsd:enumeration value="QRCODE"/>
+            <xsd:enumeration value="BIOMETRIA"/>
+            <xsd:enumeration value="SENHA_CONTA"/>
+            <xsd:enumeration value="SEQUENCIA_ASSINATURA_MULTIPLA"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ASSINATURA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="16"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="APELIDO_USUARIO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="SISTEMA_OPERACIONAL">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ANDROID_PHONE"/>
+            <xsd:enumeration value="ANDROID_TABLET"/>
+            <xsd:enumeration value="IOS_PHONE"/>
+            <xsd:enumeration value="IOS_TABLET"/>
+            <xsd:enumeration value="WINDOWS_PHONE"/>
+            <xsd:enumeration value="WINDOWS_TABLET"/>
+            <xsd:enumeration value="OUTROS"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="CODIGO_DISPOSITIVO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="16"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ENDERECO_IP">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999999999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+        </xsd:sequence>
+  </xsd:complexType>
+    <xsd:complexType name="dados_saida_Type">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+        <xsd:sequence/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+    <xsd:complexType name="conta_Type">
+    <xsd:sequence>
+      <xsd:element name="UNIDADE">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="PRODUTO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="NUMERO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DV">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+    <xsd:element name="SERVICO_ENTRADA" type="manutencaoassinaturaeletronica:servico_entrada_negocial_Type">
+  </xsd:element>
+    <xsd:element name="SERVICO_SAIDA" type="manutencaoassinaturaeletronica:servico_saida_negocial_Type">
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:header="http://caixa.gov.br/simtx/comuns/header" 
+	xmlns:validapermissao="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao"
+	xmlns:pagamento="http://caixa.gov.br/simtx/negocial/pagamento/v1/pagamento"
+	xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns"
+	xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns"
+	xmlns:validaassinatura="http://caixa.gov.br/simtx/meios_de_entrada/valida_assinatura/v1/valida_assinatura"
+	xmlns:ns="http://caixa.gov.br/simtx/pagamento_boleto/v1/ns"
+	targetNamespace="http://caixa.gov.br/simtx/pagamento_boleto/v1/ns">
+
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/header" schemaLocation="../../../SIMTX/COMUNS/V1/Header.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao" schemaLocation="../../../SIMTX/MEIOS_DE_ENTRADA/VALIDA_PERMISSAO/V1/Valida_Permissao_Simtx.xsd"/>
+	<xsd:import namespace="http://caixa.gov.br/simtx/negocial/pagamento/v1/pagamento" schemaLocation="../../../SIMTX/NEGOCIAL/Pagamento/V1/Pagamento.xsd"/>
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/comuns" schemaLocation="../../../SIMTX/COMUNS/V1/Comuns_Simtx.xsd"/>
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/enuns" schemaLocation="../../../SIMTX/COMUNS/V1/Enuns_Type_Simtx.xsd"/>
+	<xsd:import namespace="http://caixa.gov.br/simtx/meios_de_entrada/valida_assinatura/v1/valida_assinatura" schemaLocation="../../../SIMTX/MEIOS_DE_ENTRADA/VALIDA_ASSINATURA/V1/Valida_Assinatura_Simtx.xsd" />
+
+	<xsd:element name="PAGAMENTO_BOLETO_ENTRADA"	type="ns:PAGAMENTO_BOLETO_ENTRADA_Type" />
+	<xsd:element name="PAGAMENTO_BOLETO_SAIDA"		type="ns:PAGAMENTO_BOLETO_SAIDA_Type" />
+
+	<xsd:complexType name="PAGAMENTO_BOLETO_ENTRADA_Type">
+		<xsd:sequence>
+			<xsd:element name="HEADER" 					type="header:HEADER_ENTRADA_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="NSUMTX_ORIGEM"  			type="comuns:nsu_format_size_15_number_type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="AGENDAMENTO" 			type="enuns:sim_nao_enum_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="CPF"						type="comuns:cpf_format_type"  minOccurs="0" maxOccurs="1" />
+			<xsd:element name="CONTA" 					type="comuns:CONTA_entrada_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="ASSINATURA_SIMPLES" 		type="validaassinatura:assinatura_simples_e_type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="TOKEN" 					type="comuns:token_validacao_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="PAGAMENTO_BOLETO"		type="ns:dados_pagamento_entrada_Type" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="PAGAMENTO_BOLETO_SAIDA_Type">
+		<xsd:sequence>
+			<xsd:element name="HEADER" 				type="header:HEADER_SAIDA_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="AGENDAMENTO" 		type="enuns:sim_nao_enum_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="CPF" 				type="comuns:cpf_format" minOccurs="0" maxOccurs="1"  />
+			<xsd:element name="CONTA" 				type="comuns:CONTA_saida_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="TOKEN" 				type="comuns:token_autenticacao_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="INFORMACOES_BOLETO" 	type="pagamento:dados_Comprovante_Type" minOccurs="0" maxOccurs="1" />	
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_pagamento_entrada_Type">
+		<xsd:sequence>
+			<xsd:element name="INFORMACOES_BOLETO" 			type="pagamento:dados_Comprovante_Type" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="INFORMACOES_COMPLEMENTARES" 	type="pagamento:informacoes_complementares_saida_Type" minOccurs="0" maxOccurs="1"/>		
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

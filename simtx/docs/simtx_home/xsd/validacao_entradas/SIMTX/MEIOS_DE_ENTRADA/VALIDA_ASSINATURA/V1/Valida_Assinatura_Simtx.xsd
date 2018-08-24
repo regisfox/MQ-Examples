@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns"
+			xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns"  
+			xmlns:validaassinatura="http://caixa.gov.br/simtx/meios_de_entrada/valida_assinatura/v1/valida_assinatura"
+			targetNamespace="http://caixa.gov.br/simtx/meios_de_entrada/valida_assinatura/v1/valida_assinatura">
+
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/enuns" schemaLocation="../../../COMUNS/V1/Enuns_Type_Simtx.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/comuns" schemaLocation="../../../COMUNS/V1/Comuns_Simtx.xsd" />
+	
+	<!-- Inicio bloco de entrada -->
+	
+	<xsd:element name="VALIDA_ASSINATURA_ENTRADA" type="validaassinatura:valida_assinatura_entrada_type" />
+
+	<xsd:complexType name="valida_assinatura_entrada_type">
+		<xsd:choice>
+			<xsd:element name="ASSINATURA_MULTIPLA" type="validaassinatura:assinatura_multipla_e_type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="ASSINATURA_SIMPLES" type="validaassinatura:assinatura_simples_e_type" minOccurs="0" maxOccurs="1" />
+		</xsd:choice>
+	</xsd:complexType>
+	
+		<xsd:element name="VALIDA_ASSINATURA_MULTIPLA_ENTRADA" type="validaassinatura:assinatura_multipla_entrada_type" />
+	
+	<xsd:complexType name="valida_assinatura_multipla_entrada_type">
+		<xsd:sequence>
+			<xsd:element name="ASSINATURA_MULTIPLA" type="validaassinatura:assinatura_multipla_entrada_type" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="dados_comuns_assinatura_type">
+		<xsd:sequence>
+			<xsd:element name="ASSINATURA" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="16" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="SERVICO_SIPER" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0" />
+						<xsd:maxInclusive value="999" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="APELIDO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="20" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DISPOSITIVO" type="enuns:dispositivo_enum_Type" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="assinatura_simples_e_type">
+		<xsd:complexContent>
+			<xsd:extension base="validaassinatura:dados_comuns_assinatura_type" />
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="assinatura_multipla_e_type">
+		<xsd:complexContent>
+			<xsd:extension base="validaassinatura:dados_comuns_assinatura_type">
+				<xsd:sequence>
+					<xsd:element name="DATA_PREVISTA_EFETIVACAO" type="xsd:date" minOccurs="0" maxOccurs="1" />
+					<xsd:element name="RESUMO_TRANSACAO"  minOccurs="0" maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="200" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<!-- Fim bloco de entrada -->
+	
+	<!-- Inicio bloco de saida VALIDA_ASSINATURA_SAIDA para serviço contra ordem cheques -->
+	
+		
+	<xsd:complexType name="assinatura_multipla_entrada_type">
+		<xsd:complexContent>
+			<xsd:extension base="validaassinatura:dados_comuns_assinatura_type">
+				<xsd:sequence>
+					<xsd:element name="DATA_PREVISTA_EFETIVACAO" type="xsd:date" minOccurs="0" maxOccurs="1" />
+					<xsd:element name="DATA_TRANSACAO" type="xsd:date" minOccurs="1" maxOccurs="1" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:element name="VALIDA_ASSINATURA_SAIDA" type="validaassinatura:valida_assinatura_multipla_saida_type" />
+	
+	
+	<xsd:complexType name="valida_assinatura_saida_type">
+		<xsd:sequence>
+			<xsd:element name="ASSINATURA_MULTIPLA" type="validaassinatura:assinatura_multipla_saida_type" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- Fim  bloco de saida "VALIDA_ASSINATURA_SAIDA" para serviço contra ordem cheques-->
+	
+	<!-- Inicio bloco de saida type VALIDA_ASSINATURA_MULTIPLA_SAIDA para servico VALIDA_ASSINATURA_MULTIPLA -->
+	
+	<xsd:element name="VALIDA_ASSINATURA_MULTIPLA_SAIDA" type="validaassinatura:valida_assinatura_multipla_saida_type" />
+	
+	<xsd:complexType name="valida_assinatura_multipla_saida_type">
+		<xsd:sequence>
+			<xsd:element name="DATA_TRANSACAO" type="xsd:date" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="ASSINATURA_MULTIPLA" type="validaassinatura:assinatura_multipla_saida_type" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="cancela_assinatura_multipla_saida_type">
+		<xsd:sequence>
+			<xsd:element name="DATA_TRANSACAO" type="xsd:date" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="ASSINATURA_MULTIPLA" type="validaassinatura:assinatura_multipla_saida_type" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="assinatura_multipla_saida_type">
+		<xsd:sequence>
+			<xsd:element name="CLASSIFICACAO_ASSINATURA" type="enuns:classificacao_assinatura_type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="ASSINANTES" type="validaassinatura:assinantes_s_Type" minOccurs="0" maxOccurs="1"  />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="assinante_s_Type">
+	<xsd:sequence>
+		<xsd:element name="CPF" type="comuns:cpf_format_type" minOccurs="1" maxOccurs="1" />
+	</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="assinantes_s_Type">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" name="ASSINANTE" type="validaassinatura:assinante_s_Type" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- Fim bloco de saida -->
+</xsd:schema>

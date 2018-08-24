@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://caixa.gov.br/siico/banco_agencia/obter_banco"
+	xmlns:nssrv="http://caixa.gov.br/siico/banco_agencia/obter_banco"
+	xmlns:sibar_base="http://caixa.gov.br/sibar" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	
+	<xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../../MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd"/>
+	
+	<xsd:element name="SERVICO_ENTRADA" type="nssrv:servico_entrada_negocial_type"/>
+	<xsd:element name="SERVICO_SAIDA" type="nssrv:servico_saida_negocial_type"/>
+	
+	
+	<xsd:complexType name="servico_entrada_negocial_type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="DADOS" type="nssrv:dados_entrada_negocial_type">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="servico_saida_negocial_type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="DADOS" type="nssrv:dados_saida_negocial_type">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	
+	<xsd:complexType name="dados_entrada_negocial_type">
+		<xsd:sequence>
+            <xsd:element name="NUMERO_BANCO" type="nssrv:NUMERO_BANCO_COMMON_TYPE" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+	</xsd:complexType>	
+
+
+	<xsd:complexType name="dados_saida_negocial_type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="BANCO" type="nssrv:saida_banco_type" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>			
+	</xsd:complexType>				
+	
+	<xsd:complexType name="saida_banco_type">
+			<xsd:sequence>
+					<xsd:element name="NUMERO" type="nssrv:NUMERO_BANCO_COMMON_TYPE" minOccurs="1" maxOccurs="1"/>
+					<xsd:element name="NOME" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="40"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="INDICADOR_SITUACAO" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="1"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="INDICADOR_TIPO" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="1"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="IDENTIFICACAO_SPB_IF" nillable="true" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int"/>
+						</xsd:simpleType>
+					</xsd:element>
+			</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="NUMERO_BANCO_COMMON_TYPE">
+		<xsd:restriction base="xsd:int">
+			<xsd:minInclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>

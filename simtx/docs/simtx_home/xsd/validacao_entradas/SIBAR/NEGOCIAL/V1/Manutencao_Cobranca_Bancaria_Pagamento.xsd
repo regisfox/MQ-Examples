@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://caixa.gov.br/sibar/manutencao_cobranca_bancaria/pagamento"
+	xmlns:manutencaocobrancabancaria="http://caixa.gov.br/sibar/manutencao_cobranca_bancaria/pagamento"
+	xmlns:sibar_base="http://caixa.gov.br/sibar">
+    
+    <xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../../MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd"/>
+    
+    <xsd:complexType name="dados_entrada_negocial_Type">
+        <xsd:choice minOccurs="1" maxOccurs="1">
+        	<xsd:element name="BAIXA_OPERACIONAL"
+        		type="manutencaocobrancabancaria:baixa_operacional_entrada_Type"
+        		minOccurs="1" maxOccurs="1">
+        	</xsd:element>
+        	<xsd:element name="CANCELAMENTO_BAIXA_OPERACIONAL"
+        		type="manutencaocobrancabancaria:cancelamento_baixa_operacional_entrada_Type"
+        		minOccurs="1" maxOccurs="1">
+        	</xsd:element>
+        </xsd:choice>
+
+    </xsd:complexType>
+    
+    <xsd:complexType name="dados_saida_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+    			<xsd:sequence>
+    				<xsd:element name="BAIXA_OPERACIONAL"
+    					type="manutencaocobrancabancaria:baixa_operacional_saida_Type"
+    					minOccurs="0" maxOccurs="1">
+    				</xsd:element>
+    				<xsd:element name="CANCELAMENTO_BAIXA_OPERACIONAL"
+    					type="manutencaocobrancabancaria:cancelamento_baixa_operacional_saida_Type"
+    					minOccurs="0" maxOccurs="1">
+    				</xsd:element>
+    				<xsd:element name="SITUACAO_CONTINGENCIA" minOccurs="0"
+    					maxOccurs="1">
+    					<xsd:simpleType>
+    						<xsd:restriction base="xsd:string">
+    							<xsd:enumeration
+    								value="SEM_CONTINGENCIA">
+    							</xsd:enumeration>
+    							<xsd:enumeration
+    								value="CONTINGENCIA_CAIXA">
+    							</xsd:enumeration>
+    							<xsd:enumeration value="CONTINGENCIA_CIP"></xsd:enumeration>
+    						</xsd:restriction>
+    					</xsd:simpleType>
+    				</xsd:element>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="servico_entrada_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+    			<xsd:sequence>
+    				<xsd:element name="DADOS" type="manutencaocobrancabancaria:dados_entrada_negocial_Type" minOccurs="1" maxOccurs="1"></xsd:element>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="servico_saida_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+    			<xsd:sequence>
+    				<xsd:element name="DADOS" type="manutencaocobrancabancaria:dados_saida_negocial_Type" minOccurs="0" maxOccurs="1"></xsd:element>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="baixa_operacional_entrada_Type">
+    	<xsd:sequence>
+    		<xsd:element name="NUMERO_IDENTIFICACAO_TITULO"
+    			minOccurs="0" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:unsignedLong">
+    					<xsd:minInclusive value="0"></xsd:minInclusive>
+    					<xsd:maxInclusive value="9999999999999999999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+
+    		<xsd:element name="BENEFICIARIO" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:long">
+    					<xsd:minInclusive value="0"></xsd:minInclusive>
+    					<xsd:maxInclusive value="999999999999999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="NOSSO_NUMERO" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:long">
+    					<xsd:minInclusive value="0"></xsd:minInclusive>
+    					<xsd:maxInclusive value="999999999999999999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="TIPO" minOccurs="0" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="BAIXA_INTEGRAL">
+    					</xsd:enumeration>
+    					<xsd:enumeration value="BAIXA_PARCIAL">
+    					</xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="NUMERO_REFERENCIA_CADASTRO"
+    			type="manutencaocobrancabancaria:NUM_SEQ_CADASTRO_DDA_TYPE"
+    			minOccurs="0" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="NUMERO_REFERENCIA_ATUAL"
+    			type="manutencaocobrancabancaria:NUM_SEQ_CADASTRO_DDA_TYPE"
+    			minOccurs="0" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="DATA_HORA_PROCESSAMENTO"
+    			type="xsd:dateTime" minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="DATA_PROCESSAMENTO" type="xsd:date"
+    			minOccurs="0" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="VALOR"
+    			type="manutencaocobrancabancaria:VALOR_TYPE" minOccurs="1"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="CODIGO_BARRAS" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:minLength value="1"></xsd:minLength>
+    					<xsd:maxLength value="44"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="PORTADOR"
+    			type="manutencaocobrancabancaria:portador_Type" minOccurs="0"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="UNIDADE_RECEBEDORA" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+    					<xsd:minInclusive value="0"></xsd:minInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="CANAL" minOccurs="0" maxOccurs="1"
+    			type="manutencaocobrancabancaria:CANAL_TYPE">
+    		</xsd:element>
+    		<xsd:element name="CANAL_PAGAMENTO" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="AGENCIA"></xsd:enumeration>
+    					<xsd:enumeration value="AUTO_ATENDIMENTO"></xsd:enumeration>
+    					<xsd:enumeration value="INTERNET"></xsd:enumeration>
+    					<xsd:enumeration value="CORRESPONDENTE"></xsd:enumeration>
+    					<xsd:enumeration value="CENTRAL_ATENDIMENTO"></xsd:enumeration>
+    					<xsd:enumeration value="ARQUIVO_ELETRONICO"></xsd:enumeration>
+    					<xsd:enumeration value="DDA"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="MEIO_PAGAMENTO" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="ESPECIE"></xsd:enumeration>
+    					<xsd:enumeration value="DEBITO_CONTA"></xsd:enumeration>
+    					<xsd:enumeration value="CARTAO_CREDITO"></xsd:enumeration>
+    					<xsd:enumeration value="CHEQUE"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+
+    		<xsd:element name="FLAG_OPERACAO_CONTINGENCIA"
+    			type="manutencaocobrancabancaria:FLAG_S_N_TYPE" minOccurs="0"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="DATA_MOVIMENTO" type="xsd:date"
+    			minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="NSU_ORIGEM" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="50"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="FLAG_CIP"
+    			type="manutencaocobrancabancaria:FLAG_S_N_TYPE" minOccurs="0"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="FLAG_CONTINGENCIA_CAIXA" type="manutencaocobrancabancaria:FLAG_S_N_TYPE" minOccurs="0" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="baixa_operacional_saida_Type">
+    	<xsd:sequence>
+    		<xsd:element name="NUMERO_IDENTIFICACAO" minOccurs="1"
+    			maxOccurs="1"
+    			type="manutencaocobrancabancaria:NUM_SEQ_CADASTRO_DDA_TYPE">
+    		</xsd:element>
+    		<xsd:element name="NUMERO_REFERENCIA_ATUAL"
+    			type="manutencaocobrancabancaria:NUM_SEQ_CADASTRO_DDA_TYPE"
+    			minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="NUMERO_SEQUENCIA_ATUALIZACAO"
+    			type="manutencaocobrancabancaria:NUM_SEQ_CADASTRO_DDA_TYPE"
+    			minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="TITULO"
+    			type="manutencaocobrancabancaria:titulo_Type" minOccurs="1"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="NUMERO_CONTROLE_DDA" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:minLength value="1"></xsd:minLength>
+    					<xsd:maxLength value="20"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="DATA_HORA_DDA" type="xsd:dateTime"
+    			minOccurs="0" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="DATA_MOVIMENTO" type="xsd:date"
+    			minOccurs="0" maxOccurs="1">
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="FLAG_S_N_TYPE">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:enumeration value="S"></xsd:enumeration>
+    		<xsd:enumeration value="N"></xsd:enumeration>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="portador_Type">
+    	<xsd:choice minOccurs="1" maxOccurs="1">
+    		<xsd:element name="CPF" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:long">
+    					<xsd:minInclusive value="0"></xsd:minInclusive>
+    					<xsd:maxInclusive value="99999999999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="CNPJ" maxOccurs="1" minOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:long">
+    					<xsd:minInclusive value="0"></xsd:minInclusive>
+    					<xsd:maxInclusive value="99999999999999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:choice>
+    </xsd:complexType>
+    
+    
+
+
+    <xsd:simpleType name="NUM_SEQ_CADASTRO_DDA_TYPE">
+    	<xsd:restriction base="xsd:unsignedLong">
+    		<xsd:minInclusive value="0"></xsd:minInclusive>
+    		<xsd:maxInclusive value="9999999999999999999"></xsd:maxInclusive>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="VALOR_TYPE">
+    	<xsd:restriction base="xsd:decimal">
+    		<xsd:minInclusive value="-99999999999999999.99"></xsd:minInclusive>
+    		<xsd:maxInclusive value="99999999999999999.99"></xsd:maxInclusive>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:element name="SERVICO_ENTRADA" type="manutencaocobrancabancaria:servico_entrada_negocial_Type"></xsd:element>
+
+
+    <xsd:element name="SERVICO_SAIDA" type="manutencaocobrancabancaria:servico_saida_negocial_Type"></xsd:element>
+
+    <xsd:complexType name="titulo_Type">
+    	<xsd:sequence>
+            <xsd:element name="NUMERO_IDENTIFICACAO" minOccurs="1" maxOccurs="1" type="manutencaocobrancabancaria:NUM_SEQ_CADASTRO_DDA_TYPE">
+    		</xsd:element>
+            <xsd:element name="NUMERO_REFERENCIA_ATUAL" type="manutencaocobrancabancaria:NUM_SEQ_CADASTRO_DDA_TYPE" minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType
+    	name="cancelamento_baixa_operacional_entrada_Type">
+    	<xsd:sequence>
+    		<xsd:element name="BENEFICIARIO" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:long">
+    					<xsd:minInclusive value="0"></xsd:minInclusive>
+    					<xsd:maxInclusive value="999999999999999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="NOSSO_NUMERO" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:long">
+    					<xsd:minInclusive value="0"></xsd:minInclusive>
+    					<xsd:maxInclusive value="999999999999999999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="CODIGO_BARRAS" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:minLength value="1"></xsd:minLength>
+    					<xsd:maxLength value="44"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="IDENTIFICACAO_BAIXA_OPERACIONAL"
+    			type="manutencaocobrancabancaria:NUM_SEQ_CADASTRO_DDA_TYPE"
+    			minOccurs="0" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="UNIDADE_RECEBEDORA" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+    					<xsd:minInclusive value="0"></xsd:minInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="CANAL" minOccurs="0" maxOccurs="1"
+    			type="manutencaocobrancabancaria:CANAL_TYPE">
+    		</xsd:element>
+    		<xsd:element name="DATA_HORA_CANCELAMENTO"
+    			type="xsd:dateTime" minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="DATA_MOVIMENTO" type="xsd:date"
+    			minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="NSU_ORIGEM" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="50"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="FLAG_CIP"
+    			type="manutencaocobrancabancaria:FLAG_S_N_TYPE" minOccurs="0"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="FLAG_CONTINGENCIA_CAIXA" type="manutencaocobrancabancaria:FLAG_S_N_TYPE" minOccurs="0" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="cancelamento_baixa_operacional_saida_Type">
+    	<xsd:sequence>
+    		<xsd:element name="IDENTIFICACAO_BAIXA_OPERACIONAL"
+    			type="manutencaocobrancabancaria:NUM_SEQ_CADASTRO_DDA_TYPE"
+    			maxOccurs="1" minOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="NUMERO_CONTROLE_DDA" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:minLength value="1"></xsd:minLength>
+    					<xsd:maxLength value="20"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="DATA_HORA_DDA" type="xsd:dateTime"
+    			minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="DATA_MOVIMENTO" type="xsd:date"
+    			minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="CANAL_TYPE">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:enumeration value="BANKING_MOBILE_CAIXA"></xsd:enumeration>
+    		<xsd:enumeration value="INTERNET_BANKING"></xsd:enumeration>
+    		<xsd:enumeration value="LOTERICO"></xsd:enumeration>
+    		<xsd:enumeration value="SISAG"></xsd:enumeration>
+    		<xsd:enumeration value="MULTICANAL"></xsd:enumeration>
+    		<xsd:enumeration value="CIAXA_AQUI"></xsd:enumeration>
+    		<xsd:enumeration value="GOV"></xsd:enumeration>
+    		<xsd:enumeration value="TIM_MONEY"></xsd:enumeration>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:LISTA_AGENDAMENTOS_TRANSACOES_ENTRADA xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:h="http://caixa.gov.br/simtx/comuns/header"
+	xmlns:ns="http://caixa.gov.br/simtx/lista_agendamentos_transacoes/v1/ns" xmlns:valida_cartao="http://caixa.gov.br/simtx/meios_de_entrada/valida_cartao/v1/valida_cartao"
+	xmlns:valida_permissao="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao" xmlns:valida_senha="http://caixa.gov.br/simtx/meios_de_entrada/valida_senha/v1/valida_senha"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://caixa.gov.br/simtx/lista_agendamentos_transacoes/v1/ns Lista_Agendamentos_Transacoes.xsd ">
+	<HEADER>
+		<SERVICO>
+			<CODIGO>110036</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO>
+		<CANAL>
+			<SIGLA>SIMAA</SIGLA>
+			<DATAHORA>20180314120103</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>4</MEIOENTRADA>
+		<DATA_REFERENCIA>20180807</DATA_REFERENCIA>
+	</HEADER>
+	<CPF>00466789807</CPF>
+	<CONTA>
+		<CONTA_NSGD>
+			<UNIDADE>612</UNIDADE>
+			<PRODUTO>1288</PRODUTO>
+			<CONTA>990010354</CONTA>
+			<DV>3</DV>
+		</CONTA_NSGD>
+	</CONTA>
+	<CARTAO>
+		<TRILHA>6277809990222884=20076208321906901040</TRILHA>
+		<TP_ENTRADA>021</TP_ENTRADA>
+		<NUMERO_SEQUENCIAL>0</NUMERO_SEQUENCIAL>
+		<INFORMACOES_CHIP>123</INFORMACOES_CHIP>
+	</CARTAO>
+	<SENHA>
+		<SENHA>M0A3E4F066B6A</SENHA>
+		<FLAG_CONSULTA_IP>S</FLAG_CONSULTA_IP>
+		<VERSAO>3</VERSAO>
+		<ACAO>17</ACAO>
+	</SENHA>
+	<LISTA_AGENDAMENTOS_TRANSACOES>
+<!-- 	<PERIODO> -->
+<!-- 		<DATA_INICIO>2018-01-01</DATA_INICIO> -->
+<!-- 		<DATA_FIM>2018-01-01</DATA_FIM> -->
+<!-- 	</PERIODO> -->
+	<IDENTIFICADOR_SERVICO>BOLETO</IDENTIFICADOR_SERVICO>
+</LISTA_AGENDAMENTOS_TRANSACOES>
+</ns:LISTA_AGENDAMENTOS_TRANSACOES_ENTRADA>

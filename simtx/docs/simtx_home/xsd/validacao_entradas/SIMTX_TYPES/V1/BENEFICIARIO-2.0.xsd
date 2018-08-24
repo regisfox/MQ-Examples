@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://caixa.gov.br/sibar/consulta_cobranca_bancaria/beneficiario" 
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			xmlns:sibar_base="http://caixa.gov.br/sibar" 
+			xmlns:validapermissao="http://caixa.gov.br/sibar/validapermissao"
+			xmlns:consultacobrancabancaria="http://caixa.gov.br/sibar/consulta_cobranca_bancaria/beneficiario">
+
+	<!-- ============================= IMPORTS ======================= -->
+	<xsd:import schemaLocation="../../SIBAR/MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd" 							namespace="http://caixa.gov.br/sibar"/>    
+	<xsd:import schemaLocation="../../SIBAR/MEIOS_DE_ENTRADA/V1/VALIDA_PERMISSAO/VALIDA_PERMISSAO_FluxoCanal.xsd"	namespace="http://caixa.gov.br/sibar/validapermissao"/>
+    
+
+	<xsd:element name="SERVICO_ENTRADA"
+        type="consultacobrancabancaria:SERVICO_ENTRADA_NEGOCIAL_TYPE"/>
+
+	<xsd:complexType name="SERVICO_ENTRADA_NEGOCIAL_TYPE">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+				<xsd:sequence>
+					<xsd:element ref="validapermissao:VALIDA_PERMISSAO_ENTRADA"/>
+					<xsd:element minOccurs="1" name="DADOS" type="consultacobrancabancaria:DADOS_ENTRADA_TYPE"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="DADOS_ENTRADA_TYPE">
+		<xsd:sequence>
+			<xsd:choice minOccurs="1">
+
+				<xsd:element name="CONTA" type="consultacobrancabancaria:CONTA_TYPE" minOccurs="1" maxOccurs="1"/>
+
+				<xsd:sequence>
+					<xsd:element name="CODIGO_BENEFICIARIO" minOccurs="1" maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:minExclusive value="0"/>
+								<xsd:maxExclusive value="999999"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="NUMERO_PAGINA" minOccurs="0"	maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:minInclusive value="0"/>
+								<xsd:maxInclusive value="999999"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="SERVICO_SAIDA" 
+		type="consultacobrancabancaria:SERVICO_SAIDA_NEGOCIAL_TYPE"/>
+
+	<xsd:complexType name="SERVICO_SAIDA_NEGOCIAL_TYPE">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+				<xsd:sequence>
+				  <xsd:element ref="validapermissao:VALIDA_PERMISSAO_SAIDA"/>
+					<xsd:element minOccurs="0" name="DADOS" type="consultacobrancabancaria:DADOS_SAIDA_TYPE"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="DADOS_SAIDA_TYPE">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+				<xsd:choice>
+					<xsd:element name="BENEFICIARIOS" type="consultacobrancabancaria:BENEFICIARIOS_TYPE" minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="CONSULTA_CONTAS_CORRENTE" type="consultacobrancabancaria:CONSULTA_CONTAS_CORRENTE_TYPE" minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="CONSULTA_ENDERECO_BENEFICIARIO" type="consultacobrancabancaria:CONSULTA_ENDERECO_BENEFICIARIO_TYPE" minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="CONSULTA_OPCOES_BENEFICIARIO" type="consultacobrancabancaria:CONSULTA_OPCOES_BENEFICIARIO_TYPE" minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="CONSULTA_INFORMACOES_CONTA" type="consultacobrancabancaria:CONSULTA_INFORMACOES_CONTA_TYPE" minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="CONSULTA_TARIFAS_CONTRATADAS" type="consultacobrancabancaria:CONSULTA_TARIFAS_CONTRATADAS_TYPE" minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="CONSULTA_FLOATING" type="consultacobrancabancaria:CONSULTA_FLOATING_TYPE" minOccurs="0" maxOccurs="1"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="CONTA_TYPE">
+		<xsd:sequence>
+			<xsd:element name="UNIDADE" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="9999"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="OPERACAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="999"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="99999999"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DV" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="9"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="BENEFICIARIOS_TYPE">
+		<xsd:sequence>
+			<xsd:element name="BENEFICIARIO" type="consultacobrancabancaria:BENEFICIARIO_TYPE"	minOccurs="0" maxOccurs="200">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="BENEFICIARIO_TYPE">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element name="CODIGO" minOccurs="1" maxOccurs="1">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:int">
+							<xsd:minInclusive value="0"/>
+							<xsd:maxInclusive value="999999"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:choice>
+					<xsd:element name="CPF" minOccurs="1" maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:long">
+								<xsd:minExclusive value="0"/>
+								<xsd:maxInclusive value="99999999999"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="CNPJ" minOccurs="1" maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:long">
+								<xsd:minInclusive value="0"/>
+								<xsd:maxInclusive value="99999999999999"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:choice>
+			<xsd:element name="NOME" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="50"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="CONSULTA_CONTAS_CORRENTE_TYPE">
+		<xsd:sequence>
+			<xsd:element name="NUMERO_PAGINA">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="999999"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CONTAS" type="consultacobrancabancaria:CONTAS_TYPE">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CONTAS_TYPE">
+		<xsd:sequence>
+			<xsd:element name="CONTA" type="consultacobrancabancaria:CONTA_TYPE"
+				minOccurs="0" maxOccurs="20">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="CONSULTA_ENDERECO_BENEFICIARIO_TYPE">
+		<xsd:sequence>
+			<xsd:element name="BENEFICIARIO" type="consultacobrancabancaria:BENEFICIARIO_TYPE"	minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="ENDERECO" type="consultacobrancabancaria:ENDERECO_TYPE"	minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ENDERECO_TYPE">
+		<xsd:sequence>
+			<xsd:element name="LOGRADOURO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="40"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="COMPLEMENTO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="BAIRRO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="MUNICIPIO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="35"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="UF" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CEP" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="99999999"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="CONSULTA_OPCOES_BENEFICIARIO_TYPE">
+		<xsd:sequence>
+			<xsd:element name="BENEFICIARIO" type="consultacobrancabancaria:BENEFICIARIO_TYPE"	minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="EXTRATO_MOVIMENTACAO" type="consultacobrancabancaria:EXTRATO_MOVIMENTACAO_TYPE" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="EXTRATO_DISTRIBUICAO" type="consultacobrancabancaria:EXTRATO_DISTRIBUICAO_TYPE" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="RELACAO_TITULOS_CARTEIRA" type="consultacobrancabancaria:RELACAO_TITULOS_CARTEIRA_TYPE" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="AVISO_VENCIDOS" type="consultacobrancabancaria:AVISO_VENCIDOS_TYPE" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="EXTRATO_MOVIMENTACAO_TYPE">
+		<xsd:sequence>
+			<xsd:element name="EMISSAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="3"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ENTREGA" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="20"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PERIODICIDADE" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="AGRUPAMENTO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="20"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="EXTRATO_DISTRIBUICAO_TYPE">
+		<xsd:sequence>
+			<xsd:element name="EMISSAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="3"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ENTREGA" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="20"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="RELACAO_TITULOS_CARTEIRA_TYPE">
+		<xsd:sequence>
+			<xsd:element name="EMISSAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="3"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ENTREGA" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="20"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PERIODICIDADE" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="AVISO_VENCIDOS_TYPE">
+		<xsd:sequence>
+			<xsd:element name="EMISSAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="3"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="VALOR_MINIMO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="9999999999999.99"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PRIMEIRA_EMISSAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="99"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="SEGUNDA_EMISSAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="99"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TERCEIRA_EMISSAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="99"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="CONSULTA_INFORMACOES_CONTA_TYPE">
+		<xsd:sequence>
+			<xsd:element name="BENEFICIARIO" type="consultacobrancabancaria:BENEFICIARIO_TYPE"	minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="PARTICIPACAO" type="consultacobrancabancaria:PARTICIPACAO_TYPE" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="RATEIOS" type="consultacobrancabancaria:RATEIOS_TYPE" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="PARTICIPACAO_TYPE">
+		<xsd:sequence>
+			<xsd:element name="CREDITO" type="consultacobrancabancaria:DADOS_PARTICIPACAO_TYPE" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="DEBITO" type="consultacobrancabancaria:DADOS_PARTICIPACAO_TYPE" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="CAUCAO" type="consultacobrancabancaria:DADOS_PARTICIPACAO_TYPE" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DADOS_PARTICIPACAO_TYPE">
+		<xsd:sequence>
+			<xsd:element name="CONTA" type="consultacobrancabancaria:CONTA_TYPE" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="PERCENTUAL" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="999.99"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="RATEIOS_TYPE">
+		<xsd:sequence>
+			<xsd:element name="RATEIO" type="consultacobrancabancaria:RATEIO_TYPE" minOccurs="0" maxOccurs="100"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="RATEIO_TYPE">
+		<xsd:sequence>
+			<xsd:element name="CONTA" type="consultacobrancabancaria:CONTA_TYPE" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="PERCENTUAL_CREDITO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:minExclusive value="0"/>
+						<xsd:maxExclusive value="999.99"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="VALOR_CREDITO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="9999999999999.99"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PERCENTUAL_DEBITO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:minExclusive value="0"/>
+						<xsd:maxExclusive value="999.99"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TITULAR" type="consultacobrancabancaria:BENEFICIARIO_TYPE" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="CONSULTA_TARIFAS_CONTRATADAS_TYPE">
+		<xsd:sequence>
+			<xsd:element name="BENEFICIARIO" type="consultacobrancabancaria:BENEFICIARIO_TYPE"	minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="TARIFAS" type="consultacobrancabancaria:TARIFAS_TYPE" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="PERIODICIDADE" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="20"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="TARIFAS_TYPE">
+		<xsd:sequence>
+			<xsd:element name="TARIFA" type="consultacobrancabancaria:TARIFA_TYPE" minOccurs="0" maxOccurs="200"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="TARIFA_TYPE">
+		<xsd:sequence>
+			<xsd:element name="SERVICO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="40"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="VALOR" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="9999999999999.99"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="CONSULTA_FLOATING_TYPE">
+		<xsd:sequence>
+			<xsd:element name="BENEFICIARIO" type="consultacobrancabancaria:BENEFICIARIO_TYPE"	minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="INFORMACOES_FLOATING" type="consultacobrancabancaria:INFORMACOES_FLOATING_TYPE" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="INFORMACOES_FLOATING_TYPE">
+		<xsd:sequence>
+			<xsd:element name="FLOATING" type="consultacobrancabancaria:FLOATING_TYPE" minOccurs="0" maxOccurs="100"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="FLOATING_TYPE">
+		<xsd:sequence>
+			<xsd:element name="DESCRICAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="40"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="FLOAT_NEGOCIADO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+</xsd:schema>

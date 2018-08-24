@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<multicanal:SERVICO_ENTRADA xmlns:controlelimite="http://caixa.gov.br/sibar/controle_limite/desfazimento" xmlns:detalhe="http://caixa.gov.br/sibar/consulta_transacoes_conta/detalhe" xmlns:multicanal="http://caixa.gov.br/sibar/multicanal/orquestracao" xmlns:sibar_base="http://caixa.gov.br/sibar" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://caixa.gov.br/simtx/multicanal/orquestracao Multicanal_Orquestracao.xsd">
+	<sibar_base:HEADER>
+		<VERSAO>1.0</VERSAO>
+		<OPERACAO>SERVICO_MIGRADO</OPERACAO>
+		<SISTEMA_ORIGEM>SIMTX</SISTEMA_ORIGEM>
+		<DATA_HORA>20180323190604</DATA_HORA>
+	</sibar_base:HEADER>
+	<ORQUESTRACAO>
+		<PASSOS>
+			<PASSO>
+				<SERVICO>consulta_transacoes_conta</SERVICO>
+				<OPERACAO>DETALHE</OPERACAO>
+				<VERSAO>1.0</VERSAO>
+				<MODO_INTEGRACAO>MQ</MODO_INTEGRACAO>
+				<RECURSOS>
+					<FILA_REQUISICAO>SIBAR.REQ.CONSULTA_TRANSACOES_CONTA</FILA_REQUISICAO>
+					<FILA_RESPOSTA>SIBAR.RSP.CONSULTA_TRANSACOES_CONTA</FILA_RESPOSTA>
+				</RECURSOS>
+				<TEMPO_ESPERA>10</TEMPO_ESPERA>
+				<IMPEDIMENTO>S</IMPEDIMENTO>
+				<FORMA_INTEGRACAO>SINCRONA</FORMA_INTEGRACAO>
+				<REGRAS_RETORNO_SUCESSO>
+					<CAMPO>CONTROLE_NEGOCIAL.COD_RETORNO</CAMPO>
+					<RESULTADO_ESPERADO>00</RESULTADO_ESPERADO>
+				</REGRAS_RETORNO_SUCESSO>
+			</PASSO>
+		</PASSOS>
+	</ORQUESTRACAO>
+	<detalhe:CONSULTA_TRANSACOES_CONTA_ENTRADA>
+		<CONTA>
+			<UNIDADE>238</UNIDADE>
+			<PRODUTO>3</PRODUTO>
+			<NUMERO>4</NUMERO>
+			<DV>2</DV>
+		</CONTA>
+		<PERIODO>
+			<INICIO>2018-01-14</INICIO>
+			<FIM>2018-03-20</FIM>
+		</PERIODO>
+		<NSU>0</NSU>
+		<ACAO>CANCELAR_AGENDAMENTO</ACAO>
+		<SOLICITACOES>
+			<SOLICITACAO>BOLETO</SOLICITACAO>
+		</SOLICITACOES>
+	</detalhe:CONSULTA_TRANSACOES_CONTA_ENTRADA>
+</multicanal:SERVICO_ENTRADA>

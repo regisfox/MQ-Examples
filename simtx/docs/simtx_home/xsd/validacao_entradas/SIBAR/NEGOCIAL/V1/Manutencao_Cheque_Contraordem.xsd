@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://caixa.gov.br/sibar/manutencao_cheque/contraordem"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:sibar_base="http://caixa.gov.br/sibar"
+	xmlns:manutencaocheque="http://caixa.gov.br/sibar/manutencao_cheque/contraordem">
+
+    <xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../../MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd"/>
+    
+    <xsd:complexType name="conta_Type">
+    	<xsd:sequence>
+    		<xsd:element name="UNIDADE" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:minExclusive value="0"></xsd:minExclusive>
+    					<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="PRODUTO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:minExclusive value="0"></xsd:minExclusive>
+    					<xsd:maxInclusive value="999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="NUMERO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:int">
+    					<xsd:minExclusive value="0"></xsd:minExclusive>
+    					<xsd:maxInclusive value="99999999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="DV" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:minInclusive value="0"></xsd:minInclusive>
+    					<xsd:maxInclusive value="9"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="dados_entrada_negocial_Type">
+    	<xsd:sequence>
+    		<xsd:element name="CONTA"
+    			type="manutencaocheque:conta_Type" minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="NUMERO_CHEQUE"
+    			type="manutencaocheque:numero_cheque_Type" minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="CODIGO_MOTIVO" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:minExclusive value="0"></xsd:minExclusive>
+    					<xsd:maxInclusive value="99"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="TIPO_COMANDO" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="INCLUSAO"></xsd:enumeration>
+    					<xsd:enumeration value="EXCLUSAO"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="JUSTIFICATIVA" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="120"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="numero_cheque_Type">
+    	<xsd:sequence>
+    		<xsd:element name="INICIO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:int">
+    					<xsd:minExclusive value="0"></xsd:minExclusive>
+    					<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="FIM" minOccurs="0" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:int">
+    					<xsd:minExclusive value="0"></xsd:minExclusive>
+    					<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="servico_entrada_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+    			<xsd:sequence>
+    				<xsd:element name="DADOS" type="manutencaocheque:dados_entrada_negocial_Type"></xsd:element>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:element name="SERVICO_ENTRADA" type="manutencaocheque:servico_entrada_negocial_Type"></xsd:element>
+
+    <xsd:complexType name="dados_saida_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+    		    	<xsd:sequence>
+    		<xsd:element name="ACATADO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="SIM"></xsd:enumeration>
+    					<xsd:enumeration value="NAO"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="servico_saida_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+    			<xsd:sequence>
+    				<xsd:element name="DADOS" type="manutencaocheque:dados_saida_negocial_Type"></xsd:element>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:element name="SERVICO_SAIDA" type="manutencaocheque:servico_saida_negocial_Type"></xsd:element>
+</xsd:schema>

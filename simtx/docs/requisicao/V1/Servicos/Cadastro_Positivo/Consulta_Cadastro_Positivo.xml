@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SERVICO_ENTRADA xmlns="http://caixa.gov.br/sibar/consulta_cadastro_positivo">
+	<ns1:HEADER xmlns:ns1="http://caixa.gov.br/sibar">
+		<VERSAO xmlns="">1</VERSAO>
+		<OPERACAO xmlns="">CONSULTA_SITUACAO_SOLICITACAO</OPERACAO>
+		<SISTEMA_ORIGEM xmlns="">SIIBC</SISTEMA_ORIGEM>
+		<IDENTIFICADOR_ORIGEM xmlns="">10.6.35.191</IDENTIFICADOR_ORIGEM>
+		<DATA_HORA xmlns="">20170817190214</DATA_HORA>
+	</ns1:HEADER>
+	<ns2:VALIDA_PERMISSAO_ENTRADA xmlns:ns2="http://caixa.gov.br/sibar/validapermissao">
+		<OPCAO xmlns="">1</OPCAO>
+		<CPF xmlns="">39897800</CPF>
+		<TOKEN xmlns="">
+			<ACAO>2</ACAO>
+			<SESSAO>Md2TMfaqoUvu5ebxZdO4A-Ty.sinbc03</SESSAO>
+			<ENDERECO_IP>10.6.35.191</ENDERECO_IP>
+			<TOKEN_SESSAO>TESTEREDEA19        inR9aC5WfHiiuJXHPqZAUyFYm4GiYA5Z9UAwtcbubYqpWTznXWVJh4bWv12J</TOKEN_SESSAO>
+		</TOKEN>
+		<CONTA xmlns="">
+			<UNIDADE>1679</UNIDADE>
+			<OPERACAO>1</OPERACAO>
+			<NUMERO>8</NUMERO>
+			<DV>0</DV>
+		</CONTA>
+		<VR_TRANSACAO xmlns="">0</VR_TRANSACAO>
+		<SERVICO xmlns="">341</SERVICO>
+		<DT_MOVTO_SIPER xmlns="">20170725</DT_MOVTO_SIPER>
+	</ns2:VALIDA_PERMISSAO_ENTRADA>
+	<DADOS xmlns="">
+		<CONSULTA_SOLICITACAO>
+			<CPF>39897800</CPF>
+		</CONSULTA_SOLICITACAO>
+	</DADOS>
+</SERVICO_ENTRADA>

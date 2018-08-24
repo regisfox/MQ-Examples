@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:CANCELA_TRANSACAO_PENDENTE_ASSINATURA_ENTRADA xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns" xmlns:h="http://caixa.gov.br/simtx/comuns/header" xmlns:ns="http://caixa.gov.br/simtx/cancela_transacao_assinatura_multipla/v1/ns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://caixa.gov.br/simtx/cancela_transacao_assinatura_multipla/v1/ns Cancela_Transacao_Assinatura_Multipla.xsd ">
+	<HEADER xsi:type="h:HEADER_ENTRADA_Type">
+		<SERVICO>
+			<CODIGO>110030</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO>
+		<CANAL>
+			<SIGLA>SIIBC</SIGLA>
+			<DATAHORA>20180130100000</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>0</MEIOENTRADA>
+		<DATA_REFERENCIA>09032018</DATA_REFERENCIA>
+	</HEADER>
+	<NSU_ORIGEM>0</NSU_ORIGEM>
+	<CPF>52649647345</CPF>
+	<TOKEN>
+		<TOKEN>TESTEREDEA09        hN53nsgDQjbkpA2bvWSzQQcuc57Ebkbdn4CJMXxAmmmchpnG7dpiMMCm3cyf</TOKEN>
+		<ID_SESSAO>QpgkKgJzKBH7ANxBKADg5XQj.testebr</ID_SESSAO>
+	</TOKEN>
+	<CANCELA_TRANSACAO_ASSINATURA_MULTIPLA>
+		<DATA_TRANSACAO>2018-03-09</DATA_TRANSACAO>
+		<ASSINATURA>ASSINATURA</ASSINATURA>
+	</CANCELA_TRANSACAO_ASSINATURA_MULTIPLA>
+</ns:CANCELA_TRANSACAO_PENDENTE_ASSINATURA_ENTRADA>
+

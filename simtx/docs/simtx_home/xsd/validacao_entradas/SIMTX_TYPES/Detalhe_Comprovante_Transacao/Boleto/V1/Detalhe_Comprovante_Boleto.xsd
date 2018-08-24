@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://caixa.gov.br/simtx/detalhe_comprovante_transacao/boleto/v1/ns"
+	xmlns:ns="http://caixa.gov.br/simtx/detalhe_comprovante_transacao/boleto/v1/ns"
+	xmlns:header="http://caixa.gov.br/simtx/comuns/header"
+	xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns"
+	xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns"
+	xmlns:pagamento="http://caixa.gov.br/simtx/negocial/pagamento/v1/pagamento"
+	xmlns:valida_cartao="http://caixa.gov.br/simtx/meios_de_entrada/valida_cartao/v1/valida_cartao"
+	xmlns:valida_senha="http://caixa.gov.br/simtx/meios_de_entrada/valida_senha/v1/valida_senha"
+	xmlns:valida_permissao="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao">
+	
+	<!-- ============================= IMPORTS ======================= -->
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/header" schemaLocation="../../../../SIMTX/COMUNS/V1/Header.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/comuns" schemaLocation="../../../../SIMTX/COMUNS/V1/Comuns_Simtx.xsd"/>
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/enuns" schemaLocation="../../../../SIMTX/COMUNS/V1/Enuns_Type_Simtx.xsd"/>
+	<xsd:import namespace="http://caixa.gov.br/simtx/meios_de_entrada/valida_cartao/v1/valida_cartao" schemaLocation="../../../../SIMTX/MEIOS_DE_ENTRADA/VALIDA_CARTAO/V1/Valida_Cartao_Simtx.xsd"/>
+	<xsd:import namespace="http://caixa.gov.br/simtx/meios_de_entrada/valida_senha/v1/valida_senha" schemaLocation="../../../../SIMTX/MEIOS_DE_ENTRADA/VALIDA_SENHA/V1/Valida_Senha_Simtx.xsd"/>
+	<xsd:import namespace="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao" schemaLocation="../../../../SIMTX/MEIOS_DE_ENTRADA/VALIDA_PERMISSAO/V1/Valida_Permissao_Simtx.xsd"/>
+	<xsd:import namespace="http://caixa.gov.br/simtx/negocial/pagamento/v1/pagamento" schemaLocation="../../../../SIMTX/NEGOCIAL/Pagamento/V1/Pagamento.xsd"/>
+
+    
+    <!-- ============================= REQUISICAO ======================= -->
+    <xsd:element name="DETALHE_COMPROVANTE_BOLETO_ENTRADA"	type="ns:dados_Entrada_Type" />
+    
+	
+	<xsd:complexType name="dados_Entrada_Type">
+		<xsd:sequence>
+			<xsd:element name="HEADER" type="header:HEADER_ENTRADA_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="CPF" minOccurs="0" maxOccurs="1" type="comuns:cpf_format_type"/>
+    		<xsd:element name="CONTA" type="comuns:CONTA_entrada_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="CARTAO" type="valida_cartao:dados_entrada_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="SENHA" type="valida_senha:dados_entrada_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="PERMISSAO" type="valida_permissao:dados_entrada_Type" minOccurs="0" maxOccurs="1" />
+    		<xsd:element name="TOKEN" type="valida_permissao:dados_token_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="DETALHE_COMPROVANTE_TRANSACAO" type="ns:detalhe_Transacao_Entrada_Type" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="detalhe_Transacao_Entrada_Type">
+		<xsd:sequence>
+			<xsd:element name="SISTEMA_ORIGEM" type="comuns:sistema_origem_Type" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="NSU" type="comuns:nsu_format_size_15_number_type" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="DATA_EFETIVACAO" type="xsd:date" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	<!-- ============================= RESPOSTA ======================= -->
+	<xsd:element name="DETALHE_COMPROVANTE_BOLETO_SAIDA"	type="ns:dados_Saida_Type" />
+    
+    <xsd:complexType name="dados_Saida_Type">
+    	<xsd:sequence>
+    		<xsd:element name="HEADER" type="header:HEADER_SAIDA_Type" minOccurs="1" maxOccurs="1" />
+    		<xsd:element name="CPF" minOccurs="0" maxOccurs="1" type="comuns:cpf_format_type"/>
+    		<xsd:element name="CONTA" type="comuns:CONTA_saida_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="CARTAO" type="valida_cartao:dados_saida_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="SENHA" type="valida_senha:dados_saida_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="PERMISSAO" type="valida_permissao:dados_saida_Type" minOccurs="0" maxOccurs="1" />
+    		<xsd:element name="TOKEN" type="valida_permissao:dados_token_Type" minOccurs="0" maxOccurs="1" />
+		  	<xsd:element name="INFORMACOES_COMPROVANTE" minOccurs="0" maxOccurs="1" type="pagamento:dados_Comprovante_Type"></xsd:element>
+		</xsd:sequence>
+    </xsd:complexType>
+    
+</xsd:schema>

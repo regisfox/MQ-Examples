@@ -1,0 +1,11 @@
+<module xmlns="urn:jboss:module:1.1" name="br.gov.caixa.simtx.core_api">
+	<resources>
+		<resource-root path="core_api.jar" />
+	</resources>
+	<dependencies>
+		<module name="javaee.api" slot="main" export="true" />
+		<module name="javax.api" slot="main" export="true" />
+		<module name="javax.xml.bind.api" slot="main" export="true" />
+		<module name="org.apache.log4j" slot="main" export="true" />
+	</dependencies>
+</module>

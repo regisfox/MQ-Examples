@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validasenha:SERVICO_ENTRADA 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:sibar_base="http://caixa.gov.br/sibar"
+	xmlns:validasenha="http://caixa.gov.br/sibar/valida_senha">
+	<sibar_base:HEADER>
+		<VERSAO>3.5</VERSAO>
+		<OPERACAO>SENHA_CIDADAO</OPERACAO>
+		<SISTEMA_ORIGEM>SIMTX</SISTEMA_ORIGEM>
+		<DATA_HORA>20170207144336</DATA_HORA>
+	</sibar_base:HEADER>
+	<DADOS>
+		<SENHA_CIDADAO>
+			<CANAL>9705</CANAL>
+			<NIS>0</NIS>
+			<SENHA>98549BE22BB72F09</SENHA>
+			<CARTAO>
+				<TRILHA>5310410100006407001=04047823002838420</TRILHA>
+			</CARTAO>
+		</SENHA_CIDADAO>
+	</DADOS>
+</validasenha:SERVICO_ENTRADA>

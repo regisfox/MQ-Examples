@@ -1,0 +1,15 @@
+1. São Pre-requisitos para criação da Base de Dados no Oracle:
+
+   a. Criação de Tablespaces "MTXTSDT001" e "MTXTSIX001".
+   b. Criação do usuario MTX com seus devidos GRANTS (Permissões).
+
+2. Os script para criacao de ambiente são:
+   
+   a. DDL: "03_DDL_CreateSequences.sql" e "04_DDL_CreateTables.sql" executados nessa ordem e apos a existencia dos pré-rquisitos do Item 1.
+   b. DML: 05_DML_Inserts.sql, onde inclui os dados basicos para o funcionamento do sistema.
+   
+Obs: 
+   i)  Os scripts da pasta "./scripts_aux/"("00_DDL_DropAll.sql", "00_DDL_DropSeqTabUser.sql","00_DDL_DropTables.sql", "00_DML_DeleteAll.sql"
+"01_DDL_CreateTableSpaces.sql", "02_DDL_CreateUsers.sql")só devem ser utilizados para fins de exemplo, ou montagem de ambiente local.
+   ii) O Script "00_DDL_DropAll.sql" contém o "00_DDL_DropSeqTabUser.sql" e o "00_DDL_DropTables.sql".
+		

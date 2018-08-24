@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:CANCELAMENTO_AGENDAMENTO_ENTRADA xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns" xmlns:h="http://caixa.gov.br/simtx/comuns/header" xmlns:ns="http://caixa.gov.br/simtx/cancelamento_agendamento/v1/ns" xmlns:validaassinatura="http://caixa.gov.br/simtx/meios_de_entrada/valida_assinatura/v1/valida_assinatura" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://caixa.gov.br/simtx/cancelamento_agendamento/v1/ns Cancelamento_Agendamento.xsd ">
+	 <HEADER>
+	   <SERVICO>
+	     <CODIGO>110037</CODIGO>
+	     <VERSAO>1</VERSAO>
+	   </SERVICO>
+	   <CANAL>
+	     <SIGLA>SIMAA</SIGLA>
+	     <DATAHORA>20180420175600</DATAHORA>
+	   </CANAL>
+	   <MEIOENTRADA>0</MEIOENTRADA>
+	   <DATA_REFERENCIA>20180807</DATA_REFERENCIA>
+	 </HEADER>
+	 <CONTA>
+		<CONTA_NSGD>
+			<UNIDADE>0682</UNIDADE>
+			<PRODUTO>1288</PRODUTO>
+			<CONTA>990011127</CONTA>
+			<DV>9</DV>
+		</CONTA_NSGD>
+	</CONTA>
+	<CANCELAMENTO_AGENDAMENTO>
+		<SERVICO>BOLETO</SERVICO>
+		<DATA_EFETIVACAO>2001-08-10</DATA_EFETIVACAO>
+		<SIMTX>
+			<NSU>150594</NSU>
+		</SIMTX>
+	</CANCELAMENTO_AGENDAMENTO>
+</ns:CANCELAMENTO_AGENDAMENTO_ENTRADA>

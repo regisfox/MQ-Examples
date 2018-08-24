@@ -1,0 +1,36 @@
+ [
+	{
+		"nsuAgendamento": 17654,
+		"codigoBarras": "789134789234587902534897534127890253",
+		"dataAgendamento": "2018-01-23",
+		"dataEfetivacao": "2018-05-23",
+		"valorTransacao": "150.00",
+		"codigoCanal": 114,
+		"codigoServico": 110042,
+		"versaoServico": 1,
+		"codigoUsuario": "F707966",
+		"codigoMaquina": "127.0.0.1",
+		"agencia": 1234,
+		"operacao": 123,
+		"conta": 12345678,
+		"dv": 1,
+		"tipoConta": "SIDEC"
+	},
+	{
+		"nsuAgendamento": 17655,
+		"codigoBarras": "238795672798364597548275489",
+		"dataAgendamento": "2018-01-24",
+		"dataEfetivacao": "2018-05-24",
+		"valorTransacao": "150.00",
+		"codigoCanal": 114,
+		"codigoServico": 110042,
+		"versaoServico": 1,
+		"codigoUsuario": "F000666",
+		"codigoMaquina": "127.0.0.1",
+		"agencia": 1234,
+		"operacao": 1234,
+		"conta": 12345678901,
+		"dv": 2,
+		"tipoConta": "NSGD"
+	}
+]

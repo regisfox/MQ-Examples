@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://caixa.gov.br/sibar/ted/manutencao_ted" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:sibar_base="http://caixa.gov.br/sibar" xmlns:manutencaoted="http://caixa.gov.br/sibar/ted/manutencao_ted">
+  <xsd:import schemaLocation="../BAR_MSG_BARRAMENTO_LIB/MensagensBarramento.xsd" namespace="http://caixa.gov.br/sibar">
+  </xsd:import>
+
+
+  <xsd:complexType name="servico_entrada_negocial_Type">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+        <xsd:sequence>
+          <xsd:element name="DADOS" type="manutencaoted:dados_entrada_Type" minOccurs="1" maxOccurs="1"></xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="servico_saida_negocial_Type">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+        <xsd:sequence>
+          <xsd:element name="DADOS" type="manutencaoted:dados_saida_Type" minOccurs="0" maxOccurs="1"></xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="dados_entrada_Type">
+    <xsd:sequence>
+
+
+
+
+
+
+    	<xsd:element name="COMUM" type="manutencaoted:dados_entrada_comum_Type" minOccurs="1" maxOccurs="1">
+    	</xsd:element>
+    	<xsd:element name="DADOS_TRC" type="manutencaoted:dados_entrada_str0026_Type" minOccurs="1" maxOccurs="1">
+    	</xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:element name="SERVICO_ENTRADA" type="manutencaoted:servico_entrada_negocial_Type"></xsd:element>
+
+
+
+
+
+  <xsd:element name="SERVICO_SAIDA" type="manutencaoted:servico_saida_negocial_Type"></xsd:element>
+  <xsd:complexType name="retorno_consultas_Type">
+    <xsd:sequence>
+    	<xsd:element name="CONSULTA" type="manutencaoted:dados_saida_Type" minOccurs="1" maxOccurs="1">
+    	</xsd:element>
+
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="dados_saida_Type">
+    <xsd:sequence>
+
+
+    	<xsd:element name="COMUM" minOccurs="1" maxOccurs="1" type="manutencaoted:dados_entrada_comum_Type">
+
+    	</xsd:element>
+
+    </xsd:sequence>
+  </xsd:complexType>
+  
+
+  
+
+  
+
+  <xsd:complexType name="dados_entrada_comum_Type">
+  	<xsd:sequence>
+
+  		<xsd:element name="SISTEMA_DESTINO" minOccurs="1" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>
+  					Deve ser preenchido com 'SITRC'.
+  				</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:string">
+  					<xsd:minLength value="0"></xsd:minLength>
+  					<xsd:maxLength value="5"></xsd:maxLength>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  		<xsd:element name="NSU_ORIGEM" minOccurs="1" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>Numero de controle de origem.</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:string">
+  					<xsd:minLength value="0"></xsd:minLength>
+  					<xsd:maxLength value="20"></xsd:maxLength>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  		<xsd:element name="FUNCAO_TRANSACAO" minOccurs="0" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>(A) Consulta - Nao gera registro no SITRC.
+(V) Validacao - Validacao do preenchimento da mensagem e geracao do numero de controle do SITRC que deve ser rebatido na proxima 'perna'.
+(I) Inclusao - Envio da TED ao SPB.
+(C) Cancelamento - Cancelamento da transacao de validacao.
+</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:string">
+  					<xsd:minLength value="0"></xsd:minLength>
+  					<xsd:maxLength value="1"></xsd:maxLength>
+  					<xsd:enumeration value="CONSULTA"></xsd:enumeration>
+  					<xsd:enumeration value="VALIDACAO"></xsd:enumeration>
+  					<xsd:enumeration value="INCLUSAO"></xsd:enumeration>
+
+
+  					<xsd:enumeration value="CANCELAMENTO"></xsd:enumeration>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  		<xsd:element name="DATA_TRANSACAO" type="xsd:date" minOccurs="1" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>Data de movimento.</xsd:documentation>
+  			</xsd:annotation></xsd:element>
+  		<xsd:element name="REDE_TRANSMISSORA" minOccurs="1" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>Numero da rede transmissora.</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:long">
+
+  					<xsd:minInclusive value="0"></xsd:minInclusive>
+  					<xsd:maxInclusive value="99999999999"></xsd:maxInclusive>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  		<xsd:element name="NUMERO_PV_ORIGEM" minOccurs="1" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>Numero do PV de origem.</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:int">
+  					<xsd:minInclusive value="0"></xsd:minInclusive>
+
+  					<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  		<xsd:element name="FATOR_DESCONTO_TARIFA" minOccurs="0" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>
+  					Fator de desconto da tarifa
+  				</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:decimal">
+
+  					<xsd:minInclusive value="0"></xsd:minInclusive>
+  					<xsd:maxInclusive value="999.99999"></xsd:maxInclusive>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  		<xsd:element name="FORMA_RECEBIMENTO" minOccurs="1" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>Forma de recebimento da transacao onde:
+1- Debito em conta (DEBITO_CONTA).
+2 - Dinheiro (DINHEIRO).
+3 - Cheque Caixa (CHEQUE_CAIXA).
+</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:string">
+  					<xsd:minLength value="0"></xsd:minLength>
+  					<xsd:maxLength value="1"></xsd:maxLength>
+  					<xsd:enumeration value="DEBITO_CONTA"></xsd:enumeration>
+  					<xsd:enumeration value="DINHEIRO"></xsd:enumeration>
+  					<xsd:enumeration value="CHEQUE_CAIXA"></xsd:enumeration>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  		<xsd:element name="CODIGO_MENSAGEM" minOccurs="1" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>Codigo da mensagem.
+  				</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:string">
+  					<xsd:minLength value="0"></xsd:minLength>
+  					<xsd:maxLength value="9"></xsd:maxLength>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  		<xsd:element name="NSU_SITRC" minOccurs="0" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>Obrigatorio na 'perna' de inclusao e cancelamento.
+O SITRC ira devolver nesse campo o NSU gerado na transacao de validacao.
+  				</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:string">
+  					<xsd:minLength value="0"></xsd:minLength>
+  					<xsd:maxLength value="18"></xsd:maxLength>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  	</xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="dados_entrada_str0026_Type">
+  	<xsd:sequence>
+  		<xsd:element name="DADOS_SACADO"
+  			type="manutencaoted:dados_pessoa_operacao_Type" minOccurs="1"
+  			maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>
+  					Dados de Documentos e Bancarios do SACADO.
+  				</xsd:documentation>
+  			</xsd:annotation>
+  		</xsd:element>
+  		<xsd:element name="DADOS_CEDENTE"
+  			type="manutencaoted:dados_pessoa_operacao_Type" minOccurs="1"
+  			maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>
+  					Dados de Documentos e Bancarios do CEDENTE.
+  				</xsd:documentation>
+  			</xsd:annotation>
+  		</xsd:element>
+
+
+
+
+
+
+
+
+
+  		<xsd:element name="CODIGO_BARRAS"
+  			type="manutencaoted:dados_codigo_barras_Type" minOccurs="1"
+  			maxOccurs="1">
+  		</xsd:element>
+
+
+            <xsd:element name="VALORES" type="manutencaoted:VALORESType"></xsd:element>
+            <xsd:element name="CANAL_PAGAMENTO" minOccurs="1"
+  			maxOccurs="1">
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:integer">
+
+  					<xsd:minInclusive value="0"></xsd:minInclusive>
+  					<xsd:maxInclusive value="9"></xsd:maxInclusive>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+
+
+
+
+
+
+            <xsd:element name="CODIGO_IDENTIFICADOR_TRANSFERENCIA"
+  			minOccurs="0" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>
+  					Codigo identificador da transferencia.
+  				</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:string">
+  					<xsd:minLength value="0"></xsd:minLength>
+  					<xsd:maxLength value="25"></xsd:maxLength>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  		<xsd:element name="HISTORICO" minOccurs="0" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>Historico.</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:string">
+  					<xsd:minLength value="0"></xsd:minLength>
+  					<xsd:maxLength value="200"></xsd:maxLength>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  		<xsd:element name="DATA_MOVIMENTO" type="xsd:date"
+  			minOccurs="1" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>
+  					Data de Movimento.
+  				</xsd:documentation>
+  			</xsd:annotation>
+  		</xsd:element>
+
+
+
+  	</xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="dados_bancarios_Type">
+  	<xsd:sequence>
+  		<xsd:element name="CODIGO_COMPE_INSTITUICAO_FINANCEIRA" minOccurs="0" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>Codigo do Sistema de Operacoes Monetarias e Compensacoes de Outros Papeis (COMPE) para a Instituicao Financeira.</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:integer">
+
+  					<xsd:minInclusive value="0"></xsd:minInclusive>
+  					<xsd:maxInclusive value="999"></xsd:maxInclusive>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  		<xsd:element name="CODIGO_ISPB_INSTITUICAO_FINANCEIRA" minOccurs="1" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>Codigo do Identificador do Sistema de Pagamento Brasileiro (ISPB) para a Instituicao Financeira.</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:int">
+  					<xsd:minInclusive value="0"></xsd:minInclusive>
+  					<xsd:maxInclusive value="99999999"></xsd:maxInclusive>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  		<xsd:element name="AGENCIA" minOccurs="1" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>Numero da Agencia.</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:int">
+
+  					<xsd:minInclusive value="0"></xsd:minInclusive>
+
+  					<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  		
+  	</xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="dados_pessoa_Type">
+  	<xsd:sequence>
+  		<xsd:element name="TIPO" minOccurs="1" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>
+  					Tipo do Documento.
+  				</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:string">
+
+  					<xsd:minLength value="0"></xsd:minLength>
+  					<xsd:maxLength value="1"></xsd:maxLength>
+  					<xsd:enumeration value="F"></xsd:enumeration>
+  					<xsd:enumeration value="J"></xsd:enumeration>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+
+
+  		<xsd:element name="NUMERO_DOCUMENTO">
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:unsignedLong">
+  					<xsd:minInclusive value="0"></xsd:minInclusive>
+
+  					<xsd:maxInclusive value="99999999999999"></xsd:maxInclusive>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+
+  	</xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="dados_pessoa_operacao_Type">
+  	<xsd:sequence>
+  		<xsd:element name="DADOS_BANCARIOS" type="manutencaoted:dados_bancarios_Type" minOccurs="1" maxOccurs="1">
+  		</xsd:element>
+  		<xsd:element name="DADOS_PESSOA" type="manutencaoted:dados_pessoa_Type" minOccurs="1" maxOccurs="1"></xsd:element>
+  	</xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="dados_codigo_barras_Type">
+  	<xsd:sequence>
+  		<xsd:element name="TIPO" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                	<xsd:documentation>Tipo do Codigo de Barras.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+  				<xsd:restriction base="xsd:string">
+  					<xsd:minLength value="0"></xsd:minLength>
+  					<xsd:maxLength value="1"></xsd:maxLength>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  		<xsd:element name="NUMERO" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                	<xsd:documentation>Numero do Codigo de Barras.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+  				<xsd:restriction base="xsd:string">
+  					<xsd:minLength value="0"></xsd:minLength>
+  					<xsd:maxLength value="44"></xsd:maxLength>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  	</xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="VALORESType">
+  	<xsd:sequence>
+            <xsd:element name="LANCAMENTO" minOccurs="1" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>
+  					Valor do Lancamento.
+  				</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:decimal">
+
+  					<xsd:minInclusive value="0"></xsd:minInclusive>
+
+  					<xsd:maxInclusive value="9999999999999999.99"></xsd:maxInclusive>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+            <xsd:element name="DOCUMENTO" minOccurs="0" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>
+  					Valor do Documento.
+  				</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:decimal">
+
+  					<xsd:minInclusive value="0"></xsd:minInclusive>
+
+  					<xsd:maxInclusive value="9999999999999999.99"></xsd:maxInclusive>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+            <xsd:element name="DESCONTO_ABATIMENTO" minOccurs="0" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>
+  					Valor de desconto ou outros abatimentos.
+  				</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:decimal">
+
+  					<xsd:minInclusive value="0"></xsd:minInclusive>
+
+  					<xsd:maxInclusive value="9999999999999999.99"></xsd:maxInclusive>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+            <xsd:element name="JUROS" minOccurs="0" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>
+  					Valor dos Juros.
+  				</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:decimal">
+  					<xsd:minInclusive value="0"></xsd:minInclusive>
+  					<xsd:maxExclusive value="9999999999999999.99"></xsd:maxExclusive>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+            <xsd:element name="MULTA" minOccurs="0" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>Valor da Multa.</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:decimal">
+  					<xsd:minInclusive value="0"></xsd:minInclusive>
+
+  					<xsd:maxInclusive value="9999999999999999.99"></xsd:maxInclusive>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+            <xsd:element name="OUTROS_ACRESCIMOS" minOccurs="0" maxOccurs="1">
+  			<xsd:annotation>
+  				<xsd:documentation>
+  					Valor de outros acrescimos.
+  				</xsd:documentation>
+  			</xsd:annotation>
+  			<xsd:simpleType>
+  				<xsd:restriction base="xsd:decimal">
+
+  					<xsd:minInclusive value="0"></xsd:minInclusive>
+
+  					<xsd:maxInclusive value="9999999999999999.99"></xsd:maxInclusive>
+  				</xsd:restriction>
+  			</xsd:simpleType>
+  		</xsd:element>
+  	</xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

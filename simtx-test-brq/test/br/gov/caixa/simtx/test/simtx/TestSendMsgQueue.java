@@ -13,14 +13,16 @@ public class TestSendMsgQueue extends BaseUtil {
 //	private String fileName = "Detalhe_Agendamento_Transacao.xml";
 //	private String fileName = "Lista_Comprovantes_SIAUT_NSGD.xml";
 //	private String fileName = "PagamentoBoletoDEV.xml";
-//	private String fileName = "PagamentoBoletoEntrada.xml";
+//	private String fileName = "Pagamento_BoletoNovo.xml";
 //	private String fileName = "Lista transacoes agendadas.xml";
 //  private String fileName = "Detalhe_Agendamento_Transacao.xml";
 //	private String fileName = "consulta-extrato.xml";
 //	private String fileName = "Detalhe_Agendamento_Boleto.xml";
 //	private String fileName = "Consulta_Boleto.xml";
 //	private String fileName = "Cancelamento_Agendamento.xml";
-    private String fileName = "Valida Boleto caixa.xml";
+//  private String fileName = "Valida Boleto caixa.xml";
+	private String fileName = "agendamento.xml";
+
 
 	
 	@Test

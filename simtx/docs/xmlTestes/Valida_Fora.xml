@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validaboleto:VALIDA_BOLETO_ENTRADA
+	xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:h="http://caixa.gov.br/simtx/comuns/header"
+	xmlns:pagamento="http://caixa.gov.br/simtx/negocial/pagamento/v1/pagamento"
+	xmlns:valida_permissao="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao"
+	xmlns:validaboleto="http://caixa.gov.br/simtx/validaboleto/v1/ns"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://caixa.gov.br/simtx/validaboleto/v1/ns Valida_Boleto.xsd ">
+	<HEADER>
+		<SERVICO>
+			<CODIGO>110038</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO>
+		<CANAL>
+			<SIGLA>SIMAA</SIGLA>
+			<NSU>1234</NSU>
+			<DATAHORA>20180403102700</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>0</MEIOENTRADA>
+		<USUARIO_SERVICO>SMTXSD01</USUARIO_SERVICO>
+		<DATA_REFERENCIA>20180417</DATA_REFERENCIA>
+	</HEADER>
+	<NSUMTX_ORIGEM>149946</NSUMTX_ORIGEM>
+	<CONTA>
+		<CONTA_NSGD>
+			<UNIDADE>0682</UNIDADE>
+			<PRODUTO>1288</PRODUTO>
+			<CONTA>990011127</CONTA>
+			<DV>9</DV>
+		</CONTA_NSGD>
+	</CONTA>
+	<VALIDA_BOLETO>
+		<DATA_PAGAMENTO>2018-04-17</DATA_PAGAMENTO>
+		<VALOR_PAGAR>40.00</VALOR_PAGAR>
+	</VALIDA_BOLETO>
+</validaboleto:VALIDA_BOLETO_ENTRADA>

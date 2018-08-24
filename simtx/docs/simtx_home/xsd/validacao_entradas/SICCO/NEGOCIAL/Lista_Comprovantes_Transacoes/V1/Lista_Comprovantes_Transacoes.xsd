@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://caixa.gov.br/sicco/lista_comprovantes_transacoes/v1/ns" 
+	xmlns:ns="http://caixa.gov.br/sicco/lista_comprovantes_transacoes/v1/ns" 
+	xmlns:header="http://caixa.gov.br/sicco/comuns/header"
+	xmlns:comuns="http://caixa.gov.br/sicco/comuns/comuns">
+	
+	<!-- ============================= IMPORTS ======================= -->
+	<xsd:import namespace="http://caixa.gov.br/sicco/comuns/header" schemaLocation="../../../../SICCO/COMUNS/V1/Header.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/sicco/comuns/comuns" schemaLocation="../../../../SICCO/COMUNS/V1/Comuns.xsd" />
+
+ 	<xsd:element name="LISTA_COMPROVANTES_TRANSACOES_ENTRADA" type="ns:SEGUNDA_VIA_LISTA_TRANSACOES_ENTRADA_Type" />
+	<xsd:element name="LISTA_COMPROVANTES_TRANSACOES_SAIDA"	type="ns:SEGUNDA_VIA_LISTA_TRANSACOES_SAIDA_Type" />
+	
+	<xsd:complexType name="SEGUNDA_VIA_LISTA_TRANSACOES_ENTRADA_Type">
+		<xsd:sequence>
+			<xsd:element name="HEADER" type="header:HEADER_ENTRADA_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="LISTA_COMPROVANTES_TRANSACOES" minOccurs="1" maxOccurs="1">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="DATA_INICIO" type="xsd:date" minOccurs="1" maxOccurs="1" />
+						<xsd:element name="DATA_FIM" type="xsd:date" minOccurs="1" maxOccurs="1" />
+						<xsd:element name="CODIGO_SERVICO" minOccurs="0" maxOccurs="1" >
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:integer">
+									<xsd:minInclusive value="110000"/>
+									<xsd:maxInclusive value="999999"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="CONTA" type="comuns:CONTA_entrada_Type" minOccurs="0" maxOccurs="1" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+    
+    <xsd:complexType name="SEGUNDA_VIA_LISTA_TRANSACOES_SAIDA_Type">
+    	<xsd:sequence>
+    		<xsd:element name="HEADER" type="header:HEADER_SAIDA_Type" minOccurs="1" maxOccurs="1" />
+    		<xsd:element name="LISTA_COMPROVANTES_TRANSACOES" minOccurs="0" maxOccurs="1">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="QTDE_TRANSACOES" type="ns:qtde_transacao_Type" minOccurs="1" maxOccurs="1" />
+						<xsd:element name="TRANSACOES" type="ns:transacao_Type" minOccurs="0" maxOccurs="unbounded" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+    
+    <xsd:simpleType name="qtde_transacao_Type">
+		<xsd:restriction base="xsd:long">
+			<xsd:minInclusive value="0"/>
+			<xsd:maxInclusive value="999"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	    <xsd:complexType name="transacao_Type">
+    	<xsd:sequence>
+    		<xsd:element name="TRANSACAO" type="ns:dados_transacao_Type" minOccurs="1" maxOccurs="1"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+	<xsd:complexType name="dados_transacao_Type">
+    	<xsd:sequence>
+    		<xsd:element name="NSU_SIMTX" type="ns:nsu_simtx_Type" minOccurs="1" maxOccurs="1"/>
+    		<xsd:element name="DATA" type="xsd:date" minOccurs="1" maxOccurs="1"/>
+    		<xsd:element name="SERVICO" type="ns:dados_servico_Type" minOccurs="1" maxOccurs="1"/>
+    		<xsd:element name="VALOR" type="ns:valor_Type" minOccurs="0" maxOccurs="1"/>
+    		<xsd:element name="IDENTIFICACAO" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    		<xsd:element name="CANAL" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    		<xsd:element name="IDENTIFICADOR_CANCELAMENTO" minOccurs="1" maxOccurs="1">
+	    		<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="1"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+
+	<xsd:simpleType name="nsu_simtx_Type">
+		<xsd:restriction base="xsd:long">
+			<xsd:minInclusive value="0" />
+			<xsd:maxInclusive value="999999999999999" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="dados_servico_Type">
+		<xsd:sequence>
+			<xsd:element name="NOME" type="ns:nome_servico_Type"
+				minOccurs="1" maxOccurs="1" />
+			<xsd:element name="CODIGO" type="ns:servico_Type"
+				minOccurs="1" maxOccurs="1" />
+			<xsd:element name="VERSAO" type="ns:versao_servico_Type"
+				minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="valor_Type">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:minInclusive value="0"></xsd:minInclusive>
+			<xsd:maxInclusive value="999999999999.99"></xsd:maxInclusive>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="nome_servico_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="50"></xsd:maxLength>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="servico_Type">
+		<xsd:restriction base="xsd:long">
+			<xsd:minExclusive value="0"></xsd:minExclusive>
+			<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="versao_servico_Type">
+		<xsd:restriction base="xsd:long">
+			<xsd:minExclusive value="0"></xsd:minExclusive>
+			<xsd:maxInclusive value="999"></xsd:maxInclusive>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

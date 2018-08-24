@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solicitacaodebito:SERVICO_ENTRADA
+	xmlns:sibar_base="http://caixa.gov.br/sibar" xmlns:solicitacaodebito="http://caixa.gov.br/sibar/solicitacao_debito"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://caixa.gov.br/sibar/solicitacao_debito Solicitacao_Debito.xsd ">
+	<sibar_base:HEADER>
+		<VERSAO>1.0</VERSAO>
+		<USUARIO_SERVICO>SMTXSD01</USUARIO_SERVICO>
+		<OPERACAO>SOLICITACAO</OPERACAO>
+		<SISTEMA_ORIGEM>SIMAA</SISTEMA_ORIGEM>
+		<UNIDADE>0625</UNIDADE>
+		<DATA_HORA>20180413120600</DATA_HORA>
+	</sibar_base:HEADER>
+	<DADOS>
+		<SIGLA_SERVICO>PBQ</SIGLA_SERVICO>
+		<CONTA>
+			<UNIDADE>682</UNIDADE>
+			<PRODUTO>1288</PRODUTO>
+			<NUMERO>990011127</NUMERO>
+			<DV>9</DV>
+		</CONTA>
+		<VALOR_TRANSACAO>275.00</VALOR_TRANSACAO>
+		<DATA_EFETIVACAO>2018-04-13</DATA_EFETIVACAO>
+		<NSU_CANAL>150193</NSU_CANAL>
+		<SISTEMA_DESTINO>SICCP</SISTEMA_DESTINO>
+		<TIPO_AUTENTICACAO>AUTENTICACAO_SIMPLES</TIPO_AUTENTICACAO>
+	</DADOS>
+</solicitacaodebito:SERVICO_ENTRADA>

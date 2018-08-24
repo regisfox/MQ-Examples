@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resumo:SERVICO_ENTRADA
+	xmlns:resumo="http://caixa.gov.br/sibar/consulta_transacoes_conta/resumo"
+	xmlns:sibar_base="http://caixa.gov.br/sibar" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://caixa.gov.br/sibar/consulta_transacoes_conta/resumo Consulta_Transacoes_Conta_Resumo.xsd ">
+	<sibar_base:HEADER>
+		<VERSAO>1.0</VERSAO>
+		<USUARIO_SERVICO>SMTXSD01</USUARIO_SERVICO>
+		<OPERACAO>RESUMO</OPERACAO>
+		<SISTEMA_ORIGEM>SIMAA</SISTEMA_ORIGEM>
+		<UNIDADE>0682</UNIDADE>
+		<DATA_HORA>20180417145300</DATA_HORA>
+	</sibar_base:HEADER>
+	<DADOS>
+		<CONTA>
+			<UNIDADE>0682</UNIDADE>
+			<PRODUTO>1288</PRODUTO>
+			<NUMERO>990011127</NUMERO>
+			<DV>9</DV>
+		</CONTA>
+		<PERIODO>
+			<INICIO>2018-04-16</INICIO>
+			<FIM>2018-04-17</FIM>
+		</PERIODO>
+		<SOLICITACOES>
+			<SOLICITACAO>BOLETO</SOLICITACAO>
+		</SOLICITACOES>
+	</DADOS>
+</resumo:SERVICO_ENTRADA>

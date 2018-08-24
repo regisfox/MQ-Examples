@@ -1,0 +1,235 @@
+<REQUISICAO>
+	<OPERACAO>UNICA</OPERACAO>
+</REQUISICAO>
+<break_pmac/>
+<ns:PAGAMENTO_BOLETO_ENTRADA xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns" xmlns:h="http://caixa.gov.br/simtx/comuns/header" xmlns:ns="http://caixa.gov.br/simtx/pagamento_boleto/v1/ns" xmlns:pagamento="http://caixa.gov.br/simtx/negocial/pagamento/v1/pagamento" xmlns:validaassinatura="http://caixa.gov.br/simtx/meios_de_entrada/valida_assinatura/v1/valida_assinatura" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://caixa.gov.br/simtx/pagamento_boleto/v1/ns Pagamento_Boleto.xsd ">
+	<HEADER>
+		<SERVICO>
+			<CODIGO>110039</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO>
+		<CANAL>
+			<SIGLA>SIMAA</SIGLA>
+			<NSU>1234</NSU>
+			<DATAHORA>20180403123700</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>0</MEIOENTRADA>
+		<DATA_REFERENCIA>20180409</DATA_REFERENCIA>
+	</HEADER>
+	<NSUMTX_ORIGEM>148430</NSUMTX_ORIGEM>
+	<AGENDAMENTO>NAO</AGENDAMENTO>
+	<CONTA>
+		<CONTA_NSGD>
+			<UNIDADE>682</UNIDADE>
+			<PRODUTO>1288</PRODUTO>
+			<CONTA>990011127</CONTA>
+			<DV>9</DV>
+		</CONTA_NSGD>
+	</CONTA>
+	<TOKEN>
+		<TOKEN>TESTEREDEA14        U52fD9mG8zgJPDQcPcguqysEWqqAjfYpaQ9xwRMicmetZGx6T3ZUjWMvz8E6</TOKEN>
+		<ID_SESSAO>P9GtQLDNR8MSCaG7mpadoNFl.sinbc10</ID_SESSAO>
+	</TOKEN>
+	<PAGAMENTO_BOLETO>
+		<INFORMACOES_BOLETO>
+			<NOSSO_NUMERO>140000201802070171</NOSSO_NUMERO>
+			<DATA_VENCIMENTO>2018-05-15</DATA_VENCIMENTO>
+			<DATA_EFETIVACAO>2018-04-10</DATA_EFETIVACAO>
+			<IDENTIFICACAO>TESTE</IDENTIFICACAO>
+			<VALOR_NOMINAL>275.00</VALOR_NOMINAL>
+			<VALOR_PAGO>275.00</VALOR_PAGO>
+		</INFORMACOES_BOLETO>
+	</PAGAMENTO_BOLETO>
+</ns:PAGAMENTO_BOLETO_ENTRADA>
+<break_pmac/>
+<pagamentoboleto:PAGAMENTO_BOLETO_SAIDA xmlns:pagamentoboleto="http://caixa.gov.br/simtx/pagamento_boleto/v1/ns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:consultacobrancabancaria="http://caixa.gov.br/simtx/negocial/consulta_cobranca_bancaria/pagamento" xmlns:validapermissao="http://caixa.gov.br/simtx/meioentrada/valida_permissao" xmlns:header="http://caixa.gov.br/simtx/comuns/header" xsi:schemaLocation="http://caixa.gov.br/simtx/consultaboleto Consulta_Boleto_Pagamento.xsd ">
+	<HEADER>
+		<SERVICO>
+			<CODIGO>110039</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO>
+		<CANAL>
+			<SIGLA>SIMAA</SIGLA>
+			<NSU>1234</NSU>
+			<DATAHORA>20180403123700</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>0</MEIOENTRADA>
+		<DATA_REFERENCIA>20180409</DATA_REFERENCIA>
+		<NSUMTX>149863</NSUMTX>
+		<COD_RETORNO>00</COD_RETORNO>
+		<ACAO_RETORNO>AUTORIZADORA</ACAO_RETORNO>
+		<ORIGEM_RETORNO>SIATR</ORIGEM_RETORNO>
+		<MENSAGENS>
+			<NEGOCIAL>TRANSAÇÃO EFETIVADA COM SUCESSO</NEGOCIAL>
+			<TECNICA>TRANSAÇÃO EFETIVADA COM SUCESSO</TECNICA>
+		</MENSAGENS>
+	</HEADER>
+	<CONTA>
+		<CONTA_NSGD>
+			<UNIDADE>682</UNIDADE>
+			<PRODUTO>1288</PRODUTO>
+			<CONTA>990011127</CONTA>
+			<DV>9</DV>
+			<TITULAR_CONTA/>
+		</CONTA_NSGD>
+	</CONTA>
+	<INFORMACOES_BOLETO>
+		<NOSSO_NUMERO>140000201802070171</NOSSO_NUMERO>
+		<DATA_VENCIMENTO>2018-05-15</DATA_VENCIMENTO>
+		<DATA_EFETIVACAO>2018-04-10</DATA_EFETIVACAO>
+		<IDENTIFICACAO>TESTE</IDENTIFICACAO>
+		<VALOR_NOMINAL>275.00</VALOR_NOMINAL>
+		<VALOR_PAGO>275.00</VALOR_PAGO>
+	</INFORMACOES_BOLETO>
+</pagamentoboleto:PAGAMENTO_BOLETO_SAIDA>
+<break_pmac/>
+<TRANSACAO>
+	<NSU>149863</NSU>
+	<NSU_ORIGEM>148430</NSU_ORIGEM>
+	<CODIGO_SERVICO>110039</CODIGO_SERVICO>
+	<VERSAO_SERVICO>1</VERSAO_SERVICO>
+	<NOME_SERVICO>Pagamento_Boleto.xsd</NOME_SERVICO>
+	<CO_CANAL_ORIGEM>106</CO_CANAL_ORIGEM>
+	<DT_REFERENCIA>09/04/2018</DT_REFERENCIA>
+	<DH_TRANSACAO_CANAL>03/04/2018 12:37:00</DH_TRANSACAO_CANAL>
+	<DT_CONTABIL/>
+	<DH_MULTICANAL>10/04/2018 10:30:22</DH_MULTICANAL>
+	<IC_SITUACAO>1</IC_SITUACAO>
+	<TAREFAS>2</TAREFAS>
+</TRANSACAO>
+<break_pmac/>100057<break_param_tarefa/>1<break_param_tarefa/>2018-04-10 10:30:27.759<break_param_tarefa/>null<break_param_tarefa/>
+<solicitacaodebito:SOLICITACAO_DEBITO_SAIDA xmlns:solicitacaodebito="http://caixa.gov.br/sibar/solicitacao_debito" xmlns:multicanal="http://caixa.gov.br/sibar/multicanal/orquestracao" xmlns:sibar_base="http://caixa.gov.br/sibar" xmlns:controlelimite="http://caixa.gov.br/sibar/controle_limite/efetivacao">
+	<CONTROLE_NEGOCIAL>
+		<ORIGEM_RETORNO>SIATR</ORIGEM_RETORNO>
+		<COD_RETORNO>00</COD_RETORNO>
+	</CONTROLE_NEGOCIAL>
+	<NSU_TRANSACAO>23638682</NSU_TRANSACAO>
+	<DATA_TRANSACAO>2018-04-10</DATA_TRANSACAO>
+	<NSU_EFETIVACAO>8076865</NSU_EFETIVACAO>
+</solicitacaodebito:SOLICITACAO_DEBITO_SAIDA>
+<break_tarefa_pmac/>100058<break_param_tarefa/>1<break_param_tarefa/>2018-04-10 10:30:27.741<break_param_tarefa/>null<break_param_tarefa/>
+<controlelimite:CONTROLE_LIMITE_SAIDA xmlns:controlelimite="http://caixa.gov.br/sibar/controle_limite/efetivacao" xmlns:multicanal="http://caixa.gov.br/sibar/multicanal/orquestracao" xmlns:sibar_base="http://caixa.gov.br/sibar" xmlns:solicitacaodebito="http://caixa.gov.br/sibar/solicitacao_debito">
+	<CONTROLE_NEGOCIAL>
+		<ORIGEM_RETORNO>SIATR</ORIGEM_RETORNO>
+		<COD_RETORNO>00</COD_RETORNO>
+	</CONTROLE_NEGOCIAL>
+</controlelimite:CONTROLE_LIMITE_SAIDA>
+<break_tarefa_pmac/>
+
+<REQUISICAO>
+	<OPERACAO>UNICA</OPERACAO>
+</REQUISICAO>
+<break_pmac/>
+<ns:PAGAMENTO_BOLETO_ENTRADA xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns" xmlns:h="http://caixa.gov.br/simtx/comuns/header" xmlns:ns="http://caixa.gov.br/simtx/pagamento_boleto/v1/ns" xmlns:pagamento="http://caixa.gov.br/simtx/negocial/pagamento/v1/pagamento" xmlns:validaassinatura="http://caixa.gov.br/simtx/meios_de_entrada/valida_assinatura/v1/valida_assinatura" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://caixa.gov.br/simtx/pagamento_boleto/v1/ns Pagamento_Boleto.xsd ">
+	<HEADER>
+		<SERVICO>
+			<CODIGO>110039</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO>
+		<CANAL>
+			<SIGLA>SIMAA</SIGLA>
+			<NSU>1234</NSU>
+			<DATAHORA>20180403123700</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>0</MEIOENTRADA>
+		<DATA_REFERENCIA>20180409</DATA_REFERENCIA>
+	</HEADER>
+	<NSUMTX_ORIGEM>148430</NSUMTX_ORIGEM>
+	<AGENDAMENTO>NAO</AGENDAMENTO>
+	<CONTA>
+		<CONTA_NSGD>
+			<UNIDADE>682</UNIDADE>
+			<PRODUTO>1288</PRODUTO>
+			<CONTA>990011127</CONTA>
+			<DV>9</DV>
+		</CONTA_NSGD>
+	</CONTA>
+	<TOKEN>
+		<TOKEN>TESTEREDEA14        U52fD9mG8zgJPDQcPcguqysEWqqAjfYpaQ9xwRMicmetZGx6T3ZUjWMvz8E6</TOKEN>
+		<ID_SESSAO>P9GtQLDNR8MSCaG7mpadoNFl.sinbc10</ID_SESSAO>
+	</TOKEN>
+	<PAGAMENTO_BOLETO>
+		<INFORMACOES_BOLETO>
+			<NOSSO_NUMERO>140000201802070171</NOSSO_NUMERO>
+			<DATA_VENCIMENTO>2018-05-15</DATA_VENCIMENTO>
+			<DATA_EFETIVACAO>2018-04-10</DATA_EFETIVACAO>
+			<IDENTIFICACAO>TESTE</IDENTIFICACAO>
+			<VALOR_NOMINAL>275.00</VALOR_NOMINAL>
+			<VALOR_PAGO>275.00</VALOR_PAGO>
+		</INFORMACOES_BOLETO>
+	</PAGAMENTO_BOLETO>
+</ns:PAGAMENTO_BOLETO_ENTRADA>
+<break_pmac/>
+<pagamentoboleto:PAGAMENTO_BOLETO_SAIDA xmlns:pagamentoboleto="http://caixa.gov.br/simtx/pagamento_boleto/v1/ns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:consultacobrancabancaria="http://caixa.gov.br/simtx/negocial/consulta_cobranca_bancaria/pagamento" xmlns:validapermissao="http://caixa.gov.br/simtx/meioentrada/valida_permissao" xmlns:header="http://caixa.gov.br/simtx/comuns/header" xsi:schemaLocation="http://caixa.gov.br/simtx/consultaboleto Consulta_Boleto_Pagamento.xsd ">
+	<HEADER>
+		<SERVICO>
+			<CODIGO>110039</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO>
+		<CANAL>
+			<SIGLA>SIMAA</SIGLA>
+			<NSU>1234</NSU>
+			<DATAHORA>20180403123700</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>0</MEIOENTRADA>
+		<DATA_REFERENCIA>20180409</DATA_REFERENCIA>
+		<NSUMTX>149863</NSUMTX>
+		<COD_RETORNO>00</COD_RETORNO>
+		<ACAO_RETORNO>AUTORIZADORA</ACAO_RETORNO>
+		<ORIGEM_RETORNO>SIATR</ORIGEM_RETORNO>
+		<MENSAGENS>
+			<NEGOCIAL>TRANSAÇÃO EFETIVADA COM SUCESSO</NEGOCIAL>
+			<TECNICA>TRANSAÇÃO EFETIVADA COM SUCESSO</TECNICA>
+		</MENSAGENS>
+	</HEADER>
+	<CONTA>
+		<CONTA_NSGD>
+			<UNIDADE>682</UNIDADE>
+			<PRODUTO>1288</PRODUTO>
+			<CONTA>990011127</CONTA>
+			<DV>9</DV>
+			<TITULAR_CONTA/>
+		</CONTA_NSGD>
+	</CONTA>
+	<INFORMACOES_BOLETO>
+		<NOSSO_NUMERO>140000201802070171</NOSSO_NUMERO>
+		<DATA_VENCIMENTO>2018-05-15</DATA_VENCIMENTO>
+		<DATA_EFETIVACAO>2018-04-10</DATA_EFETIVACAO>
+		<IDENTIFICACAO>TESTE</IDENTIFICACAO>
+		<VALOR_NOMINAL>275.00</VALOR_NOMINAL>
+		<VALOR_PAGO>275.00</VALOR_PAGO>
+	</INFORMACOES_BOLETO>
+</pagamentoboleto:PAGAMENTO_BOLETO_SAIDA>
+<break_pmac/>
+<TRANSACAO>
+	<NSU>149863</NSU>
+	<NSU_ORIGEM>148430</NSU_ORIGEM>
+	<CODIGO_SERVICO>110039</CODIGO_SERVICO>
+	<VERSAO_SERVICO>1</VERSAO_SERVICO>
+	<NOME_SERVICO>Pagamento_Boleto.xsd</NOME_SERVICO>
+	<CO_CANAL_ORIGEM>106</CO_CANAL_ORIGEM>
+	<DT_REFERENCIA>09/04/2018</DT_REFERENCIA>
+	<DH_TRANSACAO_CANAL>03/04/2018 12:37:00</DH_TRANSACAO_CANAL>
+	<DT_CONTABIL/>
+	<DH_MULTICANAL>10/04/2018 10:30:22</DH_MULTICANAL>
+	<IC_SITUACAO>1</IC_SITUACAO>
+	<TAREFAS>2</TAREFAS>
+</TRANSACAO>
+<break_pmac/>100057<break_param_tarefa/>1<break_param_tarefa/>2018-04-10 10:30:27.759<break_param_tarefa/>null<break_param_tarefa/>
+<solicitacaodebito:SOLICITACAO_DEBITO_SAIDA xmlns:solicitacaodebito="http://caixa.gov.br/sibar/solicitacao_debito" xmlns:multicanal="http://caixa.gov.br/sibar/multicanal/orquestracao" xmlns:sibar_base="http://caixa.gov.br/sibar" xmlns:controlelimite="http://caixa.gov.br/sibar/controle_limite/efetivacao">
+	<CONTROLE_NEGOCIAL>
+		<ORIGEM_RETORNO>SIATR</ORIGEM_RETORNO>
+		<COD_RETORNO>00</COD_RETORNO>
+	</CONTROLE_NEGOCIAL>
+	<NSU_TRANSACAO>23638682</NSU_TRANSACAO>
+	<DATA_TRANSACAO>2018-04-10</DATA_TRANSACAO>
+	<NSU_EFETIVACAO>8076865</NSU_EFETIVACAO>
+</solicitacaodebito:SOLICITACAO_DEBITO_SAIDA>
+<break_tarefa_pmac/>100058<break_param_tarefa/>1<break_param_tarefa/>2018-04-10 10:30:27.741<break_param_tarefa/>null<break_param_tarefa/>
+<controlelimite:CONTROLE_LIMITE_SAIDA xmlns:controlelimite="http://caixa.gov.br/sibar/controle_limite/efetivacao" xmlns:multicanal="http://caixa.gov.br/sibar/multicanal/orquestracao" xmlns:sibar_base="http://caixa.gov.br/sibar" xmlns:solicitacaodebito="http://caixa.gov.br/sibar/solicitacao_debito">
+	<CONTROLE_NEGOCIAL>
+		<ORIGEM_RETORNO>SIATR</ORIGEM_RETORNO>
+		<COD_RETORNO>00</COD_RETORNO>
+	</CONTROLE_NEGOCIAL>
+</controlelimite:CONTROLE_LIMITE_SAIDA>
+<break_tarefa_pmac/>

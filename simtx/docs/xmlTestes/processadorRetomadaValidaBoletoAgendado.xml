@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:RETOMAR_TRANSACAO_ENTRADA xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:h="http://caixa.gov.br/simtx/comuns/header" xmlns:ns="http://caixa.gov.br/simtx/retomadaTransacao/v1/ns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://caixa.gov.br/simtx/retomadaTransacao/v1/ns retormarTransacao.xsd">
+	<HEADER>
+		<SERVICO>
+			<CODIGO>110045</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO>
+		<CANAL>
+			<SIGLA>SIMAA</SIGLA>
+			<DATAHORA>20180811200459</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>0</MEIOENTRADA>
+		<DATA_REFERENCIA>20180811</DATA_REFERENCIA>
+	</HEADER>
+	<NSUMTX_ORIGEM>226945</NSUMTX_ORIGEM>
+	<TRANSACAO_IC_SITUACAO>1</TRANSACAO_IC_SITUACAO>
+	<NSUMTX_SERVICO_ORIGEM>110031</NSUMTX_SERVICO_ORIGEM>
+	<NSUMTX_VERSAO_SERVICO_ORIGEM>1</NSUMTX_VERSAO_SERVICO_ORIGEM>
+	<DADOS_MENSAGEM_TRANSACAO_TAREFAS_RESPOSTA_SIBAR>
+		<multicanal:SERVICO_SAIDA xmlns:multicanal="http://caixa.gov.br/sibar/multicanal/orquestracao" xmlns:sibar_base="http://caixa.gov.br/sibar">
+			<sibar_base:HEADER>
+				<VERSAO>1.0</VERSAO>
+				<USUARIO_SERVICO>smtxsd01</USUARIO_SERVICO>
+				<OPERACAO>SERVICO_MIGRADO</OPERACAO>
+				<SISTEMA_ORIGEM>SIMAA</SISTEMA_ORIGEM>
+				<UNIDADE>664</UNIDADE>
+				<DATA_HORA>20180811200451</DATA_HORA>
+			</sibar_base:HEADER>
+			<COD_RETORNO>MC006</COD_RETORNO>
+			<ORIGEM_RETORNO>ROTINAS_USO_COMUM</ORIGEM_RETORNO>
+			<MSG_RETORNO>PASSO ROTINAS_USO_COMUM EXECUTADO COM ERRO DE NEGOCIO.</MSG_RETORNO>
+			<calculaboleto:ROTINAS_USO_COMUM_SAIDA xmlns:calculaboleto="http://caixa.gov.br/sibar/rotinas_uso_comum/calcula_boleto">
+				<CONTROLE_NEGOCIAL>
+					<ORIGEM_RETORNO>BROKER-SPD9MAG3</ORIGEM_RETORNO>
+					<COD_RETORNO>X5</COD_RETORNO>
+					<MENSAGENS>
+						<RETORNO>(BK76) ERRO NA FORMATACAO DA MENSAGEM.</RETORNO>
+					</MENSAGENS>
+				</CONTROLE_NEGOCIAL>
+				<EXCECAO>EXCECAO NO BAR_ROTINAS_USO_COMUM_MQ.MQInput. DETALHES: ParserException(1) - Funcao: ImbRootParser::parseNextItem, Texto Excecao: Exception whilst parsing.ParserException(2) - Funcao: ImbXMLNSCParser::parseLastChild, Texto Excecao: XML Parsing Errors have occurred.ParserException(3) - Funcao: ImbXMLNSCDocHandler::handleParseErrors, Texto Excecao: A schema validation error has occurred while parsing the XML document, Texto de Insercao(1) - 5004, Texto de Insercao(2) - 2, Texto de Insercao(3) - 1, Texto de Insercao(4) - 527, Texto de Insercao(5) - cvc-complex-type.2.4.a: Expecting element with local name "UNIDADE_PAGAMENTO" but saw "DATA_MOVIMENTO"., Texto de Insercao(6) - /Root/XMLNSC/{http://caixa.gov.br/sibar/rotinas_uso_comum/calcula_boleto}:SERVICO_ENTRADA/DADOS.</EXCECAO>
+			</calculaboleto:ROTINAS_USO_COMUM_SAIDA>
+		</multicanal:SERVICO_SAIDA>
+	</DADOS_MENSAGEM_TRANSACAO_TAREFAS_RESPOSTA_SIBAR>
+</ns:RETOMAR_TRANSACAO_ENTRADA>

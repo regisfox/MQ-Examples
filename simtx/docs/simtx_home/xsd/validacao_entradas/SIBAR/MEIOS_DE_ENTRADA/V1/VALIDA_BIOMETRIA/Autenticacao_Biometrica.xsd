@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://caixa.gov.br/sibar/autenticacao_biometrica"
+			xmlns:autenticacaobiometrica="http://caixa.gov.br/sibar/autenticacao_biometrica"
+			xmlns:sibar_base="http://caixa.gov.br/sibar" 
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../MensagensBarramento.xsd" />
+
+	<xsd:element name="SERVICO_ENTRADA" type="autenticacaobiometrica:SERVICO_ENTRADA_TYPE"/>
+
+	<xsd:element name="SERVICO_SAIDA" type="autenticacaobiometrica:SERVICO_SAIDA_TYPE"/>
+
+	<xsd:complexType name="SERVICO_ENTRADA_TYPE">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="DADOS" type="autenticacaobiometrica:DADOS_ENTRADA_TYPE" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="SERVICO_SAIDA_TYPE">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="DADOS" type="autenticacaobiometrica:DADOS_SAIDA_TYPE" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="DADOS_ENTRADA_TYPE">
+		<xsd:sequence>
+			<xsd:element name="NUMERO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+						<xsd:minInclusive value="0" />
+						<xsd:maxInclusive value="99999999999" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="IDENTIFICADOR" type="xsd:string" />
+			<xsd:element name="NSU" type="xsd:string" />
+			<xsd:element minOccurs="0" name="LFD">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0" />
+						<xsd:maxInclusive value="99999" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="DEDO" type="xsd:string" />
+			<xsd:element minOccurs="0" name="TEMPLATE" type="xsd:string" />
+			<xsd:element minOccurs="0" name="FORMATO_TEMPLATE">
+			  <xsd:simpleType>
+			    <xsd:restriction base="xsd:string">
+			      <xsd:enumeration value="SEM_CRIPTOGRAFIA"/>
+			      <xsd:enumeration value="ASSIMETRICA_SW"/>
+			      <xsd:enumeration value="SIMETRICA_HW"/>
+			      <xsd:enumeration value="ASSIMETRICA_HW"/>
+			      <xsd:enumeration value="CRIPTOGRAFIA_DUKPT"/>
+			    </xsd:restriction>
+			  </xsd:simpleType>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="CHAVE_SESSAO" type="xsd:string" />
+			<xsd:element minOccurs="0" name="FLAG_CARTAO_PRESENTE" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DADOS_SAIDA_TYPE">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="NUMERO" type="xsd:long" />
+					<xsd:element minOccurs="0" name="IDENTIFICADOR" type="xsd:string" />
+					<xsd:element minOccurs="0" name="NSU" type="xsd:string" />
+					<xsd:element minOccurs="0" name="LFD">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:minInclusive value="0" />
+								<xsd:maxInclusive value="99999" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element minOccurs="0" name="DEDO" type="xsd:string" />
+					<xsd:element minOccurs="0" name="TEMPLATE" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="ISO_0305" type="autenticacaobiometrica:ISO_0305_TYPE"/>
+
+	<xsd:element name="ISO_0315" type="autenticacaobiometrica:ISO_0315_TYPE"/>
+
+	<xsd:element name="BIT062" type="autenticacaobiometrica:BIT062_TYPE"/>
+
+	<xsd:complexType name="ISO_0305_TYPE">
+		<xsd:sequence>
+			<xsd:element fixed="0305" name="TIPO_MSG">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short" />
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element default=" " name="MAPA_BITS1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string" />
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element default=" " name="BIT001_MAPA_BITS2">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string" />
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DADOS">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string" />
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ISO_0315_TYPE">
+		<xsd:sequence>
+			<xsd:element default="0" name="TIPO_MSG">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short" />
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element default=" " name="MAPA_BITS1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string" />
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element default=" " name="BIT001_MAPA_BITS2">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string" />
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DADOS">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string" />
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="BIT062_TYPE">
+		<xsd:sequence>
+			<xsd:element default="0" name="QTD_BENEFICIO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0" />
+						<xsd:maxInclusive value="9" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element maxOccurs="8" minOccurs="8" name="BENEFICIO" type="autenticacaobiometrica:BENEFICIO_TYPE"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="BENEFICIO_TYPE">
+		<xsd:sequence>
+			<xsd:element default=" " name="NR_BENEFICIO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="10" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element default=" " name="DV_BENEFICIO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+    <xsd:element name="AUTENTICACAO_BIOMETRICA_ENTRADA" type="autenticacaobiometrica:DADOS_ENTRADA_TYPE"></xsd:element>
+
+    <xsd:element name="AUTENTICACAO_BIOMETRICA_SAIDA" type="autenticacaobiometrica:DADOS_SAIDA_TYPE"></xsd:element>
+</xsd:schema>

@@ -1,0 +1,56 @@
+<?xml version ="1.0" encoding= "UTF-8"?>
+<validaboleto:VALIDA_BOLETO_ENTRADA 
+ xmlns:comuns ="http://caixa.gov.br/simtx/comuns/comuns"
+ xmlns:consultacobrancabancaria ="http://caixa.gov.br/simtx/negocial/consulta_boleto/v1/consulta_boleto" 
+ xmlns:h= "http://caixa.gov.br/simtx/comuns/header" 
+ xmlns:valida_permissao ="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao" 
+ xmlns:validaboleto= "http://caixa.gov.br/simtx/validaboleto" 
+ xmlns:xsi ="http://www.w3.org/2001/XMLSchema-instance" 
+ xsi:schemaLocation= "http://caixa.gov.br/simtx/validaboleto Valida_Boleto.xsd">
+	<HEADER xsi:type= "h:HEADER_ENTRADA_Type">
+		<SERVICO>
+			<CODIGO>110031</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO> 
+		<CANAL>
+			<SIGLA>SIIBC</SIGLA>
+			<NSU>1234</NSU>
+			<DATAHORA>20180110115100</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>0</MEIOENTRADA>
+		<USUARIO_SERVICO>SMTXSD01</USUARIO_SERVICO>
+		<DATA_REFERENCIA>20870110</DATA_REFERENCIA>
+	</HEADER>
+	<NSUMTX_ORIGEM>11832</NSUMTX_ORIGEM>
+	<CPF>00000000949</CPF>
+	<CONTA> 
+		<CONTA_NSGD>
+			<UNIDADE>0612</UNIDADE> 
+			<PRODUTO>1288</PRODUTO> 
+			<CONTA>990010354</CONTA> 
+			<DV>3</DV> 
+		</CONTA_NSGD>
+	</CONTA>
+	<VALIDA_BOLETO>
+		<FORMA_LEITURA>1</FORMA_LEITURA>
+		<LINHA_DIGITAVEL>99492813698180300400819601022500000000000000</LINHA_DIGITAVEL>
+		<DATA_PAGAMENTO>2018-03-06</DATA_PAGAMENTO>
+		<DATA_VENCIMENTO>2018-02-11</DATA_VENCIMENTO>
+		<VALOR_PAGAR>4000.00</VALOR_PAGAR>
+	</VALIDA_BOLETO>
+	<CONSULTA_BOLETO>
+		<FLAG_NOVA_COBRANCA>S</FLAG_NOVA_COBRANCA>
+		<SITUACAO_CONTINGENCIA>SEM_CONTINGENCIA</SITUACAO_CONTINGENCIA>
+		<FLAG_HABITACAO>S</FLAG_HABITACAO>
+		<NUMERO_CONTROLE_DDA>31231</NUMERO_CONTROLE_DDA>
+		<TIPO_BOLETO>1</TIPO_BOLETO>
+		<TITULO>
+			<PAGADOR>
+				<CPF>00000000949</CPF>
+				<NOME>TESTE</NOME>
+			</PAGADOR>
+			<VALOR>341.85</VALOR>
+		</TITULO>
+		<RECEBE_VALOR_DIVERGENTE>QUALQUER_VALOR</RECEBE_VALOR_DIVERGENTE>
+	</CONSULTA_BOLETO>
+</validaboleto:VALIDA_BOLETO_ENTRADA>

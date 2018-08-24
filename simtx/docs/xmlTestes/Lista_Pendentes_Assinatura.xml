@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <ns:LISTA_TRANSACOES_PENDENTES_ASSINATURA_ENTRADA
+ xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns"
+  xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns"   xmlns:h="http://caixa.gov.br/simtx/comuns/header"
+  xmlns:ns="http://caixa.gov.br/simtx/lista_transacoes_pendentes_assinatura/v1/ns"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://caixa.gov.br/simtx/lista_transacoes_pendentes_assinatura/v1/ns Lista_Transacoes_Pendentes_Assinatura.xsd"> 
+	<HEADER xsi:type="h:HEADER_ENTRADA_Type">
+		<SERVICO>
+			<CODIGO>110023</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO>
+		<CANAL>
+			<SIGLA>SIIBC</SIGLA>
+			<DATAHORA>20180201100100</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>5</MEIOENTRADA>
+		<IDENTIFICADOR_ORIGEM>
+			<CODIGO_MAQUINA>127001</CODIGO_MAQUINA>
+		</IDENTIFICADOR_ORIGEM>
+		<USUARIO_SERVICO>SMTXSD01</USUARIO_SERVICO>
+		<DATA_REFERENCIA>20160101</DATA_REFERENCIA>
+	</HEADER>
+	<CONTA>
+		<CONTA_SIDEC>
+			<UNIDADE>1679</UNIDADE>
+			<OPERACAO>001</OPERACAO>
+			<CONTA>00000008</CONTA>
+			<DV>0</DV>
+		</CONTA_SIDEC>
+	</CONTA>
+	<TOKEN>
+		<TOKEN>TESTEREDEA09        hN53nsgDQjbkpA2bvWSzQQcuc57Ebkbdn4CJMXxAmmmchpnG7dpiMMCm3cyf</TOKEN>
+		<ID_SESSAO>QpgkKgJzKBH7ANxBKADg5XQj.testebr</ID_SESSAO>
+	</TOKEN>
+	<LISTA_TRANSACOES_PENDENTES_ASSINATURA>
+		<TIPO>TODAS</TIPO>
+		<CPF>52649647345</CPF>
+		<DATA_INICIO>2018-03-07</DATA_INICIO>
+		<DATA_FIM>2018-03-09</DATA_FIM>
+	</LISTA_TRANSACOES_PENDENTES_ASSINATURA>
+</ns:LISTA_TRANSACOES_PENDENTES_ASSINATURA_ENTRADA>

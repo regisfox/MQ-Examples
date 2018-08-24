@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:ns="http://caixa.gov.br/simtx/valida_boleto/regras/v1/ns"
+	xmlns:sibar_base="http://caixa.gov.br/sibar"
+	targetNamespace="http://caixa.gov.br/simtx/valida_boleto/regras/v1/ns">
+
+	<xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../../../SIBAR/MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd"/>
+
+	<xsd:element name="SERVICO_ENTRADA" type="ns:servico_entrada_negocial_type" />
+	<xsd:element name="SERVICO_SAIDA" type="ns:servico_saida_negocial_type" />
+	
+	
+	<xsd:complexType name="servico_entrada_negocial_type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="DADOS" type="ns:dados_entrada_negocial_type"></xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_entrada_negocial_type">
+		<xsd:sequence>
+			<xsd:element name="NSU_TRANSACAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+						<xsd:minInclusive value="0" />
+						<xsd:maxInclusive value="999999999999999999" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NU_CANAL" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0" />
+						<xsd:maxInclusive value="999" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CODIGO_BARRAS" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="44" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ULTIMA_PARCELA_VIAVEL" type="ns:S_ou_N_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="PAGAMENTO_PARCIAL" type="ns:S_ou_N_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="QUANTIDADE_PAGAMENTO_PARCIAL_PERMITIDO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+    				<xsd:restriction base="xsd:int">
+    					<xsd:minInclusive value="0"></xsd:minInclusive>
+    					<xsd:maxInclusive value="999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO_PARCELA_ATUAL" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+    				<xsd:restriction base="xsd:int">
+    					<xsd:minExclusive value="0"></xsd:minExclusive>
+    					<xsd:maxInclusive value="999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="RECEBE_VALOR_DIVERGENTE" type="ns:RECEBE_VALOR_DIVERGENTE_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="ESPECIE" type="xsd:string" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="TIPO_CONTINGENCIA" type="ns:contingencia_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="NOVA_PLATAFORMA_DE_COBRANCA" type="ns:S_ou_N_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="DATA_PAGAMENTO" type="xsd:date" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="DATA_VENCIMENTO_UTIL" type="xsd:date" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="VALOR_MINIMO_CONSULTA" type="ns:valor_decimal" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="VALOR_MAXIMO_CONSULTA" type= "ns:valor_decimal" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="VALOR_TOTAL_CALCULADO" type= "ns:valor_decimal" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="VALOR_PAGAR" type= "ns:valor_decimal" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="VALOR_NOMINAL" type= "ns:valor_decimal" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="servico_saida_negocial_type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="DADOS" type="ns:dados_saida_negocial_type"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:simpleType name="TIPOBAIXA_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="BAIXA_INTEGRAL" />
+			<xsd:enumeration value="BAIXA_PARCIAL" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="dados_saida_negocial_type">
+		<xsd:sequence>
+			<xsd:element name="TIPO_BAIXA" type="ns:TIPOBAIXA_Type" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="S_ou_N_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="S" />
+			<xsd:enumeration value="N" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="RECEBE_VALOR_DIVERGENTE_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="QUALQUER_VALOR" />
+			<xsd:enumeration value="ENTRE_MINIMO_MAXIMO" />
+			<xsd:enumeration value="NAO_ACEITAR"></xsd:enumeration>
+			<xsd:enumeration value="SOMENTE_VALOR_MINIMO" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="contingencia_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="SEM_CONTINGENCIA"></xsd:enumeration>
+			<xsd:enumeration value="CONTINGENCIA_CAIXA"></xsd:enumeration>
+			<xsd:enumeration value="CONTINGENCIA_CIP"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="valor_decimal">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:minInclusive value="0.00" />
+			<xsd:maxInclusive value="999999999999999.99" />
+			<xsd:fractionDigits value="2" />
+			<xsd:totalDigits value="17" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+</xsd:schema>

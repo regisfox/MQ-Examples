@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://caixa.gov.br/sibar/controle_limite/efetivacao"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions"
+	xmlns:sibar_base="http://caixa.gov.br/sibar" 
+	xmlns:controlelimite="http://caixa.gov.br/sibar/controle_limite/efetivacao">
+
+	<xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../../MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd"/>
+	
+	<xsd:element ibmSchExtn:docRoot="true" name="SERVICO_ENTRADA" type="controlelimite:servico_entrada_negocial_Type"></xsd:element>
+	<xsd:complexType name="dados_entrada_negocial_Type">
+		<xsd:sequence>
+			<xsd:element name="TIPO_PAGAMENTO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+
+						<xsd:enumeration value="BOLETO"></xsd:enumeration>
+						<xsd:enumeration value="HABITACAO"></xsd:enumeration>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CONTA" type="controlelimite:CONTAType"/>
+			<xsd:element name="VALOR_TRANSACAO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:minInclusive value="0" />
+						<xsd:maxInclusive value="9999999999999.99">
+						</xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_EFETIVACAO" type="xsd:date"></xsd:element>
+			<xsd:element name="TIPO_AUTENTICACAO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="AUTENTICACAO_SIMPLES">
+						</xsd:enumeration>
+						<xsd:enumeration value="CERTIFICADO_DIGITAL">
+						</xsd:enumeration>
+						<xsd:enumeration value="QRCODE"/>
+						<xsd:enumeration value="LIMITE_DIFERENCIADO">
+						</xsd:enumeration>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="CONTA_DESTINO" type="controlelimite:CONTA_DESTINOType">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="conta_Type">
+		<xsd:sequence>
+			<xsd:element name="UNIDADE">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="99999">
+						</xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PRODUTO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="9999"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="999999999999">
+						</xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DV">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0"/>
+						<xsd:maxInclusive value="9"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element ibmSchExtn:docRoot="true" name="SERVICO_SAIDA" type="controlelimite:servico_saida_negocial_Type"/>
+	<xsd:complexType name="servico_saida_negocial_Type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="DADOS" type="controlelimite:dados_saida_negocial_Type"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="servico_entrada_negocial_Type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="DADOS" type="controlelimite:dados_entrada_negocial_Type"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="dados_saida_negocial_Type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:DADOS_SAIDA_TYPE"></xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="CONTAType">
+		<xsd:sequence>
+			<xsd:element name="UNIDADE">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType></xsd:element>
+			<xsd:element name="PRODUTO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType></xsd:element>
+			<xsd:element name="NUMERO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+
+						<xsd:maxInclusive value="999999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DV" type="controlelimite:DVType">				</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CONTA_DESTINOType">
+		<xsd:sequence>
+			<xsd:element name="BANCO" type="controlelimite:BANCOType"></xsd:element>
+			<xsd:element name="AGENCIA" type="controlelimite:AGENCIAType"></xsd:element>
+			<xsd:element name="NUMERO_DESTINO">
+
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:double">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+
+						<xsd:maxInclusive
+							value="99999999999999999999">
+						</xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DV_DESTINO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="2"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ISBPF">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="AGENCIAType">
+		<xsd:restriction base="xsd:int">
+			<xsd:minInclusive value="0"></xsd:minInclusive>
+			<xsd:maxInclusive value="99999"></xsd:maxInclusive>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="BANCOType">
+		<xsd:restriction base="xsd:short">
+			<xsd:minInclusive value="0"></xsd:minInclusive>
+			<xsd:maxInclusive value="999"></xsd:maxInclusive>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="DVType">
+		<xsd:restriction base="xsd:short">
+			<xsd:minInclusive value="0"></xsd:minInclusive>
+			<xsd:maxInclusive value="9"></xsd:maxInclusive>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ISBPFType">
+		<xsd:restriction base="xsd:long">
+			<xsd:minInclusive value="0"></xsd:minInclusive>
+			<xsd:maxInclusive value="99999999"></xsd:maxInclusive>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>

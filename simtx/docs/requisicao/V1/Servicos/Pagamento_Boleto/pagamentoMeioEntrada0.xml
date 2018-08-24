@@ -1,0 +1,102 @@
+<ns:PAGAMENTO_BOLETO_ENTRADA xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns" xmlns:h="http://caixa.gov.br/simtx/comuns/header"
+	xmlns:ns="http://caixa.gov.br/simtx/pagamento_boleto/v1/ns" xmlns:pagamento="http://caixa.gov.br/simtx/negocial/pagamento/v1/pagamento" xmlns:validaassinatura="http://caixa.gov.br/simtx/meios_de_entrada/valida_assinatura/v1/valida_assinatura"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://caixa.gov.br/simtx/pagamento_boleto/v1/ns Pagamento_Boleto.xsd ">
+	<HEADER>
+		<SERVICO>
+			<CODIGO>110032</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO>
+		<CANAL>
+			<SIGLA>SIMAA</SIGLA>
+			<NSU>1234</NSU>
+			<DATAHORA>20180402114601</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>0</MEIOENTRADA>
+		<USUARIO_SERVICO>SMTXSD01</USUARIO_SERVICO>
+		<DATA_REFERENCIA>20180409</DATA_REFERENCIA>
+	</HEADER>
+	<NSUMTX_ORIGEM>148430</NSUMTX_ORIGEM>
+	<AGENDAMENTO>NAO</AGENDAMENTO>
+	<CONTA>
+		<CONTA_NSGD>
+			<UNIDADE>0612</UNIDADE>
+			<PRODUTO>1288</PRODUTO>
+			<CONTA>990010354</CONTA>
+			<DV>3</DV>
+		</CONTA_NSGD>
+	</CONTA>
+	<TOKEN>
+		<TOKEN>TESTEREDEA09 hN53nsgDQjbkpA2bvWSzQQcuc57Ebkbdn4CJMXxAmmmchpnG7dpiMMCm3cyf</TOKEN>
+		<ID_SESSAO>QpgkKgJzKBH7ANxBKADg5XQj.testebr</ID_SESSAO>
+	</TOKEN>
+	<PAGAMENTO_BOLETO>
+		<INFORMACOES_BOLETO>
+			<DATA_VENCIMENTO>2018-04-09</DATA_VENCIMENTO>
+			<DATA_EFETIVACAO>2018-04-09</DATA_EFETIVACAO>
+			<VALOR_PAGO>5000</VALOR_PAGO>
+		</INFORMACOES_BOLETO>
+	</PAGAMENTO_BOLETO>
+</ns:PAGAMENTO_BOLETO_ENTRADA>
+<solicitacao_debito:SOLICITACAO_DEBITO_SAIDA xmlns:solicitacao_debito="http://caixa.gov.br/sibar/solicitacao_debito" xmlns:multicanal="http://caixa.gov.br/sibar/multicanal/orquestracao"
+	xmlns:manutencao_cobranca_bancaria="http://caixa.gov.br/sibar/manutencao_cobranca_bancaria" xmlns:sibar="http://caixa.gov.br/sibar" xmlns:cartao="http://caixa.gov.br/sibar/valida_cartao"
+	xmlns:valida_senha="http://caixa.gov.br/sibar/valida_senha" xmlns:controle_limite="http://caixa.gov.br/sibar/controle_limite" xmlns:assinaturaimples="http://caixa.gov.br/sibar/valida_permissao/assinatura_simples">
+	<CONTROLE_NEGOCIAL>
+		<ORIGEM_RETORNO>SIPER</ORIGEM_RETORNO>
+		<COD_RETORNO>00</COD_RETORNO>
+		<MSG_RETORNO>sucesso</MSG_RETORNO>
+		<NSU>123</NSU>
+		<MENSAGENS>
+			<RETORNO>RETORNO</RETORNO>
+			<INSTITUCIONAL>INSTITUCIONAL</INSTITUCIONAL>
+			<INFORMATIVA>INFORMATIVA</INFORMATIVA>
+			<TELA>TELA</TELA>
+			<MENSAGEM>MENSAGEM</MENSAGEM>
+		</MENSAGENS>
+	</CONTROLE_NEGOCIAL>
+	<DATA_TRANSACAO>2018-01-15</DATA_TRANSACAO>
+	<TOKEN_AUTENTICACAO>TOKEN_AUTENTICACAO</TOKEN_AUTENTICACAO>
+</solicitacao_debito:SOLICITACAO_DEBITO_SAIDA>
+<controle_limite:CONTROLE_LIMITE_SAIDA xmlns:controle_limite="http://caixa.gov.br/sibar/controle_limite" xmlns:multicanal="http://caixa.gov.br/sibar/multicanal/orquestracao"
+	xmlns:manutencao_cobranca_bancaria="http://caixa.gov.br/sibar/manutencao_cobranca_bancaria" xmlns:sibar="http://caixa.gov.br/sibar" xmlns:cartao="http://caixa.gov.br/sibar/valida_cartao"
+	xmlns:valida_senha="http://caixa.gov.br/sibar/valida_senha" xmlns:solicitacao_debito="http://caixa.gov.br/sibar/solicitacao_debito" xmlns:assinaturaimples="http://caixa.gov.br/sibar/valida_permissao/assinatura_simples">
+	<CONTROLE_NEGOCIAL>
+		<ORIGEM_RETORNO>SIPER</ORIGEM_RETORNO>
+		<COD_RETORNO>00</COD_RETORNO>
+		<MSG_RETORNO>sucesso</MSG_RETORNO>
+		<NSU>123</NSU>
+		<MENSAGENS>
+			<RETORNO>RETORNO</RETORNO>
+			<INSTITUCIONAL>INSTITUCIONAL</INSTITUCIONAL>
+			<INFORMATIVA>INFORMATIVA</INFORMATIVA>
+			<TELA>TELA</TELA>
+			<MENSAGEM>MENSAGEM</MENSAGEM>
+		</MENSAGENS>
+	</CONTROLE_NEGOCIAL>
+	<DATA_TRANSACAO>2018-01-15</DATA_TRANSACAO>
+	<TOKEN_AUTENTICACAO>2A5S45SAASDFF545115S34511534587S#15</TOKEN_AUTENTICACAO>
+</controle_limite:CONTROLE_LIMITE_SAIDA>
+<manutencao_cobranca_bancaria:MANUTENCAO_COBRANCA_BANCARIA_SAIDA xmlns:manutencao_cobranca_bancaria="http://caixa.gov.br/sibar/manutencao_cobranca_bancaria"
+	xmlns:multicanal="http://caixa.gov.br/sibar/multicanal/orquestracao" xmlns:sibar="http://caixa.gov.br/sibar" xmlns:cartao="http://caixa.gov.br/sibar/valida_cartao"
+	xmlns:valida_senha="http://caixa.gov.br/sibar/valida_senha" xmlns:solicitacao_debito="http://caixa.gov.br/sibar/solicitacao_debito" xmlns:controle_limite="http://caixa.gov.br/sibar/controle_limite"
+	xmlns:assinaturaimples="http://caixa.gov.br/sibar/valida_permissao/assinatura_simples">
+	<CONTROLE_NEGOCIAL>
+		<ORIGEM_RETORNO>MANUTENCAO</ORIGEM_RETORNO>
+		<COD_RETORNO>00</COD_RETORNO>
+		<MENSAGENS>
+			<RETORNO>SUCESSO</RETORNO>
+		</MENSAGENS>
+	</CONTROLE_NEGOCIAL>
+	<SITUACAO_CONTINGENCIA>SEM_CONTINGENCIA</SITUACAO_CONTINGENCIA>
+	<BAIXA_OPERACIONAL>
+		<NUMERO_IDENTIFICACAO>21101983</NUMERO_IDENTIFICACAO>
+		<NUMERO_REFERENCIA_ATUAL>21101983</NUMERO_REFERENCIA_ATUAL>
+		<NUMERO_SEQUENCIA_ATUALIZACAO>21101983</NUMERO_SEQUENCIA_ATUALIZACAO>
+		<TITULO>
+			<NUMERO_IDENTIFICACAO>152</NUMERO_IDENTIFICACAO>
+			<NUMERO_REFERENCIA_ATUAL>150</NUMERO_REFERENCIA_ATUAL>
+		</TITULO>
+		<NUMERO_CONTROLE_DDA>12345</NUMERO_CONTROLE_DDA>
+		<DATA_HORA_DDA>2001-12-31T12:00:00</DATA_HORA_DDA>
+		<DATA_MOVIMENTO>2001-01-01</DATA_MOVIMENTO>
+	</BAIXA_OPERACIONAL>
+</manutencao_cobranca_bancaria:MANUTENCAO_COBRANCA_BANCARIA_SAIDA>

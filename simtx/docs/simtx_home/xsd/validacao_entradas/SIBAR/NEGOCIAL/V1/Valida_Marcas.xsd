@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://caixa.gov.br/sibar/consulta_conta_sid09/valida_marcas_impeditivas"
+	xmlns:consultacontasid09="http://caixa.gov.br/sibar/consulta_conta_sid09/valida_marcas_impeditivas"
+	xmlns:sibar_base="http://caixa.gov.br/sibar">
+
+	<xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../../MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd"/>
+
+
+    <xsd:complexType name="servico_entrada_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+    			<xsd:sequence>
+    				<xsd:element maxOccurs="1" minOccurs="1" name="DADOS" type="consultacontasid09:dados_entrada_Type"/>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="servico_saida_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+    			<xsd:sequence>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="DADOS" type="consultacontasid09:dados_saida_negocial_Type"/>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="dados_saida_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+    			<xsd:sequence>
+    			  <xsd:element maxOccurs="1" minOccurs="0" name="MARCAS_ENCONTRADAS" type="consultacontasid09:marcas_Type"/>
+    			  <xsd:element maxOccurs="1" minOccurs="0" name="OUTRAS_MARCAS" type="consultacontasid09:marcas_Type"/>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="dados_entrada_Type">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="REDE_TRANSMISSORA">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:minInclusive value="0"/>
+    					<xsd:maxInclusive value="9999"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="CONTA" type="consultacontasid09:conta_Type"/>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="MARCAS" type="consultacontasid09:marcas_Type"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="conta_Type">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="UNIDADE">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:maxInclusive value="9999"/>
+    					<xsd:minInclusive value="0"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="OPERACAO">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:maxInclusive value="999"/>
+    					<xsd:minInclusive value="0"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="NUMERO">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:int">
+    					<xsd:maxInclusive value="99999999"/>
+    					<xsd:minInclusive value="0"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="DV">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:minInclusive value="0"/>
+    					<xsd:maxInclusive value="9"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="marcas_Type">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="unbounded" minOccurs="1" name="MARCA">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="2"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>        
+
+    <xsd:element name="SERVICO_ENTRADA" type="consultacontasid09:servico_entrada_negocial_Type">
+  </xsd:element>
+    <xsd:element name="SERVICO_SAIDA" type="consultacontasid09:servico_saida_negocial_Type">
+  </xsd:element>
+
+</xsd:schema>

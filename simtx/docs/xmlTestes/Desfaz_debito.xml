@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<multicanal:SERVICO_ENTRADA xmlns:assinaturasimples="http://caixa.gov.br/sibar/valida_permissao/assinatura_simples" xmlns:controle_limite="http://caixa.gov.br/sibar/solicitacao_debito" xmlns:manutencaocheque="http://caixa.gov.br/sibar/manutencao_cheque/contraordem" xmlns:multicanal="http://caixa.gov.br/sibar/multicanal/orquestracao" xmlns:sibar_base="http://caixa.gov.br/sibar" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://caixa.gov.br/simtx/multicanal/orquestracao Multicanal_Orquestracao.xsd">
+	<sibar_base:HEADER>
+		<VERSAO>1.0</VERSAO>
+		<OPERACAO>SERVICO_MIGRADO</OPERACAO>
+		<SISTEMA_ORIGEM>SIMAA</SISTEMA_ORIGEM>
+		<DATA_HORA>20180619184708</DATA_HORA>
+	</sibar_base:HEADER>
+	<ORQUESTRACAO>
+		<PASSOS>
+			<PASSO>
+				<SERVICO>solicitacao_debito</SERVICO>
+				<OPERACAO>DESFAZIMENTO</OPERACAO>
+				<VERSAO>1.0</VERSAO>
+				<MODO_INTEGRACAO>MQ</MODO_INTEGRACAO>
+				<RECURSOS>
+					<FILA_REQUISICAO>SIBAR.REQ.SOLICITACAO_DEBITO</FILA_REQUISICAO>
+					<FILA_RESPOSTA>SIBAR.RSP.SOLICITACAO_DEBITO</FILA_RESPOSTA>
+				</RECURSOS>
+				<TEMPO_ESPERA>5</TEMPO_ESPERA>
+				<IMPEDIMENTO>S</IMPEDIMENTO>
+				<FORMA_INTEGRACAO>SINCRONA</FORMA_INTEGRACAO>
+				<REGRAS_RETORNO_SUCESSO>
+					<CAMPO>CONTROLE_NEGOCIAL.COD_RETORNO</CAMPO>
+					<RESULTADO_ESPERADO>0</RESULTADO_ESPERADO>
+					<RESULTADO_ESPERADO>00</RESULTADO_ESPERADO>
+				</REGRAS_RETORNO_SUCESSO>
+			</PASSO>
+		</PASSOS>
+	</ORQUESTRACAO>
+	<solicitacaodebito:SOLICITACAO_DEBITO_ENTRADA xmlns:solicitacaodebito="http://caixa.gov.br/sibar/solicitacao_debito">
+		<TIPO_SOLICITACAO>SOLICITACAO</TIPO_SOLICITACAO>
+		<SIGLA_SERVICO>PBQ</SIGLA_SERVICO>
+		<CONTA>
+			<UNIDADE>625</UNIDADE>
+			<PRODUTO>1288</PRODUTO>
+			<NUMERO>900000001</NUMERO>
+			<DV>2</DV>
+		</CONTA>
+		<VALOR_TRANSACAO>130.00</VALOR_TRANSACAO>
+		<DATA_EFETIVACAO>2018-06-13-03:00</DATA_EFETIVACAO>
+		<NSU_CANAL>183879</NSU_CANAL>
+		<SISTEMA_DESTINO>SICOB</SISTEMA_DESTINO>
+		<TIPO_AUTENTICACAO>AUTENTICACAO_SIMPLES</TIPO_AUTENTICACAO>
+		<TERMINAL>
+			<CODIGO>00131001</CODIGO>
+		</TERMINAL>
+	</solicitacaodebito:SOLICITACAO_DEBITO_ENTRADA>
+</multicanal:SERVICO_ENTRADA>

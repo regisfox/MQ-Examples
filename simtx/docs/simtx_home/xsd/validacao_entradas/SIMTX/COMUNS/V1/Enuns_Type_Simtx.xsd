@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns"
+	targetNamespace="http://caixa.gov.br/simtx/comuns/enuns">
+	
+	<xsd:complexType name="dispositivo_enum_Type">
+    	<xsd:sequence>
+    		<xsd:element name="SISTEMA_OPERACIONAL" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="ANDROID_PHONE"></xsd:enumeration>
+    					<xsd:enumeration value="ANDROID_TABLET"></xsd:enumeration>
+    					<xsd:enumeration value="IOS_PHONE"></xsd:enumeration>
+    					<xsd:enumeration value="IOS_TABLET"></xsd:enumeration>
+    					<xsd:enumeration value="WINDOWS_PHONE"></xsd:enumeration>
+    					<xsd:enumeration value="WINDOWS_TABLET"></xsd:enumeration>
+    					<xsd:enumeration value="OUTROS"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="CODIGO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="16" />
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+  	<xsd:simpleType name="sim_nao_enum_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="SIM" />
+			<xsd:enumeration value="NAO" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="classificacao_assinatura_type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NAO_UTILIZADO" />
+			<xsd:enumeration value="PRIMEIRA_ASSINATURA" />
+			<xsd:enumeration value="ASSINATURA_INTERMEDIARIA" />
+			<xsd:enumeration value="ASSINATURA_FINAL" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="tipo_consulta_pendencias_assinatura_type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="TODAS" />
+			<xsd:enumeration value="NAO_ASSINADAS" />
+			<xsd:enumeration value="NAO_EFETIVADAS" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="situacao_transacao_type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="PENDENTE" />
+			<xsd:enumeration value="ASSINADA" />
+			<xsd:enumeration value="NAO_ASSINADA" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="sistema_origem_type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="SIMTX" />
+			<xsd:enumeration value="SIAUT" />
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

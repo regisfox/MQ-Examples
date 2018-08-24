@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	targetNamespace="http://caixa.gov.br/sibar/valida_permissao/assinatura_multipla"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:sibar_base="http://caixa.gov.br/sibar"
+	xmlns:validapermissao="http://caixa.gov.br/sibar/valida_permissao/assinatura_multipla">
+    
+    <xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../MensagensBarramento.xsd" />
+    
+    
+    <xsd:complexType name="servico_entrada_Type">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+                <xsd:sequence>
+      <xsd:element name="DADOS" type="validapermissao:dados_entrada_Type"/>
+    </xsd:sequence>
+                  
+            </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="servico_saida_Type">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+                <xsd:sequence>
+      <xsd:element name="DADOS" type="validapermissao:dados_saida_Type" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+                  
+            </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="dados_entrada_Type">
+    <xsd:sequence>
+    	<xsd:element name="CPF" type="validapermissao:cpf_Type" minOccurs="1" maxOccurs="1"/>
+    	<xsd:choice minOccurs="1" maxOccurs="1">
+    		<xsd:element name="CONTA_NSGD"
+    			type="validapermissao:conta_nsgd_e_Type" minOccurs="1" maxOccurs="1"/>
+    		<xsd:element name="CONTA_SIDEC" type="validapermissao:conta_sidec_e_Type" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:choice>
+    	<xsd:element name="ASSINATURA" minOccurs="1" maxOccurs="1">
+    		<xsd:simpleType>
+    			<xsd:restriction base="xsd:string">
+    				<xsd:maxLength value="16" />
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:element>
+    	<xsd:element name="NSU_ORIGEM" minOccurs="1" maxOccurs="1">
+    		<xsd:simpleType>
+    			<xsd:restriction base="xsd:long">
+    				<xsd:minExclusive value="0"></xsd:minExclusive>
+
+    				<xsd:maxInclusive value="999999999999999"></xsd:maxInclusive>
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:element>
+    	<xsd:element name="DATA_PREVISTA_EFETIVACAO" type="xsd:date" minOccurs="0" maxOccurs="1"></xsd:element>
+
+    	<xsd:element name="SERVICO" minOccurs="1" maxOccurs="1">
+    		<xsd:simpleType>
+    			<xsd:restriction base="xsd:short">
+    				<xsd:minExclusive value="0"></xsd:minExclusive>
+
+    				<xsd:maxInclusive value="999"></xsd:maxInclusive>
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:element>
+    	<xsd:element name="TRANSACAO"
+    		type="validapermissao:transacao_e_Type" minOccurs="1" maxOccurs="1"/>
+    	<xsd:element name="APELIDO" minOccurs="1" maxOccurs="1">
+    		<xsd:simpleType>
+    			<xsd:restriction base="xsd:string">
+    				<xsd:maxLength value="20"></xsd:maxLength>
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:element>
+    	<xsd:element name="ENDERECO_IP" minOccurs="1" maxOccurs="1">
+    		<xsd:simpleType>
+    			<xsd:restriction base="xsd:string">
+    				<xsd:maxLength value="20"></xsd:maxLength>
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:element>
+    	<xsd:element name="TOKEN" minOccurs="1" maxOccurs="1">
+    		<xsd:simpleType>
+    			<xsd:restriction base="xsd:string">
+    				<xsd:maxLength value="80" />
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:element>
+    	<xsd:element name="SESSION_ID" minOccurs="1" maxOccurs="1">
+    		<xsd:simpleType>
+    			<xsd:restriction base="xsd:string">
+    				<xsd:maxLength value="32"></xsd:maxLength>
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:element>
+    	<xsd:element name="NSU_SIPER" minOccurs="0" maxOccurs="1">
+    		<xsd:simpleType>
+    			<xsd:restriction base="xsd:int">
+    				<xsd:minExclusive value="0"></xsd:minExclusive>
+
+    				<xsd:maxInclusive value="999999999"></xsd:maxInclusive>
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:element>
+
+    	<xsd:element name="DISPOSITIVO" type="validapermissao:dispositivo_e_Type" minOccurs="0" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="dados_saida_Type">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+        <xsd:sequence>
+        	<xsd:element name="DATA_TRANSACAO" type="xsd:date" minOccurs="0" maxOccurs="1"/>
+        	<xsd:element name="ASSINATURA"
+        		type="validapermissao:assinatura_s_Type" minOccurs="0"
+        		maxOccurs="1">
+        	</xsd:element>
+        	<xsd:element name="ASSINANTES"
+        		type="validapermissao:assinantes_s_Type" minOccurs="0"
+        		maxOccurs="1">
+        	</xsd:element>
+        	<xsd:element name="TOKEN_AUTENTICACAO" minOccurs="0"
+        		maxOccurs="1">
+        		<xsd:simpleType>
+        			<xsd:restriction base="xsd:string">
+        				<xsd:maxLength value="36"></xsd:maxLength>
+        			</xsd:restriction>
+        		</xsd:simpleType>
+        	</xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="assinante_s_Type">
+    <xsd:sequence>
+      <xsd:element name="CPF" type="validapermissao:cpf_Type" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="assinantes_s_Type">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="ASSINANTE" type="validapermissao:assinante_s_Type"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="conta_nsgd_e_Type">
+    <xsd:sequence>
+      <xsd:element name="UNIDADE">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="PRODUTO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="NUMERO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DV">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="transacao_e_Type">
+    <xsd:sequence>
+            <xsd:element name="RESUMO" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="200" />
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+            <xsd:element name="DATA" type="validapermissao:data_Type" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="cpf_Type">
+    <xsd:restriction base="xsd:long">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="99999999999"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="nsu_Type">
+    <xsd:restriction base="xsd:long">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="9999999999"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:element name="SERVICO_ENTRADA" type="validapermissao:servico_entrada_Type">
+  </xsd:element>
+  <xsd:element name="SERVICO_SAIDA" type="validapermissao:servico_saida_Type">
+  </xsd:element>
+    <xsd:simpleType name="data_Type">
+    <xsd:restriction base="xsd:date"/>
+  </xsd:simpleType>
+
+    <xsd:complexType name="dispositivo_e_Type">
+    	<xsd:sequence>
+    		<xsd:element name="SISTEMA_OPERACIONAL" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="ANDROID_PHONE"></xsd:enumeration>
+    					<xsd:enumeration value="ANDROID_TABLET"></xsd:enumeration>
+    					<xsd:enumeration value="IOS_PHONE"></xsd:enumeration>
+    					<xsd:enumeration value="IOS_TABLET"></xsd:enumeration>
+    					<xsd:enumeration value="WINDOWS_PHONE"></xsd:enumeration>
+    					<xsd:enumeration value="WINDOWS_TABLET"></xsd:enumeration>
+    					<xsd:enumeration value="OUTROS"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="CODIGO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="16"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="assinatura_s_Type">
+    	<xsd:sequence>
+    		<xsd:element name="CLASSIFICACAO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="NAO_UTILIZADO"></xsd:enumeration>
+    					<xsd:enumeration value="PRIMEIRA_ASSINATURA"></xsd:enumeration>
+    					<xsd:enumeration
+    						value="ASSINATURA_INTERMEDIARIA">
+    					</xsd:enumeration>
+    					<xsd:enumeration value="ASSINATURA_FINAL"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="conta_sidec_e_Type">
+    	<xsd:sequence>
+    		<xsd:element name="UNIDADE" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:minExclusive value="0"></xsd:minExclusive>
+    					<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="OPERACAO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:minExclusive value="0"></xsd:minExclusive>
+
+    					<xsd:maxInclusive value="999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="NUMERO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:int">
+    					<xsd:minExclusive value="0"></xsd:minExclusive>
+
+    					<xsd:maxInclusive value="99999999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="DV" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+
+    					<xsd:minInclusive value="0"></xsd:minInclusive>
+    					<xsd:maxInclusive value="9"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

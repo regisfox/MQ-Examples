@@ -1,0 +1,1356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://caixa.gov.br/sibar/consulta_transacoes_conta/lista" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:sibar_base="http://caixa.gov.br/sibar" xmlns:lista="http://caixa.gov.br/sibar/consulta_transacoes_conta/lista">
+
+	<xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../../MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd"/>
+	
+	<xsd:element name="SERVICO_ENTRADA" type="lista:servico_entrada_negocial_Type" />
+
+	<xsd:element name="SERVICO_SAIDA" type="lista:servico_saida_negocial_Type" />
+
+	<xsd:complexType name="servico_entrada_negocial_Type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="DADOS" type="lista:dados_entrada_Type" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="servico_saida_negocial_Type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="DADOS" type="lista:dados_saida_Type" minOccurs="0" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_entrada_Type">
+		<xsd:sequence>
+			<xsd:element name="CONTA" type="lista:conta_Type" minOccurs="1" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="PERIODO" type="lista:periodo_Type" minOccurs="1" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="SOLICITACOES" type="lista:dados_entrada_solicitacoes_Type" minOccurs="1" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_Type">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+				<xsd:sequence>
+
+					<xsd:element name="CARTAO_CREDITO" type="lista:dados_saida_cartao_credito_Type" minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="PAGAMENTO_CONCESSIONARIA" type="lista:dados_saida_pagamento_concessionaria_Type" minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="TEV" type="lista:dados_saida_tev_Type" minOccurs="0" maxOccurs="1">
+					</xsd:element>
+
+					<xsd:element name="DOC" type="lista:dados_saida_doc_Type" minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="TED" type="lista:dados_saida_ted_Type" minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="HAB" type="lista:dados_saida_habitacao_Type" minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="DARF" type="lista:dados_saida_darf_Type" minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="FGTS" type="lista:dados_saida_fgts_Type" minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="GPS" type="lista:dados_saida_gps_Type" minOccurs="0" maxOccurs="1">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="conta_Type">
+		<xsd:sequence>
+			<xsd:element name="UNIDADE" minOccurs="1" maxOccurs="1">
+
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+
+						<xsd:maxInclusive value="99999"></xsd:maxInclusive>
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PRODUTO" minOccurs="1" maxOccurs="1">
+
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO" minOccurs="1" maxOccurs="1">
+
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+
+						<xsd:maxInclusive value="999999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DV" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+
+						<xsd:maxInclusive value="9"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="periodo_Type">
+		<xsd:sequence>
+			<xsd:element name="INICIO" type="xsd:date" minOccurs="1" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="FIM" type="xsd:date" minOccurs="1" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_entrada_solicitacoes_Type">
+		<xsd:sequence>
+			<xsd:element name="SOLICITACAO" minOccurs="1" maxOccurs="9">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="CARTAO_CREDITO"></xsd:enumeration>
+						<xsd:enumeration value="PAGAMENTO_CONCESSIONARIA">
+						</xsd:enumeration>
+						<xsd:enumeration value="TEV"></xsd:enumeration>
+						<xsd:enumeration value="DOC"></xsd:enumeration>
+						<xsd:enumeration value="TED"></xsd:enumeration>
+						<xsd:enumeration value="HABITACAO_SEM_BARRA">
+						</xsd:enumeration>
+						<xsd:enumeration value="DARF"></xsd:enumeration>
+						<xsd:enumeration value="FGTS"></xsd:enumeration>
+						<xsd:enumeration value="GPS"></xsd:enumeration>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_cartao_credito_Type">
+		<xsd:sequence>
+
+			<xsd:element name="TRANSACOES" type="lista:dados_saida_transacoes_cartao_credito_Type" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="dados_saida_transacao_pagamento_concessionaria_Type">
+		<xsd:sequence>
+			<xsd:element name="NSU" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+
+						<xsd:maxInclusive value="999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="BARRA1" type="lista:bloco_barra" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="BARRA2" type="lista:bloco_barra" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="BARRA3" type="lista:bloco_barra" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="BARRA4" type="lista:bloco_barra" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="EMPRESA" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="35"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<xsd:element name="IDENTIFICACAO" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_PAGAMENTO" minOccurs="0" maxOccurs="1">
+
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="8"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="VALOR" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="DATA_TRANSACAO" minOccurs="0" maxOccurs="1" type="xsd:dateTime">
+
+			</xsd:element>
+
+
+			<xsd:element name="NUM_IDENTIFICACAO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="40"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="MSG1" maxOccurs="1" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="40"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="MSG2" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="40"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="MSG3" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="40"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="MSG4" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="40"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CANAL_ORIGEM" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="5"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO_DOCUMENTO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_tev_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACOES" type="lista:dados_saida_transacoes_tev_Type" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_transacoes_cartao_credito_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACAO" type="lista:dados_saida_transacao_cartao_credito_Type" minOccurs="1" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_transacao_cartao_credito_Type">
+		<xsd:sequence>
+			<xsd:element name="NSU" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NOME_AGENCIA" type="lista:nome_agencia" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="TERMINAL" minOccurs="0" maxOccurs="1">
+
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NOME_CLIENTE" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="32"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="9999999999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_PAGAMENTO" type="xsd:date" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="VALOR" minOccurs="0" maxOccurs="1" type="lista:valor">
+
+			</xsd:element>
+			<xsd:element name="IDENTIFICACAO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_TRANSACAO" type="xsd:dateTime" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+
+
+
+
+
+
+			<xsd:element name="CANAL_ORIGEM" minOccurs="0" maxOccurs="1">
+
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="5"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO_DOCUMENTO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="nome_agencia">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="20"></xsd:maxLength>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="valor">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:minInclusive value="0"></xsd:minInclusive>
+			<xsd:maxInclusive value="999999999999.99"></xsd:maxInclusive>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="dados_saida_transacoes_pagamento_concessionaria_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACAO" type="lista:dados_saida_transacao_pagamento_concessionaria_Type" minOccurs="1" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="codigo_barras_Type">
+		<xsd:sequence>
+			<xsd:element name="BLOCO1" type="lista:bloco_barra">
+			</xsd:element>
+			<xsd:element name="BLOCO2" type="lista:bloco_barra">
+			</xsd:element>
+			<xsd:element name="BLOCO3" type="lista:bloco_barra">
+			</xsd:element>
+			<xsd:element name="BLOCO4" type="lista:bloco_barra">
+			</xsd:element>
+			<xsd:element name="EMPRESA">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="bloco_barra">
+		<xsd:restriction base="xsd:long">
+			<xsd:minInclusive value="0"></xsd:minInclusive>
+			<xsd:maxInclusive value="9999999999999"></xsd:maxInclusive>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="dados_saida_transacao_tev_Type">
+		<xsd:sequence>
+			<xsd:element name="NSU" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CPF_DESTINO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TIPO_CONTA_DEBITO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="2"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TIPO_CONTA_CREDITO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="2"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="AGENCIA_DEBITO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="20"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="AGENCIA_CREDITO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="20"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CLIENTE_CREDITO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="32"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ID_CONTA" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CONTA_CREDITO" type="lista:conta_Type" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="DATA_TRANSFERENCIA" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="8"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="VALOR" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="IDENTIFICACAO" minOccurs="0" maxOccurs="1">
+
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_TRANSACAO" minOccurs="0" maxOccurs="1" type="xsd:dateTime">
+
+			</xsd:element>
+
+			<xsd:element name="CANAL_ORIGEM" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="5"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO_DOCUMENTO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUM_DOC_CREDITO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_transacoes_tev_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACAO" type="lista:dados_saida_transacao_tev_Type" minOccurs="1" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="dados_saida_pagamento_concessionaria_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACOES" type="lista:dados_saida_transacoes_pagamento_concessionaria_Type" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_transacao_doc">
+		<xsd:sequence>
+			<xsd:element name="NSU" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_MOVIMENTO" type="xsd:date" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="BANCO_DESTINO" minOccurs="0" maxOccurs="1" type="lista:banco_type">
+			</xsd:element>
+			<xsd:element name="CONTA" minOccurs="0" maxOccurs="1">
+
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+
+						<xsd:maxInclusive value="999999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DV" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CPF" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CONTA_DEBITO" minOccurs="0" maxOccurs="1" type="lista:dados_cliente_Type">
+
+			</xsd:element>
+			<xsd:element name="CONTA_DESTINO" minOccurs="0" maxOccurs="1" type="lista:dados_cliente_Type">
+
+			</xsd:element>
+
+
+
+
+			<xsd:element name="VALOR" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxExclusive value="999999999999.99"></xsd:maxExclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TARIFA_EMISSAO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:minExclusive value="0"></xsd:minExclusive>
+						<xsd:maxExclusive value="9999999.99"></xsd:maxExclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TARIFA_AGENDAMENTO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxExclusive value="9999999.99"></xsd:maxExclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="IDENTIFICACAO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_TRANSACAO" type="xsd:dateTime" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+
+			<xsd:element name="CANAL_ORIGEM" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="5"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO_DOCUMENTO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TIPO_DOC" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="FINALIDADE" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="100"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="banco_type">
+		<xsd:sequence>
+			<xsd:element name="CODIGO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="AGENCIA" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DV" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_cliente_Type">
+		<xsd:sequence>
+			<xsd:element name="TIPO_CONTA" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NOME_AGENCIA" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="20"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NOME" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="32"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_transacoes_doc_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACAO" type="lista:dados_saida_transacao_doc" minOccurs="1" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_doc_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACOES" type="lista:dados_saida_transacoes_doc_Type" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="pessoa_Type">
+		<xsd:sequence>
+			<xsd:element name="NOME" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="40"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CPF" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_transacao_ted_Type">
+		<xsd:sequence>
+			<xsd:element name="NSU" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+						<xsd:maxInclusive value="999999999"></xsd:maxInclusive>
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="REMETENTE1" type="lista:pessoa_Type" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="REMETENTE2" type="lista:pessoa_Type" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="TIPO_CONTA_REMETENTE" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="9"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TIPO_PESSOA_REMETENTE" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="VALOR" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="DATA_MOVIMENTO" type="xsd:date" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="DATA_TRANSFERENCIA" type="xsd:date" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="NSU_CONFIRMACAO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TIPO_DOC" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="2"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TIPO_SERVICO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="MODO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="3"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ISPB_DESTINO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="BANCO_DESTINO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="AGENCIA_DESTINO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CONTA_DESTINO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DV_CONTA_DESTINO" minOccurs="0" maxOccurs="1">
+
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="2"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DESTINATARIO" type="lista:pessoa_Type" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="TIPO_CONTA_DESTINATARIO" minOccurs="0" maxOccurs="1" type="xsd:string">
+
+			</xsd:element>
+			<xsd:element name="TIPO_PESSOA_DESTINATARIO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TARIFA" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="IDENTIFICACAO_DEPOSITO_JUDICIAL" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999999999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DV_IDENTIFICACAO_DEPOSITO_JUDICIAL" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="1"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PESSOA_CORT" type="lista:pessoa_Type" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="TIPO_PESSOA_CORT" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="IDENTIFICACAO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_TRANSACAO" type="xsd:dateTime" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+
+			<xsd:element name="CANAL_ORIGEM" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="5"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO_DOCUMENTO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TIPO_TED" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="6"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="FINALIDADE" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="100"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_transacoes_ted_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACAO" type="lista:dados_saida_transacao_ted_Type" minOccurs="1" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_ted_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACOES" type="lista:dados_saida_transacoes_ted_Type" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_transacao_habitacao_Type">
+		<xsd:sequence>
+			<xsd:element name="NSU" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO_CONTRATO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="9999999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NCPD" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_PAGAMENTO" type="xsd:date" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="MUTUARIO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="36"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="VALOR" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="IDENTIFICACAO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_TRANSACAO" type="xsd:dateTime" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="CANAL_ORIGEM" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="5"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO_DOCUMENTO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_transacoes_habitacao_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACAO" type="lista:dados_saida_transacao_habitacao_Type" minOccurs="1" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_habitacao_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACOES" type="lista:dados_saida_transacoes_habitacao_Type" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_transacao_darf_Type">
+		<xsd:sequence>
+			<xsd:element name="NSU" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TIPO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CODIGO_RECEITA" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CPF_CNPJ" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_APURACAO" type="xsd:date" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="VALOR" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="PRINCIPAL" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="MULTA" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="JUROS" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="REFERENCIA" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="17"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_PAGAMENTO" type="xsd:date" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="RECEITA_BRUTA" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="PERCENTUAL" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="9999999.99"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CONTRIBUINTE" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="28"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DDD" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TELEFONE" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="IDENTIFICACAO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_TRANSACAO" type="xsd:dateTime" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="CANAL_ORIGEM" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="5"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO_DOCUMENTO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_VENCIMENTO" type="xsd:date" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="dados_saida_transacoes_darf_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACAO" type="lista:dados_saida_transacao_darf_Type" minOccurs="1" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_darf_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACOES" type="lista:dados_saida_transacoes_darf_Type" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_transacao_fgts_Type">
+		<xsd:sequence>
+			<xsd:element name="NSU" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TOMADOR" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CPF_CNPJ" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="VALOR" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="DEPOSITO" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="MULTA" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="JUROS" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="DATA_VALIDADE" type="xsd:date" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="DATA_PAGAMENTO" type="xsd:date" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="LACRE" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="IDENTIFICACAO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_TRANSACAO" type="xsd:dateTime"></xsd:element>
+			<xsd:element name="CANAL_ORIGEM" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+
+						<xsd:maxLength value="5"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO_DOCUMENTO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_transacao_gps_Type">
+		<xsd:sequence>
+			<xsd:element name="NSU" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CODIGO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="4"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="MES_COMPETENCIA" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+
+						<xsd:minInclusive value="01"></xsd:minInclusive>
+						<xsd:maxInclusive value="12"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ANO_COMPETENCIA" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+
+						<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ID_CONTRIBUINTE" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="14"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PAGAMENTO" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="ENTIDADE" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="MULTA" type="lista:valor" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="DATA_PAGAMENTO" type="xsd:date" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="NOME" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="32"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="IDENTIFICACAO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DATA_TRANSACAO" type="xsd:dateTime" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="CANAL_ORIGEM" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="5"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO_DOCUMENTO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_transacoes_fgts_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACAO" type="lista:dados_saida_transacao_fgts_Type" minOccurs="1" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_transacoes_gps_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACAO" type="lista:dados_saida_transacao_gps_Type" minOccurs="1" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_fgts_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACOES" type="lista:dados_saida_transacoes_fgts_Type" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_saida_gps_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACOES" type="lista:dados_saida_transacoes_gps_Type" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

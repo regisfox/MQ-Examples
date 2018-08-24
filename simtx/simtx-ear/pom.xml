@@ -1,0 +1,128 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>simtx-ear</artifactId>
+	<name>simtx-ear</name>
+	<packaging>ear</packaging>
+
+	<parent>
+		<groupId>br.gov.caixa.simtx</groupId>
+		<artifactId>simtx</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>br.gov.caixa.simtx</groupId>
+			<artifactId>simtx-core</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>br.gov.caixa.simtx</groupId>
+			<artifactId>simtx-persistencia</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.gov.caixa.simtx</groupId>
+			<artifactId>simtx-integrador</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>br.gov.caixa.simtx</groupId>
+			<artifactId>simtx-mensageria</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>br.gov.caixa.simtx</groupId>
+			<artifactId>simtx-assinatura-multipla</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>br.gov.caixa.simtx</groupId>
+			<artifactId>simtx-agendamento</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>br.gov.caixa.simtx</groupId>
+			<artifactId>simtx-cancelamento</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>br.gov.caixa.simtx</groupId>
+			<artifactId>simtx-comprovante</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>br.gov.caixa.simtx</groupId>
+			<artifactId>simtx-util</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>br.gov.caixa.simtx</groupId>
+			<artifactId>simtx-manutencao</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+
+  		<dependency>
+			<groupId>br.gov.caixa.simtx</groupId>
+			<artifactId>simtx-roteador-api</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>  
+	</dependencies>
+
+	<build>
+		<finalName>${project.parent.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${version.compiler.plugin}</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>${version.ear.plugin}</version>
+				<configuration>
+					<modules>
+						<webModule>
+							<groupId>br.gov.caixa.simtx</groupId>
+							<artifactId>simtx-roteador-api</artifactId>
+							<uri>simtx-roteador-api.war</uri>
+							<bundleFileName>simtx-roteador-api.war</bundleFileName>
+							<contextRoot>/roteador</contextRoot>
+						</webModule>
+					</modules>
+					<version>7</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<fileNameMapping>no-version</fileNameMapping>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

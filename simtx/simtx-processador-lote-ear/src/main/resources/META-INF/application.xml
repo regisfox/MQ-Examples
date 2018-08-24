@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application_7.xsd"
+	version="7">
+	<display-name>simtx-processador-lote-ear</display-name>
+	<module>
+		<ejb>simtx-core.jar</ejb>
+	</module>
+	<module>
+		<ejb>simtx-integrador.jar</ejb>
+	</module>
+	<module>
+		<ejb>simtx-mensageria.jar</ejb>
+	</module>
+	<module>
+		<ejb>simtx-assinatura-multipla.jar</ejb>
+	</module>
+	<module>
+		<ejb>simtx-agendamento.jar</ejb>
+	</module>
+	<module>
+		<ejb>simtx-comprovante.jar</ejb>
+	</module>
+	<module>
+		<ejb>simtx-util.jar</ejb>
+	</module>
+	<library-directory>lib</library-directory>
+</application>

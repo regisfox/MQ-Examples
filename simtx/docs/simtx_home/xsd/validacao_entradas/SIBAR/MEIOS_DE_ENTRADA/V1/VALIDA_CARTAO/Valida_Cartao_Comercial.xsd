@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://caixa.gov.br/sibar/valida_cartao/comercial"
+	xmlns:sibar_base="http://caixa.gov.br/sibar" 
+	xmlns:soapenv11="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:validacartaocomercial="http://caixa.gov.br/sibar/valida_cartao/comercial">
+
+	<xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../MensagensBarramento.xsd"/>
+    
+    
+    <xsd:complexType name="servico_entrada_negocial_Type">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+        <xsd:sequence>
+          <xsd:element name="DADOS" type="validacartaocomercial:dados_entrada_cartao_conta_Type"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="servico_saida_negocial_Type">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="DADOS" type="validacartaocomercial:dados_saida_cartao_comercial_Type"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="cartao_comercial_e_Type">
+    <xsd:sequence>
+      <xsd:element name="TRILHA">
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">TRILHA\s2\sCAPTURADA\sDO\sCARTAO\sMAGNETICO\sNO\sMOMENTO\sDA\sTRANSACAO</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="37"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="TP_ENTRADA">
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">Modo\sde\sEntrada\r\n\r\nDominio:\r\n011\s\sTransacao\ssem\scartao;\r\n021\s\sTransacao\scom\sCartao\scom\sTarja\sMagnetica;\r\n051\s\sTransacao\scom\sCartao\scom\sChip.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="NUMERO_SEQUENCIAL">
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">NUMERO\sDO\sPAN\sDO\sCARTAO.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="TAMANHO_INFORMACOES_CHIP">
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">OBS.:\sCAMPO\sCONHECIDO\sNO\sISO\sCOMO\sBIT55.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="INFORMACOES_CHIP">
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">OBS.:\sCAMPO\sCONHECIDO\sNO\sISO\sCOMO\sBIT55.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="512"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="dados_complementares_Type">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="VALOR_AUTORIZADO">
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9999999999.99"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="VALOR_TROCO">
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:decimal">
+			<xsd:minInclusive value="0"/>
+			<xsd:maxInclusive value="9999999999.99"/>
+		  </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CODIGO_MOEDA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+			<xsd:minInclusive value="0"/>
+			<xsd:maxInclusive value="9999"/>
+		  </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ADQUIRENTE">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="TERMINAL">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="8"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="conta_Type">
+    <xsd:sequence>
+      <xsd:element name="UNIDADE">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OPERACAO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="NUMERO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DV">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="conta_nsgd_Type">
+    <xsd:sequence>
+      <xsd:element name="UNIDADE">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="PRODUTO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="NUMERO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="12"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DV">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="cartao_saida_Type">
+    <xsd:sequence>
+      <xsd:element name="VENCIMENTO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="TIPO">
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">TIPO\sDO\sCARTAO.\r\n\r\nDominio:\r\n00\s-\sCONTA\sSEM\sCARTAO\r\n01\s-\sCARTAO\sBANCO\s24\sHORAS\r\n02\s-\sCARTAO\sMULTIPLO\r\n03\s-\sCARTAO\sOCRE\r\n04\s-\sCARTAO\sPOUPANCA\r\n05\s-\sCARTAO\sCONSTRUCARD\r\n06\s-\sCARTAO\sCONSTRUCARD-FGTS\r\n07\s-\sMAESTRO\sAZUL\r\n08\s-\sMAESTRO\sOCRE\r\n09\s-\sMAESTRO\sPOUPANCA\r\n10\s-\sVISA\sELECTRON\sAZUL\r\n11\s-\sVISA\sELECTRON\sOCRE\r\n12\s-\sVISA\sELECTRON\sPOUPANCA\r\n13\s-\sELO\sELECTRON\sAZUL\r\n14\s-\sELO\sELECTRON\sOCRE\r\n15\s-\sELO\sELECTRON\sPOUPANCA\r\n31\s-\sPRODUCARD\sPESSOA\sFISICA\r\n32\s-\sPRODUCARD\sPESSOA\sJURIDICA\r\n33\s-\sMOVEISCARD\s(OP.\s168)\r\n50\s-\sCARTAO\sDE\sCREDITO\sCAIXA</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="SITUACAO">
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">SITUACAO\sDO\sCARTAO.\r\n\r\nDominio:\r\n0\s\s-\sATIVO\r\n2\s\s-\sBLOQUEADO\r\n6\s\s-\sCANCELADO</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="FLAG_ULTIMA_VIA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="QUANTIDADE_UR">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="2"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="FLAG_CHIP">
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">IDENTIFICA\sCARTAO\sCOM\sOU\sSEM\sCHIP.\r\n\r\nDominio:\r\n0\s\sSEM\sCHIP\r\n1\s\sCOM\sCHIP\sEMV\s+\sPKI\r\n2\s\sCOM\sCHIP\sEMV</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="FLAG_CVV2">
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">IDENTIFICA\sCONTROLE\sDE\sCARTAO.\r\n\r\nDominio:\r\nN\s-\sSEM\sCVV2\r\nS\s-\sCOM\sCVV2</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="BANDEIRA">
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">IDENTIFICA\sA\sBANDEIRA\sDO\sCARTAO.\r\n\r\nDominio:\r\nM\s-\sCARTAO\sMAESTO\r\nV\s-\sCARTAO\sVISA\r\nE\s-\sCARTAO\sELO</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="SERVICO_ENTRADA" type="validacartaocomercial:servico_entrada_negocial_Type">
+    </xsd:element>
+  <xsd:element name="SERVICO_SAIDA" type="validacartaocomercial:servico_saida_negocial_Type">
+  </xsd:element>
+  <xsd:complexType name="dados_entrada_cartao_conta_Type">
+    <xsd:sequence>
+      <xsd:element name="CARTAO" type="validacartaocomercial:cartao_comercial_e_Type"/>
+      <xsd:element minOccurs="0" name="TERMINAL">
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">Tipo\sde\sTerminal.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="26"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="REDE_TRANSMISSORA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DADOS_COMPLEMENTARES" type="validacartaocomercial:dados_complementares_Type"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="dados_saida_cartao_comercial_Type">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+	    <xsd:sequence>
+	      <xsd:element minOccurs="0" name="CARTAO" type="validacartaocomercial:cartao_saida_Type"/>
+	      <xsd:element minOccurs="0" name="TITULAR">
+	        <xsd:simpleType>
+	          <xsd:restriction base="xsd:short">
+	            <xsd:minInclusive value="0"/>
+	            <xsd:maxInclusive value="9"/>
+	          </xsd:restriction>
+	        </xsd:simpleType>
+	      </xsd:element>
+	      <xsd:choice minOccurs="0">
+	      	<xsd:element minOccurs="0" name="CONTA" type="validacartaocomercial:conta_Type"/>
+          	<xsd:element minOccurs="0" name="CONTA_NSGD" type="validacartaocomercial:conta_nsgd_Type"/>
+          </xsd:choice>
+	    </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="VALIDA_CARTAO_COMERCIAL_ENTRADA" type="validacartaocomercial:dados_entrada_cartao_conta_Type"/>
+  <xsd:element name="VALIDA_CARTAO_COMERCIAL_SAIDA" type="validacartaocomercial:dados_saida_cartao_comercial_Type"/>
+</xsd:schema><!-- Envelope, header and body --><!-- Global Attributes.  The following attributes are intended to be usable via qualified attribute names on any complex type referencing them.  -->

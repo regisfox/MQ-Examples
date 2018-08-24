@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xmlns:h="http://caixa.gov.br/simtx/comuns/header"
+			xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" 
+			xmlns:ns="http://caixa.gov.br/simtx/retomadaTransacao/v1/ns" 
+			targetNamespace="http://caixa.gov.br/simtx/retomadaTransacao/v1/ns">
+
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/header" schemaLocation="../../../SIMTX/COMUNS/V1/Header.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/comuns" schemaLocation="../../../SIMTX/COMUNS/V1/Comuns_Simtx.xsd" />
+
+	<xsd:element name="RETOMAR_TRANSACAO_ENTRADA" 	type="ns:retomar_transacao_entrada_type" />
+	<xsd:element name="RETOMAR_TRANSACAO_SAIDA" 	type="ns:retomar_transacao_saida_type" />
+
+
+	<xsd:complexType name="retomar_transacao_entrada_type">
+		<xsd:sequence>
+			<xsd:element name="HEADER" type="h:HEADER_ENTRADA_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="NSU_TRANSACAO" type="comuns:nsu_format_size_15_number_type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="SITUACAO_TRANSACAO" type="xsd:long" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="NSUMTX_AGENDAMENTO" type="comuns:nsu_format_size_15_number_type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="AGENDAMENTO_FINAL" type="xsd:anyType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="CODIGO_SERVICO" type="comuns:codigo_servico_format_6_number_type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="VERSAO_SERVICO" type="comuns:short_0_to_3_digits_format_type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="CODIGO_USUARIO" type="xsd:anyType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="CODIGO_MAQUINA" type="xsd:anyType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="DADOS_MENSAGEM_TRANSACAO_TAREFAS_RESPOSTA_SIBAR" type="xsd:anyType" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="retomar_transacao_saida_type">
+		<xsd:sequence>
+			<xsd:element name="HEADER" type="h:HEADER_SAIDA_Type" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

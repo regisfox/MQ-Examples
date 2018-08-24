@@ -1,0 +1,46 @@
+<ns:LISTA_COMPROVANTES_TRANSACOES_ENTRADA
+	xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:h="http://caixa.gov.br/simtx/comuns/header"
+	xmlns:ns="http://caixa.gov.br/simtx/lista_comprovantes_transacoes/v1/ns"
+	xmlns:valida_cartao="http://caixa.gov.br/simtx/meios_de_entrada/valida_cartao/v1/valida_cartao"
+	xmlns:valida_permissao="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao"
+	xmlns:valida_senha="http://caixa.gov.br/simtx/meios_de_entrada/valida_senha/v1/valida_senha"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://caixa.gov.br/simtx/lista_comprovantes_transacoes/v1/ns Lista_Comprovantes_Transacoes.xsd ">
+	<HEADER>
+		<SERVICO>
+			<CODIGO>110026</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO>
+		<CANAL>
+			<SIGLA>SIIBC</SIGLA>
+			<DATAHORA>20180309153000</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>4</MEIOENTRADA>
+		<IDENTIFICADOR_ORIGEM>
+			<TERMINAL>1234001</TERMINAL>
+		</IDENTIFICADOR_ORIGEM>
+		<USUARIO_SERVICO>SMTX01</USUARIO_SERVICO>
+		<USUARIO>TOSCANO</USUARIO>
+		<DATA_REFERENCIA>20180309</DATA_REFERENCIA>
+	</HEADER>
+	<CARTAO>
+		<TRILHA>123456789123456789012345678912345678</TRILHA>
+		<TP_ENTRADA>0</TP_ENTRADA>
+		<NUMERO_SEQUENCIAL>0</NUMERO_SEQUENCIAL>
+		<INFORMACOES_CHIP>INFORMACOES_CHIP</INFORMACOES_CHIP>
+	</CARTAO>
+	<SENHA>
+		<SENHA>SENHA</SENHA>
+		<FLAG_CONSULTA_IP>1</FLAG_CONSULTA_IP>
+		<VERSAO>0</VERSAO>
+		<ACAO>0</ACAO>
+		<CODIGO_SERVICO>111</CODIGO_SERVICO>
+		<CARTEIRA>CART</CARTEIRA>
+		<INFORMACOES_TELA>INFORMACOES_TELA</INFORMACOES_TELA>
+	</SENHA>
+	<LISTA_COMPROVANTES_TRANSACOES>
+		<DATA_INICIO>2001-01-01</DATA_INICIO>
+		<DATA_FIM>2001-01-01</DATA_FIM>
+		<IDENTIFICADOR_SERVICO>CONCESSIONARIA</IDENTIFICADOR_SERVICO>
+	</LISTA_COMPROVANTES_TRANSACOES>
+</ns:LISTA_COMPROVANTES_TRANSACOES_ENTRADA>

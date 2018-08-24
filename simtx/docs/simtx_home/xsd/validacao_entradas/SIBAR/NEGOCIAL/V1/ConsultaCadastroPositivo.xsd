@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:consultacadastropositivo="http://caixa.gov.br/sibar/consulta_cadastro_positivo"
+	xmlns:sibar_base="http://caixa.gov.br/sibar" targetNamespace="http://caixa.gov.br/sibar/consulta_cadastro_positivo">
+	
+	
+	<xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../../MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd"/>
+    
+    
+    
+    <xsd:complexType name="SERVICO_ENTRADA_TYPE">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+        <xsd:sequence>
+          <xsd:element name="DADOS" type="consultacadastropositivo:DADOS_ENTRADA_TYPE"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="SERVICO_SAIDA_TYPE">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="DADOS" type="consultacadastropositivo:DADOS_SAIDA_TYPE"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_ENTRADA_TYPE">
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="CONSULTA_SOLICITACAO" type="consultacadastropositivo:CONSULTA_SOLICITACOES_ENTRADA_TYPE"/>
+        <xsd:element name="CONSULTA_TABELA" type="consultacadastropositivo:TABELA_ENTRADA_TYPE"/>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element default="0" minOccurs="0" name="FLAG_RECEBIMENTO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:choice minOccurs="0">
+        <xsd:element name="SOLICITACOES" type="consultacadastropositivo:DADOS_SOLICITACOES_SAIDA_TYPE"/>
+        <xsd:element name="STATUS_SOLICITACAO" type="consultacadastropositivo:DADOS_STATUS_SAIDA_TYPE"/>
+        <xsd:element name="DETALHE_AUTORIZACAO" type="consultacadastropositivo:DADOS_DETALHE_AUTORIZACAO_SAIDA_TYPE"/>
+        <xsd:element name="TABELA" type="consultacadastropositivo:DADOS_TABELA_SAIDA_TYPE"/>
+                <xsd:element minOccurs="0" name="EXCECAO">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="10000"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+            </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TABELA_ENTRADA_TYPE">
+    <xsd:sequence>
+      <xsd:element default=" " minOccurs="0" name="IDENTIFICACAO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="30"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CONSULTA_SOLICITACOES_ENTRADA_TYPE">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0">
+        <xsd:element default="0" name="CPF">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:long">
+              <xsd:minInclusive value="0"/>
+              <xsd:maxInclusive value="99999999999"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="CNPJ">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:long">
+              <xsd:minInclusive value="0"/>
+              <xsd:maxInclusive value="99999999999999"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:element default=" " minOccurs="0" name="NUMERO_AUTORIZACAO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_SOLICITACAO_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element default="0" name="NUMERO_AUTORIZACAO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999999999999999"/>
+            <xsd:fractionDigits value="0"/>
+            <xsd:totalDigits value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DATA_AUTORIZACAO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:dateTime"/>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default="0" name="FLAG_SOLICITACAO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="PROTOCOLO_AUTORIZACAO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="PROTOCOLO_CANCELAMENTO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_SOLICITACOES_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element maxOccurs="20" name="SOLICITACAO" type="consultacadastropositivo:DADOS_SOLICITACAO_SAIDA_TYPE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_STATUS_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element name="SOLICITACAO" type="consultacadastropositivo:DADOS_SOLICITACAO_SAIDA_TYPE"/>
+      <xsd:element name="BIROS" type="consultacadastropositivo:DADOS_BIROS_TYPE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_BIRO_TYPE">
+    <xsd:sequence>
+      <xsd:element default=" " name="DESCRICAO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="SITUACAO_SOLICITACAO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="30"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="MSG_ERRO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="60"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_BIROS_TYPE">
+    <xsd:sequence>
+      <xsd:element maxOccurs="10" name="BIRO" type="consultacadastropositivo:DADOS_BIRO_TYPE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_DETALHE_AUTORIZACAO_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element name="SOLICITACAO" type="consultacadastropositivo:DADOS_SOLICITACAO_SAIDA_TYPE"/>
+      <xsd:element name="ORIGEM" type="consultacadastropositivo:DADOS_ORIGEM_SAIDA_TYPE"/>
+      <xsd:element name="DATA_CANCELAMENTO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:dateTime"/>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:choice>
+        <xsd:element default="0" name="CPF">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:long">
+              <xsd:minInclusive value="0"/>
+              <xsd:maxInclusive value="99999999999"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element default="0" name="CNPJ">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:long">
+              <xsd:minInclusive value="0"/>
+              <xsd:maxInclusive value="99999999999999"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:element name="AUTORIZACAO" type="consultacadastropositivo:DADOS_AUTORIZACAO_SAIDA_TYPE"/>
+      <xsd:element name="BIROS" type="consultacadastropositivo:DADOS_AUTORIZACAO_BIROS_TYPE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_ORIGEM_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element default=" " name="CANAL">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="MATRICULA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="7"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="TERMINAL">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_AUTORIZACAO_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element default="0" name="FLAG_ADESAO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default="0" name="FLAG_COMPARTILHAR">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default="0" name="FLAG_NAO_IF">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_AUTORIZACAO_BIROS_TYPE">
+    <xsd:sequence>
+      <xsd:element maxOccurs="10" name="NUMERO_BIRO" type="consultacadastropositivo:DADOS_AUTORIZACAO_BIRO_TYPE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_AUTORIZACAO_BIRO_TYPE">
+    <xsd:sequence>
+      <xsd:element default="0" name="AUTORIZADO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default="0" name="COMPARTILHAR">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_TABELA_BIROS_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element maxOccurs="10" name="BIRO" type="consultacadastropositivo:DADOS_TABELA_BIRO_SAIDA_TYPE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_TABELA_BIRO_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element default="0" name="NUMERO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default="0" name="CNPJ">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="NOME">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default=" " name="SITUACAO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DADOS_TABELA_SAIDA_TYPE">
+    <xsd:sequence>
+      <xsd:element name="BIROS" type="consultacadastropositivo:DADOS_TABELA_BIROS_SAIDA_TYPE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="SERVICO_ENTRADA" type="consultacadastropositivo:SERVICO_ENTRADA_TYPE">
+  </xsd:element>
+  <xsd:element name="SERVICO_SAIDA" type="consultacadastropositivo:SERVICO_SAIDA_TYPE">
+  </xsd:element>
+</xsd:schema>

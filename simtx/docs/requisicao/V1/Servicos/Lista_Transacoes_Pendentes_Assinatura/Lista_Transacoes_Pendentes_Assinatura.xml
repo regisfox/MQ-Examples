@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BUSDATA>
+	<BUSTIME></BUSTIME>
+	<ns:LISTA_TRANSACOES_PENDENTES_ASSINATURA_ENTRADA
+		xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns"
+		xmlns:h="http://caixa.gov.br/simtx/comuns/header"
+		xmlns:ns="http://caixa.gov.br/simtx/lista_transacoes_pendentes_assinatura/v1/ns"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://caixa.gov.br/simtx/lista_transacoes_pendentes_assinatura/v1/ns Lista_Transacoes_Pendentes_Assinatura.xsd">
+		<HEADER>
+			<SERVICO>
+				<CODIGO>110023</CODIGO>
+				<VERSAO>1</VERSAO>
+			</SERVICO>
+			<CANAL>
+				<SIGLA>SIIBC</SIGLA>
+				<DATAHORA>20171228162300</DATAHORA>
+			</CANAL>
+			<MEIOENTRADA>5</MEIOENTRADA>
+			<IDENTIFICADOR_ORIGEM>
+				<CODIGO_MAQUINA>127001</CODIGO_MAQUINA>
+			</IDENTIFICADOR_ORIGEM>
+			<USUARIO_SERVICO>SDMTX01</USUARIO_SERVICO>
+			<USUARIO>JOANADAR</USUARIO>
+			<DATA_REFERENCIA>20171228</DATA_REFERENCIA>
+		</HEADER>
+		<CONTA>
+			<CONTA_SIDEC>
+				<UNIDADE>1234</UNIDADE>
+				<OPERACAO>123</OPERACAO>
+				<CONTA>1221</CONTA>
+				<DV>1</DV>
+			</CONTA_SIDEC>
+		</CONTA>
+
+		<TOKEN>
+			<TOKEN>SESSAO</TOKEN>
+			<ID_SESSAO>TOKENNNNNNNNNN</ID_SESSAO>
+		</TOKEN>
+		<LISTA_TRANSACOES_PENDENTES_ASSINATURA>
+			<TIPO>TODAS</TIPO>
+			<CPF>36199093852</CPF>
+			<DATA_INICIO>2001-01-01</DATA_INICIO>
+			<DATA_FIM>2001-01-01</DATA_FIM>
+		</LISTA_TRANSACOES_PENDENTES_ASSINATURA>
+	</ns:LISTA_TRANSACOES_PENDENTES_ASSINATURA_ENTRADA>
+</BUSDATA>

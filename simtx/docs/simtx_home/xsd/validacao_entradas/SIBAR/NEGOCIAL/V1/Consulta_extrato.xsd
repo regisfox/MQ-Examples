@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://caixa.gov.br/sibar/extrato/consulta" xmlns:consulta="http://caixa.gov.br/sibar/extrato/consulta" xmlns:sibar_base="http://caixa.gov.br/sibar">
+    <xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../../MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd"/>
+    <xsd:complexType name="servico_entrada_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+    			<xsd:sequence>
+    				<xsd:element name="DADOS" type="consulta:dados_entrada_Type" minOccurs="1" maxOccurs="1"></xsd:element>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="servico_saida_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+    			<xsd:sequence>
+    				<xsd:element name="DADOS" type="consulta:dados_saida_Type" minOccurs="0" maxOccurs="1"></xsd:element>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+
+    
+    <xsd:complexType name="dados_saida_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+    			<xsd:sequence>
+    				<xsd:element name="DADOS_CADASTRAIS" type="consulta:dados_cadastrais_saida_Type" minOccurs="0" maxOccurs="1"/>
+    				<xsd:element name="CONTA_MIGRADA" type="consulta:conta_migrada_saida_Type" minOccurs="0" maxOccurs="1"/>
+    				<xsd:element name="LANCAMENTOS" type="consulta:lancamentos_saida_Type" minOccurs="0" maxOccurs="1"/>
+    				<xsd:element name="SALDOS" type="consulta:saldos_saida_Type" minOccurs="0" maxOccurs="1"/>
+    				<xsd:element name="COMPRAS" type="consulta:compras_saida_Type" minOccurs="0" maxOccurs="1"/>
+    				<xsd:element name="AGENDAMENTOS" type="consulta:agendamentos_saida_Type" minOccurs="0" maxOccurs="1"/>
+    				<xsd:element name="VALORES_BLOQUEADOS" type="consulta:valores_bloqueados_saida_Type" minOccurs="0" maxOccurs="1"/>
+    				<xsd:element name="SALDO_DATA_LIMITE" type="consulta:saldos_data_limite_saida_Type" minOccurs="0" maxOccurs="1"/>
+  					<xsd:element name="LANCAMENTOS_DIA" type="consulta:lancamentos_dia_saida_Type" minOccurs="0" maxOccurs="1"/>
+      			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="dados_cadastrais_saida_Type">
+    	<xsd:sequence>
+            <xsd:element name="NOME_CLIENTE">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="40"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+            <xsd:choice>
+				<xsd:element name="CPF" type="consulta:cpf_type" />
+				<xsd:element name="CNPJ" type="consulta:cnpj_type" />
+			</xsd:choice>
+            <xsd:element name="NOME_UNIDADE">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="30"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+            <xsd:element name="DESCRICAO_PRODUTO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="40"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+	<xsd:simpleType name="cpf_type">
+		<xsd:restriction base="xsd:long">
+			<xsd:minInclusive value="0"></xsd:minInclusive>
+			<xsd:maxInclusive value="99999999999"></xsd:maxInclusive>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="cnpj_type">
+		<xsd:restriction base="xsd:long">
+			<xsd:minInclusive value="0"></xsd:minInclusive>
+			<xsd:maxInclusive value="99999999999999"></xsd:maxInclusive>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+    <xsd:complexType name="conta_migrada_saida_Type">
+    	<xsd:sequence>
+			<xsd:element name="UNIDADE">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="99999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PRODUTO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>			
+			<xsd:element name="PROPRIEDADE">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="9999999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>	
+            <xsd:element name="MSG_MIGRACAO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="200"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>		
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="lancamentos_saida_Type">
+    	<xsd:sequence>
+			<xsd:element name="LANCAMENTO" minOccurs="0" maxOccurs="unbounded" 
+				type="consulta:lancamento_saida_Type"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="lancamento_saida_Type">
+    	<xsd:sequence>
+			<xsd:element name="DATA_LANCAMENTO"  	type="xsd:date"/>
+			<xsd:element name="NUMERO_DOCUMENTO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DESCRICAO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="VALOR" type="consulta:valor_Type"/>
+			<xsd:element name="SINAL" type="consulta:sinal_Type"/>
+			<xsd:element name="TAXA_PRODUTO">
+		    	<xsd:simpleType>
+			    	<xsd:restriction base="xsd:decimal">
+			    		<xsd:minInclusive value="0"></xsd:minInclusive>
+			    		<xsd:maxInclusive value="999.999999"></xsd:maxInclusive>
+			    	</xsd:restriction>
+			    </xsd:simpleType>
+		    </xsd:element>
+		    <xsd:element name="APOS" type="consulta:apos_saida_Type"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="apos_saida_Type">
+    	<xsd:sequence>
+    		<xsd:element name="SALDO" type="consulta:valor_Type"/>
+			<xsd:element name="SINAL" type="consulta:sinal_Type"/>
+		</xsd:sequence>
+    </xsd:complexType>
+  
+    <xsd:complexType name="saldos_saida_Type">
+    	<xsd:sequence>
+			<xsd:element name="SALDO" minOccurs="0" maxOccurs="unbounded" 
+				type="consulta:saldo_saida_Type"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="saldo_saida_Type">
+    	<xsd:sequence>
+    		<xsd:element name="SIGLA">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="2"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+            <xsd:element name="DESCRICAO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="VALOR" type="consulta:valor_Type"/>
+            <xsd:element name="SINAL" type="consulta:sinal_Type"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="compras_saida_Type">
+    	<xsd:sequence>
+            <xsd:element name="LANCAMENTO" minOccurs="0" maxOccurs="unbounded" 
+				type="consulta:compra_saida_Type"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="compra_saida_Type">
+    	<xsd:sequence>
+			<xsd:element name="DATA"  	type="xsd:date"/>
+    		<xsd:element name="HORA"  	type="xsd:time"/>
+    		<xsd:element name="NUMERO_DOCUMENTO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DESCRICAO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="VALOR" type="consulta:valor_Type"/>
+            <xsd:element name="SINAL" type="consulta:sinal_Type"/>
+            <xsd:element name="ESTABELECIMENTO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="30"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="agendamentos_saida_Type">
+    	<xsd:sequence>
+            <xsd:element name="LANCAMENTO" minOccurs="0" maxOccurs="unbounded" 
+				type="consulta:agendamento_saida_Type"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="dados_entrada_Type">
+    	<xsd:sequence>
+            <xsd:element name="REDE_TRANSMISSORA" minOccurs="1" maxOccurs="1">
+            	<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+            <xsd:element name="CONTA" minOccurs="1" maxOccurs="1"
+    			type="consulta:conta_Type">
+    		</xsd:element>
+    		<xsd:element name="PERIODO_CONSULTA" minOccurs="1"
+    			maxOccurs="1" type="consulta:periodo_consulta_Type">
+    		</xsd:element>
+    		<xsd:element name="TIPO_CONSULTA" minOccurs="1"
+    			maxOccurs="1" type="consulta:tipo_consulta_Type">
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="agendamento_saida_Type">
+    	<xsd:sequence>
+			<xsd:element name="DATA"  	type="xsd:date"
+    			minOccurs="1" maxOccurs="1"/>
+    		<xsd:element name="NUMERO_DOCUMENTO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"></xsd:minInclusive>
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DESCRICAO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="VALOR" type="consulta:valor_Type"/>
+            <xsd:element name="SINAL" type="consulta:sinal_Type"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="valores_bloqueados_saida_Type">
+    	<xsd:sequence>
+			<xsd:element name="VALOR_BLOQUEADO" minOccurs="0" maxOccurs="unbounded" 
+				type="consulta:valor_bloqueado_saida_Type"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="valor_bloqueado_saida_Type">
+    	<xsd:sequence>
+    		<xsd:element name="DATA"  	type="xsd:date"/>
+    		<xsd:element name="DESCRICAO">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="20"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+    		<xsd:element name="VALOR" type="consulta:valor13_Type"/>
+    		<xsd:element name="CHAVE">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="30"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="saldos_data_limite_saida_Type">
+    	<xsd:sequence>
+			<xsd:element name="SALDO" minOccurs="0" maxOccurs="unbounded" 
+				type="consulta:saldo_data_limite_saida_Type"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="saldo_data_limite_saida_Type">
+    	<xsd:sequence>
+    		<xsd:element name="INDICADOR_REMUNERACAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:maxInclusive value="9"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DIA" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:maxInclusive value="99"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="MES" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:maxInclusive value="99"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="SINAL" type="consulta:sinal_Type"/>
+            <xsd:element name="VALOR" type="consulta:valor13_Type"/>
+        </xsd:sequence>
+    </xsd:complexType>        
+        
+	<xsd:complexType name="conta_Type">
+		<xsd:sequence>
+			<xsd:element name="UNIDADE" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PRODUTO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NUMERO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+						<xsd:maxInclusive value="999999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DV" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:maxInclusive value="9"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>    
+
+	<xsd:complexType name="periodo_consulta_Type">
+		<xsd:sequence>
+			<xsd:element name="DATA_INICIO"  	type="xsd:date"
+    			minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="DATA_FIM"  		type="xsd:date"
+    			minOccurs="1" maxOccurs="1"/>					
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tipo_consulta_Type">
+		<xsd:sequence>
+			<xsd:element name="FLAG_DADOS_CADASTRAIS" type="xsd:boolean"
+				minOccurs="1" maxOccurs="1" />
+			<xsd:element name="FLAG_LANCAMENTOS" type="xsd:boolean"
+				minOccurs="1" maxOccurs="1" />
+			<xsd:element name="FLAG_SALDOS" type="xsd:boolean"
+				minOccurs="1" maxOccurs="1" />
+			<xsd:element name="FLAG_COMPRAS" type="xsd:boolean"
+				minOccurs="1" maxOccurs="1" />
+			<xsd:element name="FLAG_AGENDAMENTO" type="xsd:boolean"
+				minOccurs="1" maxOccurs="1" />
+			<xsd:element name="FLAG_VALORES_BLOQUEADOS"
+				type="xsd:boolean" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="FLAG_SALDO_DATA_LIMITE"
+				type="xsd:boolean" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="FLAG_LANCAMENTOS_DIA" type="xsd:boolean"
+				minOccurs="1" maxOccurs="1" />
+			<xsd:element name="FLAG_SALDO_POUPANCA_VINCULADA" type="xsd:boolean"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="FLAG_LANCAMENTO_POUPANCA_VINCULADA" type="xsd:boolean"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="FLAG_SALDO_POUPANCA_INTEGRADA" type="xsd:boolean"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="FLAG_LANCAMENTO_POUPANCA_INTEGRADA" type="xsd:boolean"
+				minOccurs="0" maxOccurs="1" />												
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="lancamentos_Type">
+		<xsd:sequence>
+            <xsd:element name="LANCAMENTO" minOccurs="1" 
+                maxOccurs="unbounded" type="consulta:lancamento_Type">
+            </xsd:element>					
+		</xsd:sequence>
+	</xsd:complexType>	
+
+	<xsd:complexType name="lancamento_Type">
+		<xsd:sequence>
+    		<xsd:element name="DATA_MOVIMENTO" type="xsd:date"
+    			minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="DATA_LANCAMENTO" type="xsd:date"
+    			minOccurs="1" maxOccurs="1">
+    		</xsd:element>    
+            <xsd:element name="HISTORICO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="25"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element> 
+            <xsd:element name="VALOR" minOccurs="1" 
+                maxOccurs="1" type="consulta:valor_Type">
+            </xsd:element>    		   					
+    		<xsd:element name="SINAL_VALOR" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="C"></xsd:enumeration>
+    					<xsd:enumeration value="D"></xsd:enumeration>
+    					<xsd:maxLength value="1"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>            			
+			<xsd:element name="TAXA" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:maxInclusive value="999.99999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+            <xsd:element name="SALDO" minOccurs="1" 
+                maxOccurs="1" type="consulta:valor_Type">
+            </xsd:element>    		   					
+    		<xsd:element name="SINAL_SALDO" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="C"></xsd:enumeration>
+    					<xsd:enumeration value="D"></xsd:enumeration>
+    					<xsd:maxLength value="1"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>			    			
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="lancamentos_dia_saida_Type">
+		<xsd:sequence>
+			<xsd:element name="LANCAMENTO" type="consulta:lancamento_dia_saida_Type" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="lancamento_dia_saida_Type">
+		<xsd:sequence>
+			<xsd:element name="DATA" type="xsd:date" minOccurs="1"
+				maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="NUMERO_DOCUMENTO" minOccurs="1"
+				maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+						<xsd:maxInclusive value="999999999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DESCRICAO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="VALOR" minOccurs="1" maxOccurs="1"
+				type="consulta:valor_Type">
+			</xsd:element>
+			<xsd:element name="SINAL" type="consulta:sinal_Type"></xsd:element>
+			<xsd:element name="APOS" type="consulta:apos_saida_Type" />
+		</xsd:sequence>
+	</xsd:complexType>
+				
+    <xsd:simpleType name="valor_Type">
+    	<xsd:restriction base="xsd:decimal">
+    		<xsd:minInclusive value="0"></xsd:minInclusive>
+    		<xsd:maxInclusive value="999999999999.99"></xsd:maxInclusive>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="valor13_Type">
+    	<xsd:restriction base="xsd:decimal">
+    		<xsd:minInclusive value="0"></xsd:minInclusive>
+    		<xsd:maxInclusive value="9999999999999.99"></xsd:maxInclusive>
+    	</xsd:restriction>
+    </xsd:simpleType>
+            
+    <xsd:simpleType name="sinal_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="1"></xsd:maxLength>
+			<xsd:enumeration value="D"></xsd:enumeration>
+			<xsd:enumeration value="C"></xsd:enumeration>
+		</xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:element name="SERVICO_ENTRADA" type="consulta:servico_entrada_negocial_Type"></xsd:element>
+
+    <xsd:element name="SERVICO_SAIDA" type="consulta:servico_saida_negocial_Type"></xsd:element>
+    
+</xsd:schema>

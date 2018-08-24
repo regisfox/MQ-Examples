@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:DETALHE_AGENDAMENTO_BOLETO_ENTRADA xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:h="http://caixa.gov.br/simtx/comuns/header" xmlns:ns="http://caixa.gov.br/simtx/detalhe_agendamento_transacao/boleto/v1/ns" xmlns:pagamento="http://caixa.gov.br/simtx/negocial/pagamento/v1/pagamento" xmlns:valida_cartao="http://caixa.gov.br/simtx/meios_de_entrada/valida_cartao/v1/valida_cartao" xmlns:valida_permissao="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao" xmlns:valida_senha="http://caixa.gov.br/simtx/meios_de_entrada/valida_senha/v1/valida_senha" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://caixa.gov.br/simtx/detalhe_agendamento_transacao/boleto/v1/ns Detalhe_Agendamento_Boleto.xsd ">
+  <HEADER>
+    <SERVICO>
+      <CODIGO>0</CODIGO>
+      <VERSAO>0</VERSAO>
+    </SERVICO>
+    <CANAL>
+      <SIGLA>SICAQ</SIGLA>
+      <DATAHORA>0</DATAHORA>
+    </CANAL>
+    <MEIOENTRADA>0</MEIOENTRADA>
+    <DATA_REFERENCIA>DATA_REFERENCIA</DATA_REFERENCIA>
+  </HEADER>
+  <CONTA>
+    <CONTA_SIDEC>
+      <UNIDADE>0</UNIDADE>
+      <OPERACAO>0</OPERACAO>
+      <CONTA>0</CONTA>
+      <DV>0</DV>
+    </CONTA_SIDEC>
+  </CONTA>
+  <DETALHE_AGENDAMENTO_TRANSACAO>
+    <SISTEMA_ORIGEM>SIAUT</SISTEMA_ORIGEM>
+    <NSU>0</NSU>
+    <DATA_EFETIVACAO>2001-01-01</DATA_EFETIVACAO>
+  </DETALHE_AGENDAMENTO_TRANSACAO>
+</ns:DETALHE_AGENDAMENTO_BOLETO_ENTRADA>

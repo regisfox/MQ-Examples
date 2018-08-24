@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://caixa.gov.br/simtx/lista_agendamentos_transacoes/v1/ns" 
+	xmlns:ns="http://caixa.gov.br/simtx/lista_agendamentos_transacoes/v1/ns"
+	xmlns:header="http://caixa.gov.br/simtx/comuns/header" 
+	xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" 
+	xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns"
+	xmlns:valida_cartao="http://caixa.gov.br/simtx/meios_de_entrada/valida_cartao/v1/valida_cartao" 
+	xmlns:valida_senha="http://caixa.gov.br/simtx/meios_de_entrada/valida_senha/v1/valida_senha" 
+	xmlns:valida_permissao="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao">
+
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/header" schemaLocation="../../../SIMTX/COMUNS/V1/Header.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/comuns" schemaLocation="../../../SIMTX/COMUNS/V1/Comuns_Simtx.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/enuns" 	schemaLocation="../../../SIMTX/COMUNS/V1/Enuns_Type_Simtx.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/meios_de_entrada/valida_cartao/v1/valida_cartao" 		schemaLocation="../../../SIMTX/MEIOS_DE_ENTRADA/VALIDA_CARTAO/V1/Valida_Cartao_Simtx.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/meios_de_entrada/valida_senha/v1/valida_senha" 		schemaLocation="../../../SIMTX/MEIOS_DE_ENTRADA/VALIDA_SENHA/V1/Valida_Senha_Simtx.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao" schemaLocation="../../../SIMTX/MEIOS_DE_ENTRADA/VALIDA_PERMISSAO/V1/Valida_Permissao_Simtx.xsd" />
+
+	<xsd:element name="LISTA_AGENDAMENTOS_TRANSACOES_ENTRADA" type="ns:LISTA_AGENDAMENTOS_ENTRADA_Type" />
+	<xsd:element name="LISTA_AGENDAMENTOS_TRANSACOES_SAIDA" type="ns:LISTA_AGENDAMENTOS_SAIDA_Type" />
+
+	<xsd:complexType name="LISTA_AGENDAMENTOS_ENTRADA_Type">
+		<xsd:sequence>
+			<xsd:element name="HEADER" type="header:HEADER_ENTRADA_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="CPF" minOccurs="0" maxOccurs="1" type="comuns:cpf_format_type" />
+			<xsd:element name="CONTA" type="comuns:CONTA_entrada_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="CARTAO" type="valida_cartao:dados_entrada_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="SENHA" type="valida_senha:dados_entrada_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="PERMISSAO" type="valida_permissao:dados_entrada_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="TOKEN" type="valida_permissao:dados_token_Type" minOccurs="0" maxOccurs="1" />
+
+			<xsd:element name="LISTA_AGENDAMENTOS_TRANSACOES" minOccurs="1" maxOccurs="1">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="PERIODO" minOccurs="0" maxOccurs="1" type="comuns:periodo_Type"/>
+						<xsd:element name="IDENTIFICADOR_SERVICO" minOccurs="1" maxOccurs="1" type="comuns:servicos_SIAUT_Type" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LISTA_AGENDAMENTOS_SAIDA_Type">
+		<xsd:sequence>
+			<xsd:element name="HEADER" type="header:HEADER_SAIDA_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="CPF" type="comuns:cpf_format_type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="CONTA" type="comuns:CONTA_saida_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="CARTAO" type="valida_cartao:dados_saida_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="SENHA" type="valida_senha:dados_saida_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="PERMISSAO" type="valida_permissao:dados_saida_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="TOKEN" type="valida_permissao:dados_token_Type" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="LISTA_AGENDAMENTOS_TRANSACOES" minOccurs="0" maxOccurs="1">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="NOME_SERVICO_SOLICITADO" type="comuns:servicos_SIAUT_Type" minOccurs="1" maxOccurs="1" />
+						<xsd:element name="TRANSACOES" type="ns:transacao_Type" minOccurs="1" maxOccurs="1" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="transacao_Type">
+		<xsd:sequence>
+			<xsd:element name="TRANSACAO" type="ns:dados_transacao_Type" minOccurs="1" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dados_transacao_Type">
+		<xsd:sequence>
+			<xsd:element name="SISTEMA_ORIGEM" type="comuns:sistema_origem_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="NSU" type="comuns:nsu_format_size_15_number_type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="VALOR" type="comuns:valor_decimal_format_type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="DATA_AGENDAMENTO" type="xsd:date" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="DATA_EFETIVACAO" type="xsd:date" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="IDENTIFICACAO" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:minInclusive value="0" />
+						<xsd:maxInclusive value="1" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="IDENTIFICADOR_CANCELAMENTO" type="comuns:id_cancelamento_Type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="CODIGO_SERVICO_DETALHE" type="comuns:codigo_servico_format_6_number_type" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

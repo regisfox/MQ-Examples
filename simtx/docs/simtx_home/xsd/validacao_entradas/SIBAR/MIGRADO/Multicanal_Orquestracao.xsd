@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://caixa.gov.br/sibar/multicanal/orquestracao"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:sibar_base="http://caixa.gov.br/sibar"
+	xmlns:multicanal="http://caixa.gov.br/sibar/multicanal/orquestracao">
+    
+    <xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd"/>
+    
+    <xsd:complexType name="passo_entrada_Type">
+    	<xsd:sequence>
+    		<xsd:element name="SERVICO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="50"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="OPERACAO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="50"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="VERSAO" minOccurs="0" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="10"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="MODO_INTEGRACAO" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="MQ"></xsd:enumeration>
+    					<xsd:enumeration value="REST"></xsd:enumeration>
+    					<xsd:enumeration value="WS"></xsd:enumeration>
+    					<xsd:enumeration value="TCP"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="RECURSOS" type="multicanal:recursos_Type" minOccurs="1" maxOccurs="1"></xsd:element>
+    		<xsd:element name="TEMPO_ESPERA" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:minInclusive value="1"></xsd:minInclusive>
+    					<xsd:maxInclusive value="999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="IMPEDIMENTO" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="S"></xsd:enumeration>
+    					<xsd:enumeration value="N"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="FORMA_INTEGRACAO" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="SINCRONA"></xsd:enumeration>
+    					<xsd:enumeration value="ASSINCRONA"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="DEPENDENCIAS" type="multicanal:dependencias_Type" minOccurs="0" maxOccurs="1"></xsd:element>
+    		<xsd:element name="REGRAS_RETORNO_SUCESSO" type="multicanal:regras_retorno_Type" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    
+    <xsd:complexType name="passos_entrada_Type">
+    	<xsd:sequence>
+    		<xsd:element name="PASSO" type="multicanal:passo_entrada_Type" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+
+    <xsd:complexType name="campo_Type">
+    	<xsd:sequence>
+    		<xsd:element name="NOME" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="dependencia_Type">
+    	<xsd:sequence>
+    		<xsd:element name="SERVICO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="50"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="CAMPO_ORIGEM" type="multicanal:campo_origem_Type" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+    		<xsd:element name="CAMPO_DESTINO" type="multicanal:campo_destino_Type" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="dependencias_Type">
+    	<xsd:sequence>
+    		<xsd:element name="DEPENDENCIA" type="multicanal:dependencia_Type" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="recursos_Type">
+    	<xsd:sequence>
+    		<xsd:element name="FILA_REQUISICAO" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="48"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="FILA_RESPOSTA" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="48"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="URL" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="regras_retorno_Type">
+    	<xsd:sequence>
+    		<xsd:element name="CAMPO" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+    		<xsd:element name="RESULTADO_ESPERADO" minOccurs="1" maxOccurs="unbounded">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="5"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="orquestracao_entrada_Type">
+    	<xsd:sequence>
+    		<xsd:element name="PASSOS" type="multicanal:passos_entrada_Type" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+
+    <xsd:complexType name="campo_origem_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="multicanal:campo_Type">
+    			<xsd:sequence>
+    				<xsd:element name="MULTIPLICIDADE" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="campo_destino_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="multicanal:campo_Type"></xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+
+
+    <xsd:complexType name="servico_entrada_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+    			<xsd:sequence>
+    				<xsd:element name="ORQUESTRACAO" type="multicanal:orquestracao_entrada_Type" minOccurs="1" maxOccurs="1"></xsd:element>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="servico_saida_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE"></xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:element name="SERVICO_ENTRADA" type="multicanal:servico_entrada_negocial_Type"></xsd:element>
+
+    <xsd:element name="SERVICO_SAIDA" type="multicanal:servico_saida_negocial_Type"></xsd:element>
+</xsd:schema>

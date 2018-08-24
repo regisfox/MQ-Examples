@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:LISTA_COMPROVANTES_TRANSACOES_ENTRADA xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:h="http://caixa.gov.br/simtx/comuns/header" xmlns:ns="http://caixa.gov.br/simtx/lista_comprovantes_transacoes/v1/ns" xmlns:valida_cartao="http://caixa.gov.br/simtx/meios_de_entrada/valida_cartao/v1/valida_cartao" xmlns:valida_permissao="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao" xmlns:valida_senha="http://caixa.gov.br/simtx/meios_de_entrada/valida_senha/v1/valida_senha" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://caixa.gov.br/simtx/lista_comprovantes_transacoes/v1/ns Lista_Comprovantes_Transacoes.xsd ">
+  <HEADER>
+    <SERVICO>
+      <CODIGO>110026</CODIGO>
+      <VERSAO>1</VERSAO>
+    </SERVICO>
+    <CANAL>
+      <SIGLA>SIMAA</SIGLA>
+      <DATAHORA>20180326083600</DATAHORA>
+    </CANAL>
+    <MEIOENTRADA>4</MEIOENTRADA>
+    <DATA_REFERENCIA>20180326</DATA_REFERENCIA>
+  </HEADER>
+  <CONTA>
+	<CONTA_SIDEC>
+		<UNIDADE>238</UNIDADE>
+		<OPERACAO>3</OPERACAO>
+		<CONTA>4</CONTA>
+		<DV>2</DV>
+	</CONTA_SIDEC>
+  </CONTA>
+  <CARTAO>
+		<TRILHA>6036899900000014319=18101201906920120</TRILHA>
+		<TP_ENTRADA>0</TP_ENTRADA>
+		<NUMERO_SEQUENCIAL>0</NUMERO_SEQUENCIAL>
+		<INFORMACOES_CHIP>12345</INFORMACOES_CHIP>
+	</CARTAO>
+	<SENHA>
+		<SENHA>SEGREDO</SENHA>
+		<FLAG_CONSULTA_IP>S</FLAG_CONSULTA_IP>
+		<VERSAO>1</VERSAO>
+		<ACAO>17</ACAO>
+	</SENHA>
+  <LISTA_COMPROVANTES_TRANSACOES>
+    <DATA_INICIO>2018-03-14</DATA_INICIO>
+    <DATA_FIM>2018-03-26</DATA_FIM>
+    <IDENTIFICADOR_SERVICO>BOLETO</IDENTIFICADOR_SERVICO>
+  </LISTA_COMPROVANTES_TRANSACOES>
+</ns:LISTA_COMPROVANTES_TRANSACOES_ENTRADA>

@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://caixa.gov.br/sibar/rotinas_uso_comum/calcula_boleto"
+	xmlns:rotinasusocomum="http://caixa.gov.br/sibar/rotinas_uso_comum/calcula_boleto"
+	xmlns:sibar_base="http://caixa.gov.br/sibar">
+    
+    <xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../../MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd"/>
+    
+    
+    <xsd:complexType name="servico_entrada_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+    			<xsd:sequence>
+    				<xsd:element name="DADOS" type="rotinasusocomum:dados_entrada_negocial_Type" minOccurs="1" maxOccurs="1"></xsd:element>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="servico_saida_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+    			<xsd:sequence>
+    				<xsd:element name="DADOS" type="rotinasusocomum:dados_saida_negocial_Type" minOccurs="0" maxOccurs="1"></xsd:element>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="dados_entrada_negocial_Type">
+    	<xsd:sequence>
+    		<xsd:element name="UNIDADE_PAGAMENTO" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:short">
+    					<xsd:minExclusive value="0"></xsd:minExclusive>
+    					<xsd:maxInclusive value="9999"></xsd:maxInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="MODELO_CALCULO" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="2"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="DATA_MOVIMENTO" type="xsd:date"
+    			minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="DATA_PAGAMENTO" type="xsd:date"
+    			minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="DATA_VENCIMENTO" type="xsd:date"
+    			minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="DATA_LIMITE_PAGAMENTO" type="xsd:date"
+    			minOccurs="0" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="JUROS" type="rotinasusocomum:juros_Type"
+    			minOccurs="0" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="MULTA" type="rotinasusocomum:multa_Type"
+    			minOccurs="0" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="DESCONTOS"
+    			type="rotinasusocomum:descontos_Type" minOccurs="0"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="VALOR_ABATIMENTO"
+    			type="rotinasusocomum:valor_TYPE" minOccurs="0" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="VALOR_TITULO"
+    			type="rotinasusocomum:valor_TYPE" minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="FLAG_PAGAMENTO_PARCIAL" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="S"></xsd:enumeration>
+    					<xsd:enumeration value="N"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="PERCENTUAL"
+    			type="rotinasusocomum:percentual_Type" minOccurs="0"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="BAIXAS_OPERACIONAIS"
+    			type="rotinasusocomum:baixas_operacionais_Type" minOccurs="0"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="BAIXAS_EFETIVAS"
+    			type="rotinasusocomum:baixas_efetivas_Type" minOccurs="0"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="CALCULOS"
+    			type="rotinasusocomum:calculos_entrada_Type" minOccurs="0"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="CODIGO_BARRAS" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="44"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="LINHA_DIGITAVEL" minOccurs="0"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="47"></xsd:maxLength>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="CANAL" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="BANKING_MOBILE_CAIXA"></xsd:enumeration>
+    					<xsd:enumeration value="INTERNET_BANKING"></xsd:enumeration>
+    					<xsd:enumeration value="LOTERICO"></xsd:enumeration>
+    					<xsd:enumeration value="SISAG"></xsd:enumeration>
+    					<xsd:enumeration value="MULTICANAL"></xsd:enumeration>
+    					<xsd:enumeration value="CAIXA_AQUI"></xsd:enumeration>
+    					<xsd:enumeration value="GOV"></xsd:enumeration>
+    					<xsd:enumeration value="TIM_MONEY"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="dados_saida_negocial_Type">
+    	<xsd:complexContent>
+    		<xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+    			<xsd:sequence>
+                    <xsd:element name="DATA_CALCULO" type="xsd:date" minOccurs="0" maxOccurs="1">
+    				</xsd:element>
+                    <xsd:element name="DATA_VALIDADE_CALCULO" type="xsd:date" minOccurs="0" maxOccurs="1">
+    				</xsd:element>
+                    <xsd:element name="DATA_VENCIMENTO_UTIL" type="xsd:date" minOccurs="0" maxOccurs="1">
+    				</xsd:element>
+                    <xsd:element name="FLAG_ENCARGOS" minOccurs="0"
+    					maxOccurs="1">
+    					<xsd:simpleType>
+    						<xsd:restriction base="xsd:string">
+    							<xsd:enumeration value="S"></xsd:enumeration>
+    							<xsd:enumeration value="N"></xsd:enumeration>
+    						</xsd:restriction>
+    					</xsd:simpleType>
+    				</xsd:element>
+                    <xsd:element name="VALOR_MINIMO" type="rotinasusocomum:valor_TYPE" minOccurs="0" maxOccurs="1">
+    				</xsd:element>
+                    <xsd:element name="VALOR_MAXIMO" type="rotinasusocomum:valor_TYPE" minOccurs="0" maxOccurs="1">
+    				</xsd:element>
+                    <xsd:element name="VALOR_JUROS" type="rotinasusocomum:valor_TYPE" minOccurs="0" maxOccurs="1"></xsd:element>
+    				<xsd:element name="VALOR_MULTA" type="rotinasusocomum:valor_TYPE" minOccurs="0" maxOccurs="1"></xsd:element>
+    				<xsd:element name="VALOR_DESCONTO"
+    					type="rotinasusocomum:valor_TYPE" minOccurs="0" maxOccurs="1">
+    				</xsd:element>
+    				<xsd:element name="VALOR_ABATIMENTO"
+    					type="rotinasusocomum:valor_TYPE" minOccurs="0" maxOccurs="1">
+    				</xsd:element>
+    				<xsd:element name="VALOR_TOTAL" type="rotinasusocomum:valor_TYPE" minOccurs="0" maxOccurs="1"></xsd:element>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="juros_Type">
+    	<xsd:sequence>
+    		<xsd:element name="TIPO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="VALOR_DIA_CORRIDO"></xsd:enumeration>
+    					<xsd:enumeration
+    						value="PERCENTUAL_DIA_CORRIDO">
+    					</xsd:enumeration>
+    					<xsd:enumeration
+    						value="PERCENTUAL_MES_DIA_CORRIDO">
+    					</xsd:enumeration>
+    					<xsd:enumeration
+    						value="PERCENTUAL_ANO_DIA_CORRIDO">
+    					</xsd:enumeration>
+    					<xsd:enumeration value="ISENTO"></xsd:enumeration>
+    					<xsd:enumeration value="VALOR_DIA_UTIL"></xsd:enumeration>
+    					<xsd:enumeration value="PERCENTUAL_DIA_UTIL"></xsd:enumeration>
+    					<xsd:enumeration
+    						value="PERCENTUAL_MES_DIA_UTIL">
+    					</xsd:enumeration>
+    					<xsd:enumeration value="PERCENTUAL_ANO_DIA_UTIL"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="DATA" type="xsd:date" minOccurs="0" maxOccurs="1"></xsd:element>
+    		<xsd:choice minOccurs="0" maxOccurs="1">
+    			<xsd:element name="VALOR" type="rotinasusocomum:valor_TYPE" minOccurs="1" maxOccurs="1"></xsd:element>
+    			<xsd:element name="PERCENTUAL" type="rotinasusocomum:percentual_TYPE" minOccurs="1" maxOccurs="1"></xsd:element>
+    		</xsd:choice>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="multa_Type">
+    	<xsd:sequence>
+    		<xsd:element name="TIPO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="VALOR_FIXO"></xsd:enumeration>
+    					<xsd:enumeration value="PERCENTUAL"></xsd:enumeration>
+    					<xsd:enumeration value="ISENTO"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="DATA" type="xsd:date" minOccurs="0" maxOccurs="1"></xsd:element>
+    		<xsd:choice minOccurs="0" maxOccurs="1">
+    			<xsd:element name="VALOR" type="rotinasusocomum:valor_TYPE" minOccurs="1" maxOccurs="1"></xsd:element>
+    			<xsd:element name="PERCENTUAL" type="rotinasusocomum:percentual_TYPE" minOccurs="1" maxOccurs="1"></xsd:element>
+    		</xsd:choice>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="desconto_Type">
+    	<xsd:sequence>
+    		<xsd:element name="TIPO" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="ISENTO"></xsd:enumeration>
+    					<xsd:enumeration value="VALOR_FIXO_ATE_DATA"></xsd:enumeration>
+    					<xsd:enumeration value="PERCENTUAL_ATE_DATA"></xsd:enumeration>
+    					<xsd:enumeration
+    						value="VALOR_ANTECIPACAO_DIA_CORRIDO">
+    					</xsd:enumeration>
+    					<xsd:enumeration
+    						value="VALOR_ANTECIPACAO_DIA_UTIL">
+    					</xsd:enumeration>
+    					<xsd:enumeration
+    						value="PERCENTUAL_ANTECIPACAO_DIA_CORRIDO">
+    					</xsd:enumeration>
+    					<xsd:enumeration value="PERCENTUAL_ANTECIPACAO_DIA_UTIL"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="DATA" type="xsd:date" minOccurs="0" maxOccurs="1"></xsd:element>
+    		<xsd:choice minOccurs="0" maxOccurs="1">
+    			<xsd:element name="VALOR" type="rotinasusocomum:valor_TYPE" minOccurs="1" maxOccurs="1"></xsd:element>
+    			<xsd:element name="PERCENTUAL" type="rotinasusocomum:percentual_TYPE" minOccurs="1" maxOccurs="1"></xsd:element>
+    		</xsd:choice>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="descontos_Type">
+    	<xsd:sequence>
+    		<xsd:element name="DESCONTO" type="rotinasusocomum:desconto_Type" minOccurs="1" maxOccurs="3"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="baixa_operacional_Type">
+    	<xsd:sequence>
+    		<xsd:element name="DATA" type="xsd:date" minOccurs="0" maxOccurs="1"></xsd:element>
+    		<xsd:element name="VALOR" type="rotinasusocomum:valor_TYPE" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="baixas_operacionais_Type">
+    	<xsd:sequence>
+    		<xsd:element name="BAIXA_OPERACIONAL" type="rotinasusocomum:baixa_operacional_Type" minOccurs="1" maxOccurs="99"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="baixa_efetiva_Type">
+    	<xsd:sequence>
+    		<xsd:element name="DATA" type="xsd:date" minOccurs="0" maxOccurs="1"></xsd:element>
+    		<xsd:element name="VALOR" type="rotinasusocomum:valor_TYPE" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="baixas_efetivas_Type">
+    	<xsd:sequence>
+    		<xsd:element name="BAIXA_EFETIVA" type="rotinasusocomum:baixa_efetiva_Type" minOccurs="1" maxOccurs="99"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="calculo_entrada_Type">
+    	<xsd:sequence>
+    		<xsd:element name="DATA" type="xsd:date" minOccurs="0" maxOccurs="1"></xsd:element>
+    		<xsd:element name="VALOR_JUROS" type="rotinasusocomum:valor_TYPE" minOccurs="1" maxOccurs="1"></xsd:element>
+    		<xsd:element name="VALOR_MULTA" type="rotinasusocomum:valor_TYPE" minOccurs="1" maxOccurs="1"></xsd:element>
+    		<xsd:element name="VALOR_DESCONTO" type="rotinasusocomum:valor_TYPE" minOccurs="1" maxOccurs="1"></xsd:element>
+    		<xsd:element name="VALOR_TOTAL" type="rotinasusocomum:valor_TYPE" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="valor_TYPE">
+    	<xsd:restriction base="xsd:decimal">
+    		<xsd:minInclusive value="0"></xsd:minInclusive>
+    		<xsd:maxInclusive value="999999999999999.99"></xsd:maxInclusive>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="percentual_TYPE">
+    	<xsd:restriction base="xsd:decimal">
+    		<xsd:maxInclusive value="999999999999.99999"></xsd:maxInclusive>
+    		<xsd:minInclusive value="0"></xsd:minInclusive>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="percentual_Type">
+    	<xsd:sequence>
+    		<xsd:element name="MINIMO" type="rotinasusocomum:percentual_TYPE" minOccurs="1" maxOccurs="1"></xsd:element>
+    		<xsd:element name="MAXIMO" type="rotinasusocomum:percentual_TYPE" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="calculos_entrada_Type">
+    	<xsd:sequence>
+    		<xsd:element name="CALCULO" type="rotinasusocomum:calculo_entrada_Type" minOccurs="1" maxOccurs="10"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="SERVICO_ENTRADA" type="rotinasusocomum:servico_entrada_negocial_Type"></xsd:element>
+
+    <xsd:element name="SERVICO_SAIDA" type="rotinasusocomum:servico_saida_negocial_Type"></xsd:element>
+</xsd:schema>

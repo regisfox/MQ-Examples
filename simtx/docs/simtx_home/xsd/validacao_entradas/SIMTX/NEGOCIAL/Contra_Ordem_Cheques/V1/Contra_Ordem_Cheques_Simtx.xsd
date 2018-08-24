@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns"  
+	xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns"
+	xmlns:ns="http://caixa.gov.br/simtx/negocial/manutencao_cheque/v1/ns" 
+	targetNamespace="http://caixa.gov.br/simtx/negocial/manutencao_cheque/v1/ns">
+
+	<!-- Inicio Imports Communs e Header -->
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/header" schemaLocation="../../../COMUNS/V1/Header.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/comuns" schemaLocation="../../../COMUNS/V1/Comuns_Simtx.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/enuns" schemaLocation="../../../COMUNS/V1/Enuns_Type_Simtx.xsd" />
+	<!-- Fim Imports Communs e Header -->
+
+
+	<!-- Inicio Bloco Dados de entrada -->
+	<xsd:element name="CONTRA_ORDEM_CHEQUE_ENTRADA" type="ns:contra_ordem_cheque_envio_type" />
+
+	<xsd:complexType name="contra_ordem_cheque_envio_type">
+		<xsd:sequence>
+			<xsd:element name="NUMERO_CHEQUE" type="ns:numero_cheque_type" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="CODIGO_MOTIVO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minExclusive value="0"></xsd:minExclusive>
+						<xsd:maxInclusive value="99"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TIPO_COMANDO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="INCLUSAO"></xsd:enumeration>
+						<xsd:enumeration value="EXCLUSAO"></xsd:enumeration>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="JUSTIFICATIVA" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="120"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="numero_cheque_type">
+		<xsd:sequence>
+			<xsd:element name="INICIO" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minExclusive value="0"></xsd:minExclusive>
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="FIM" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minExclusive value="0"></xsd:minExclusive>
+						<xsd:maxInclusive value="999999"></xsd:maxInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Fim Bloco Dados de entrada -->
+
+	<!-- Inicio Bloco Dados de saida -->
+	<xsd:element name="CONTRA_ORDEM_CHEQUE_SAIDA" type="ns:contra_ordem_cheque_dados_retorno_type" />
+	
+	<xsd:complexType name="contra_ordem_cheque_dados_retorno_type">
+		<xsd:complexContent>
+			<xsd:extension base="ns:contra_ordem_cheque_envio_type">
+				<xsd:sequence>
+					<xsd:element name="ACATADO" type="enuns:sim_nao_enum_Type" minOccurs="1" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<!-- Fim Bloco Dados de saida -->
+	
+</xsd:schema>

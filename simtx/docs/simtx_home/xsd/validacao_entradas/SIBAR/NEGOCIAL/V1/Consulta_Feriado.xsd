@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	targetNamespace="http://caixa.gov.br/sibar/rotinas_uso_comum/consulta_feriado"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:sibar_base="http://caixa.gov.br/sibar"
+	xmlns:consultaferiado="http://caixa.gov.br/sibar/rotinas_uso_comum/consulta_feriado">
+
+    <xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../../MEIOS_DE_ENTRADA/V1/MensagensBarramento.xsd"/>
+
+    
+    <xsd:element name="SERVICO_ENTRADA" type="consultaferiado:SERVICO_ENTRADA_NEGOCIAL_TYPE"/>
+
+    <xsd:complexType name="SERVICO_ENTRADA_NEGOCIAL_TYPE">
+        <xsd:complexContent>
+            <xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" name="DADOS" type="consultaferiado:DADOS_ENTRADA_TYPE"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="DADOS_ENTRADA_TYPE">
+        <xsd:sequence>
+        	<xsd:element name="DATA" type="xsd:date" minOccurs="1"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+	<xsd:element name="SERVICO_SAIDA" type="consultaferiado:SERVICO_SAIDA_NEGOCIAL_TYPE"/>
+
+	<xsd:complexType name="SERVICO_SAIDA_NEGOCIAL_TYPE">
+		<xsd:complexContent>
+ 			<xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="DADOS" type="consultaferiado:DADOS_SAIDA_TYPE" minOccurs="0"/>
+				</xsd:sequence>
+ 			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="DADOS_SAIDA_TYPE">
+		<xsd:complexContent>
+			<xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+				<xsd:sequence>
+					<xsd:element name="DATA_UTIL" type="xsd:date" minOccurs="1"></xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+		
+						 	
+</xsd:schema>

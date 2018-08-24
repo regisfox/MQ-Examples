@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:h="http://caixa.gov.br/simtx/comuns/header" 
+	xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns"
+	xmlns:enuns="http://caixa.gov.br/simtx/comuns/enuns"
+	xmlns:ns="http://caixa.gov.br/simtx/detalhe_transacao_pendente_assinatura/v1/ns" 
+	xmlns:contraordemcheques="http://caixa.gov.br/simtx/negocial/manutencao_cheque/v1/ns" 
+	targetNamespace="http://caixa.gov.br/simtx/detalhe_transacao_pendente_assinatura/v1/ns">
+
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/header" schemaLocation="../../../SIMTX/COMUNS/V1/Header.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/comuns" schemaLocation="../../../SIMTX/COMUNS/V1/Comuns_Simtx.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/comuns/enuns" schemaLocation="../../../SIMTX/COMUNS/V1/Enuns_Type_Simtx.xsd" />
+	<xsd:import namespace="http://caixa.gov.br/simtx/negocial/manutencao_cheque/v1/ns" schemaLocation="../../../SIMTX/NEGOCIAL/Contra_Ordem_Cheques/V1/Contra_Ordem_Cheques_Simtx.xsd" />
+	
+
+	<xsd:element name="DETALHE_TRANSACAO_PENDENTE_ASSINATURA_ENTRADA" type="ns:detalhe_transacao_pendente_assinatura_entrada_type"/>
+	<!-- Inicio Bloco Dados de entrada -->
+	<xsd:complexType name="detalhe_transacao_pendente_assinatura_entrada_type">
+		<xsd:sequence>
+			<xsd:element name="HEADER" type="h:HEADER_ENTRADA_Type" />
+			<xsd:element name="NSU_MTX" type="comuns:nsu_format_size_15_number_type" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Fim Bloco Dados de entrada -->
+	
+	<!-- Inicio Bloco Dados de saida -->
+	
+	<xsd:element name="DETALHE_TRANSACAO_PENDENTE_ASSINATURA_SAIDA" type="ns:detalhe_transacao_pendente_assinatura_saida_type"></xsd:element>
+	
+	
+	<xsd:complexType name="detalhe_transacao_pendente_assinatura_saida_type">
+	<xsd:sequence>
+		<xsd:element name="HEADER" type="h:HEADER_SAIDA_Type" minOccurs="1" maxOccurs="1"/>
+		<xsd:element name="DETALHE_TRANSACAO_PENDENTE_ASSINATURA" type="ns:detalhe_transacao_dados_type" minOccurs="0" maxOccurs="1"/>	
+		<xsd:element name="CONTRA_ORDEM_CHEQUES" type="contraordemcheques:contra_ordem_cheque_envio_type" minOccurs="0" maxOccurs="1"/>
+	</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="detalhe_transacao_dados_type">
+		<xsd:sequence>
+				<xsd:element name="NSU_MTX" type="comuns:nsu_format_size_15_number_type" minOccurs="1" maxOccurs="1"/>
+				<xsd:element name="NSU_SIPER" type="comuns:nsu_siper_format_size_9_number_type" minOccurs="1" maxOccurs="1" />
+				<xsd:element name="DATA_TRANSACAO" type="xsd:date" minOccurs="1" maxOccurs="1" />
+				<xsd:element name="DATA_PREVISTA_EFETIVACAO" type="xsd:date" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+		
+	<!-- Fim Bloco Dados de saida -->
+
+</xsd:schema>

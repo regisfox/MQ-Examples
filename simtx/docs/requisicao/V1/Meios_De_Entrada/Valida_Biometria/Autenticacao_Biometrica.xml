@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autenticacaobiometrica:SERVICO_ENTRADA
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:sibar_base="http://caixa.gov.br/sibar"
+	xmlns:autenticacaobiometrica="http://caixa.gov.br/sibar/autenticacao_biometrica">
+	<sibar_base:HEADER>
+		<VERSAO>1.1</VERSAO>
+		<OPERACAO>AUTENTICACAO_BIOMETRICA</OPERACAO>
+		<SISTEMA_ORIGEM>SIMTX</SISTEMA_ORIGEM>
+		<DATA_HORA>20170207144336</DATA_HORA>
+	</sibar_base:HEADER>
+	<DADOS>
+		<NUMERO>0</NUMERO>
+		<IDENTIFICADOR>IDENTIFICADOR</IDENTIFICADOR>
+		<NSU>NSU</NSU>
+		<LFD>0</LFD>
+		<DEDO>DEDO</DEDO>
+		<TEMPLATE>TEMPLATE</TEMPLATE>
+		<FORMATO_TEMPLATE>SEM_CRIPTOGRAFIA</FORMATO_TEMPLATE>
+		<CHAVE_SESSAO>CHAVE_SESSAO</CHAVE_SESSAO>
+		<FLAG_CARTAO_PRESENTE>FLAG_CARTAO_PRESENTE</FLAG_CARTAO_PRESENTE>
+	</DADOS>
+</autenticacaobiometrica:SERVICO_ENTRADA>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:LISTA_COMPROVANTES_TRANSACOES_ENTRADA
+				xmlns:comuns="http://caixa.gov.br/simtx/comuns/comuns" xmlns:h="http://caixa.gov.br/simtx/comuns/header"
+				xmlns:ns="http://caixa.gov.br/simtx/lista_comprovantes_transacoes/v1/ns"
+				xmlns:valida_cartao="http://caixa.gov.br/simtx/meios_de_entrada/valida_cartao/v1/valida_cartao"
+				xmlns:valida_permissao="http://caixa.gov.br/simtx/meios_de_entrada/valida_permissao/v1/valida_permissao"
+				xmlns:valida_senha="http://caixa.gov.br/simtx/meios_de_entrada/valida_senha/v1/valida_senha"
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				xsi:schemaLocation="http://caixa.gov.br/simtx/lista_comprovantes_transacoes/v1/ns Lista_Comprovantes_Transacoes.xsd ">
+	<HEADER>
+		<SERVICO>
+			<CODIGO>110026</CODIGO>
+			<VERSAO>1</VERSAO>
+		</SERVICO>
+		<CANAL>
+			<SIGLA>SIIBC</SIGLA>
+			<DATAHORA>20180115153000</DATAHORA>
+		</CANAL>
+		<MEIOENTRADA>1</MEIOENTRADA>
+		<IDENTIFICADOR_ORIGEM>
+			<TERMINAL>1234001</TERMINAL>
+		</IDENTIFICADOR_ORIGEM>
+		<USUARIO_SERVICO>SMTX01</USUARIO_SERVICO>
+		<USUARIO>TOSCANO</USUARIO>
+		<DATA_REFERENCIA>20180101</DATA_REFERENCIA>
+	</HEADER>
+	<CPF>36199093852</CPF>
+	<CONTA>
+		<CONTA_SIDEC>
+			<UNIDADE>1679</UNIDADE>
+			<OPERACAO>1</OPERACAO>
+			<CONTA>8</CONTA>
+			<DV>0</DV>
+		</CONTA_SIDEC>
+	</CONTA>
+	<CARTAO>
+		<TRILHA>2562349578954=23424</TRILHA>
+		<TP_ENTRADA>0</TP_ENTRADA>
+		<NUMERO_SEQUENCIAL>0</NUMERO_SEQUENCIAL>
+		<INFORMACOES_CHIP>INFORMACOES_CHIP</INFORMACOES_CHIP>
+	</CARTAO>
+	<SENHA>
+		<SENHA>SENHA</SENHA>
+		<FLAG_CONSULTA_IP>1</FLAG_CONSULTA_IP>
+		<VERSAO>0</VERSAO>
+		<ACAO>0</ACAO>
+		<CODIGO_SERVICO>CODIGO_SERVICO</CODIGO_SERVICO>
+		<CARTEIRA>CARTEIRA</CARTEIRA>
+		<INFORMACOES_TELA>INFORMACOES_TELA</INFORMACOES_TELA>
+	</SENHA>
+	<PERMISSAO>
+		<OPCAO>1</OPCAO>
+		<SERVICO_SIPER>112</SERVICO_SIPER>
+		<DT_MOVTO_SIPER>20180101</DT_MOVTO_SIPER>
+	</PERMISSAO>
+	<TOKEN>
+		<ACAO>1</ACAO>
+		<SESSAO>SESSAO</SESSAO>
+		<CODIGO_SESSAO>CODIGO_SESSAO</CODIGO_SESSAO>
+	</TOKEN>
+	<LISTA_COMPROVANTES_TRANSACOES>
+		<DATA_INICIO>2017-07-24</DATA_INICIO>
+		<DATA_FIM>2018-01-05</DATA_FIM>
+		<CODIGO_SERVICO>110032</CODIGO_SERVICO> 
+	</LISTA_COMPROVANTES_TRANSACOES>
+</ns:LISTA_COMPROVANTES_TRANSACOES_ENTRADA>

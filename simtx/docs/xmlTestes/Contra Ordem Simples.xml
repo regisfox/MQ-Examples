@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:CONTRA_ORDEM_CHEQUE_ENTRADA
+    xmlns:ns2="http://caixa.gov.br/simtx/manutencao_cheque/v1/ns">
+    <HEADER>
+        <SERVICO>
+            <CODIGO>110030</CODIGO>
+            <VERSAO>1</VERSAO>
+        </SERVICO>
+        <CANAL>
+            <SIGLA>SIIBC</SIGLA>
+            <DATAHORA>20180322173200</DATAHORA>
+        </CANAL>
+        <MEIOENTRADA>2</MEIOENTRADA>
+        <IDENTIFICADOR_ORIGEM>
+            <ENDERECO_IP>10.192.227.254</ENDERECO_IP>
+        </IDENTIFICADOR_ORIGEM>
+        <DATA_REFERENCIA>20180417</DATA_REFERENCIA>
+    </HEADER>
+    <CPF>31134858</CPF>
+    <CONTA>
+        <CONTA_SIDEC>
+            <UNIDADE>1679</UNIDADE>
+            <OPERACAO>1</OPERACAO>
+            <CONTA>154</CONTA>
+            <DV>0</DV>
+        </CONTA_SIDEC>
+    </CONTA>
+    <TOKEN>
+        <TOKEN>TESTEIBCD003        z4kSIEh3ByEpB4pqxjuGnDhyUFaVxkPrrCBP7VuwXQBisb461bNx442iVxve</TOKEN>
+        <ID_SESSAO>jOEGJ5D4rA3KU2ujWrRZLLhg.sinbc10</ID_SESSAO>
+    </TOKEN>
+    <ASSINATURA_SIMPLES>
+        <ASSINATURA>3BDD5A1E1747CE0E</ASSINATURA>
+        <SERVICO_SIPER>245</SERVICO_SIPER>
+        <APELIDO>TESTEREDEA65</APELIDO>
+    </ASSINATURA_SIMPLES>
+    <CONTRA_ORDEM_CHEQUE>
+        <NUMERO_CHEQUE>
+            <INICIO>131</INICIO>
+            <FIM>131</FIM>
+        </NUMERO_CHEQUE>
+        <CODIGO_MOTIVO>21</CODIGO_MOTIVO>
+        <TIPO_COMANDO>INCLUSAO</TIPO_COMANDO>
+        <JUSTIFICATIVA>teste</JUSTIFICATIVA>
+    </CONTRA_ORDEM_CHEQUE>
+</ns2:CONTRA_ORDEM_CHEQUE_ENTRADA>

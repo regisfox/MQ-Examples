@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://caixa.gov.br/sibar/valida_senha" xmlns:sibar_base="http://caixa.gov.br/sibar" xmlns:valida_senha="http://caixa.gov.br/sibar/valida_senha" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://caixa.gov.br/sibar" schemaLocation="../MensagensBarramento.xsd"/>
+    <xsd:complexType name="servico_entrada_negocial_Type">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:SERVICO_ENTRADA_TYPE">
+        <xsd:sequence>
+          <xsd:element name="DADOS" type="valida_senha:dados_entrada_Type"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+    <xsd:complexType name="servico_saida_negocial_Type">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:SERVICO_SAIDA_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="DADOS" type="valida_senha:dados_saida_Type"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+    <xsd:complexType name="dados_entrada_Type">
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="SENHA_CONTA" type="valida_senha:senha_conta_e_Type"/>
+        <xsd:element name="SENHA_INSS" type="valida_senha:senha_inss_e_Type"/>
+                <xsd:element name="SENHA_CIDADAO" type="valida_senha:senha_cidadao_e_Type"/>
+                <xsd:element name="SENHA_CARTAO_CREDITO" type="valida_senha:senha_cartao_credito_e_Type"/>
+            </xsd:choice>
+        </xsd:sequence>
+  </xsd:complexType>
+    <xsd:complexType name="dados_saida_Type">
+    <xsd:complexContent>
+      <xsd:extension base="sibar_base:DADOS_SAIDA_TYPE">
+                <xsd:sequence>
+      <xsd:choice minOccurs="0">
+        <xsd:element name="SENHA_CONTA" type="valida_senha:senha_conta_s_Type"/>
+                <xsd:element name="SENHA_CARTAO_CREDITO" type="valida_senha:senha_cartao_credito_s_Type"/>
+            </xsd:choice>
+        </xsd:sequence>
+                  
+            </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+    <xsd:complexType name="senha_conta_e_Type">
+    <xsd:sequence>
+            <xsd:element name="FLAG_CONSULTA_IP">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+            <xsd:element minOccurs="0" name="VERSAO">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">Domínio:\r\n001\s-\sCONTAS\sNO\sPADRAO\sANTIGO,\sOU\sSEJA,\sO\sNUMERO\sDA\sCONTA\sEH\sLIMITADO\s(SEM\sO\sDV)\sA\s8\sDIGITOS.\r\n003\s-\sCONTAS\sNO\sNOVO\sPADRAO(MIGRADA\sAO\sNSGD).\sNESTE\sCASO\sO\sNUMERO\sDA\sCONTA\sSEM\sO\sDV\sEH\sLIMITADO\sA\s12\sDIGITOS.</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+                        <xsd:minInclusive value="0"/>
+                        <xsd:maxInclusive value="999"/>
+                    </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ACAO">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">Domínio:\r\n00\s-\sINFORMADA\sSENHA\sCAIXA\sPARA\sSER\sVALIDADA.\r\n01\s-\sINFORMADA\sSENHA\sNO\sPADRAO\sLOTERICO\sOU\sCAIXA\sAQUI\sNO\sTEXTO-BB627,\sPARA\sSER\sVALIDADA.\r\n02\s-\sINFORMADA\sSENHA\sDE\sCONTA\sPOP\sNO\sPADRAO\sCAIXA.\r\n03\s-\sINFORMADA\sSENHA\sDE\sCONTA\sNO\sPADRAO\sEASYPHONE\sNO\sCAMPO\sTEXTO-BB627.\r\n04\s-\sINFORMADA\sSENHA\sDE\sCONTA\sNO\sPADRAO\sPROCOMP\sNO\sCAMPO\sTEXTO-BB627.\r\n05\s-\sINFORMADA\sSENHA\sDE\sCONTA\sNO\sPADRAO\sTECBAN\sNO\sCAMPO\sTEXTO-BB627.\r\n06\s-\sINFORMADA\sSENHA\sNO\sPADRAO\sREDESHOP\sNO\sCAMPO\sTEXTO-BB627.\r\n07\s-\sINFORMADA\sSENHA\sCEF1\sSEM\sTRILHA\sPARA\sSER\sVALIDADA.\r\n08\s-\sINFORMADA\sSENHA\sCEF1\sCOM\sTRILHA\sPARA\sSER\sVALIDADA.\r\n09\s-\sINFORMADA\sSENHA\sNO\sPADRAO\sPOS\sCAIXA\sAQUI.\sINFORMAR\sO\sCPO\sREDE-TRANS-BB620.\r\n10\s-\sINFORMADA\sSENHA\sNO\sPADRAO\sWEB\sCAIXA\sAQUI.\sINFORMAR\sO\sCPO\sREDE-TRANS-BB620.\r\n11\s-\sINFORMADA\sSENHA\sNO\sPADRAO\sORBITAL.\sINFORMAR\sSENHA\sNO\sTEXTO-BB627.\r\n12\s-\sINFORMADA\sSENHA\sNO\sPADRAO\sWEB\s-\sE-CAIXA\sPOSTAL.\s\r\n13\s-\sINFORMADA\sSENHA\sDE\sCONTA\sNO\sPADRAO\sPROCOMP\sDE\s2003\sNO\sCAMPO\sTEXTO-BB627.\sNAO\sESQUECER\sDE\sFORNECER\sTAMBEM\sA\sTRILHA2.\r\n14\s-\sINFORMADA\sSENHA\sNO\sFORMATO\sBANCO\sDO\sBRASIL.\r\n15\s-\sINFORMADA\sSENHA\sNO\sPADRAO\sCAIXA\sPROVENIENTE\sDO\sINTERNET\sBANKING.\r\n16\s-\sINFORMADA\sSENHA\sNO\sPADRAO\sPCR\sPARA\sSER\sVALIDADA.\r\n17\s-\sINFORMADA\sSENHA\sNO\sPADRAO\sMULTICANAL\sPARA\sSER\sVALIDADA\sCOM\sTRILHA.\r\n18\s-\sINFORMADA\sSENHA\sNO\sPADRAO\sMULTICANAL\sPARA\sSER\sVALIDADA\sSEM\sTRILHA.\r\n19\s-\sSENHA\sNO\sPADRAO\sSISAG\sPARA\sSER\sVALIDADA\sSEM\sTRILHA.\r\n20\s-\sSENHA\sNO\sPADRAO\sSISAG\sPARA\sSER\sVALIDADA\sCOM\sTRILHA.\r\n21\s-\sSENHA\sNO\sPADRAO\sVISA-VEA\sPARA\sSER\sVALIDADA.</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+                        <xsd:minInclusive value="0"/>
+                        <xsd:maxInclusive value="999"/>
+                    </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="REDE_TRANSMISSORA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+                        <xsd:minInclusive value="0"/>
+                        <xsd:maxInclusive value="9999"/>
+                    </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+            <xsd:choice minOccurs="1">
+        <xsd:element minOccurs="0" name="CONTA_NSGD" type="valida_senha:conta_nsgd_Type"/>
+        <xsd:element minOccurs="0" name="CONTA" type="valida_senha:conta_Type"/>
+      </xsd:choice>
+      <xsd:element minOccurs="0" name="VALOR">
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:decimal">
+                        <xsd:minInclusive value="0"/>
+                        <xsd:maxInclusive value="999999999999.99"/>
+                    </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="NUMERO_SEQUENCIAL">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="FLAG_TRILHA">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">INDICA\sSE\sA\sTRANSACAO\sFOI\sFEITA\sCOM\sOU\sSEM\sTRILHA.\r\n\r\nDomínio:\r\nS\s-\sCOM\sTRILHA.\r\nN\s-\sSEM\sTRILHA.</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="TRILHA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="37"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="SENHA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="16"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="INFORMACOES_CHIP">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="255"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CODIGO_SERVICO">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">CODIGO\sDE\sSERVICO\sPARA\sCONTROLE\sDA\sSENHA.\r\n\r\nOBRIGATÓRIO:\sAUT001.</xsd:documentation>
+        
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="FLAG_CARTEIRA">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">INDICA\sSE\sA\sCARTEIRA\sDO\sCLIENTE\sFOI\sFORNECIDA.\r\n\r\nDomínio:\r\nS\s-\sFOI\sFORNECIDA.\r\nN\s-\sNAO\sFOI\sFORNECIDA.</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CARTEIRA">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">CODIGO\sQUE\sIDENTIFICA\sA\sCARTEIRA\sDO\sCLIENTE.</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="INFORMACOES_TELA">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">CAMPO\sCONHECIDO\sNO\sISO\sCOMO\sBIT123.\r\n\r\nNOS\sDADOS\sDE\sENTRADA\sESTE\sCAMPO\sSÓ\sÉ\sENVIADO\sQUANDO\sA\sOPERAÇÃO\sFOR\s"INFORMA_ERRO_IDENTIFICACAO_POSITIVA".</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="400"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+        </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="senha_conta_s_Type">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="INFORMACOES_TELA">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">CAMPO\sCONHECIDO\sNO\sISO\sCOMO\sBIT123.\r\n\r\nSERÁ\sDEVOLVIDO\sCOM\sOS\sDADOS\sDA\sIDENTIFICACAO\sPOSITIVA.</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="400"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="FLAG_VALIDACAO">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">INDICA\sSE\sSERÁ\sNECESSARIO\sVALIDACAO\sDA\sIDENTIFICACAO\sPOSITIVA.\r\n\r\nDomínio:\r\nS\s-\sHA\sVALIDACAO.\r\nN\s-\sNAO\sHA\sVALIDACAO.</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="TAMANHO_INFORMACOES_TELA">
+        <xsd:annotation>
+          
+        <xsd:documentation source="WMQI_DOCUMENTATION">TAMANHO\sDO\sCAMPO\s"INFORMACOES_TELA".</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CRIPTOGRAMA">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">CAMPO\sCONHECIDO\sNO\sISO\sCOMO\sBIT112.\r\n\r\nSERÁ\sDEVOLVIDO\sCOM\sOS\sDADOS\sPARA\sCHECAGEM\sDA\sIDENTIFICAÇÃO\sPOSITIVA\sPELO\sCANAL\sORIGEM.</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="100"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="TAMANHO_CRIPTOGRAMA">
+        <xsd:annotation>
+          
+        <xsd:documentation source="WMQI_DOCUMENTATION">TAMANHO\sDO\sCAMPO\s"CRIPTOGRAMA".</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="FLAG_ULTIMA_TENTATIVA">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">INDICA\sSE\sEH\sA\sULTIMA\sTENTATIVA\sPARA\sO\sCLIENTE\sACERTAR\sA\sIP:\r\n\r\nDomínio:\r\nS\s-\sULTIMA\sTENTATIVA.\r\nN\s-\sNAO\sÉ\sA\sULTIMA\sTENTATIVA.</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+            <xsd:element minOccurs="0" name="TP_IDENTIFICACAO_POSITIVA">
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">Este\scampo\sNÃO\sdeve\sser\sverificado\sno\scaso\sdo\scampo\sFLAG_VALIDACAO\sser\sigual\sa\s'N'.\r\n\r\nDomínio:\r\n1\s-\sO\sCRIPTOGRAMA\snão\sserá\sfornecido.\sO\sprocesso\sde\sautorizacao\sda\stransacao\sdeve\sser\sINTERROMPIDO\se\sdeverá\sser\sdevolvido\s\spara\so\scanal\sde\sorigem\so\scampo\sINFORMACOES_TELA\se\suma\sinformacao\sque\sindique\sque\sa\sIdentificação\sPositiva\sdeve\sser\scolhida\sdo\scliente\se\senviada\spara\schegagem\sno\smainframe\s(neste\scaso\sa\sIdentificação\sPositiva\sdeve\socorrer\sOBRIGATORIAMENTE\sno\sSIRAN.\r\n2\s-\sO\sCRIPTOGRAMA\sserá\sfornecido\spelo\sSIRAN\spara\spossibilitar\sa\schecagem\sda\sIdentificação\sPositiva\spelo\scanal\sde\sorigem.\r\n3\s-\sSerá\snecessário\sefetuar\scadastramento\sdo\scodigo\sde\sacesso.\sO\sprocesso\sde\sautorizacao\sdeve\sser\sinterrompido\s(confirmar\scom\sa\sespecificacao);\so\scampo\sINFORMACOES_TELA\sserá\sdevolvido\spara\sa\sorigem;\so\scampo\sCRIPTOGRAMA\snão\sserá\sfornecido.</xsd:documentation>
+          
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+        </xsd:sequence>
+  </xsd:complexType>
+    <xsd:complexType name="senha_inss_e_Type">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="TRILHA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="37"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="SENHA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="16"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="REDE_TRANSMISSORA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+                        <xsd:minInclusive value="0"/>
+                        <xsd:maxInclusive value="9999"/>
+                    </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CODIGO_PROCESSAMENTO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:int">
+                        <xsd:minInclusive value="0"/>
+                        <xsd:maxInclusive value="999999"/>
+                    </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+        </xsd:sequence>
+  </xsd:complexType>
+    <xsd:complexType name="senha_cidadao_e_Type">
+    <xsd:sequence maxOccurs="1" minOccurs="1">
+            <xsd:element default="0" minOccurs="1" name="CANAL">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+                        <xsd:minInclusive value="0"/>
+                        <xsd:maxInclusive value="9999"/>
+                    </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+            <xsd:element default="0" name="NIS">
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+            </xsd:element>
+            <xsd:element default=" " minOccurs="1" name="SENHA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="16"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+            <xsd:element minOccurs="0" name="CARTAO" type="valida_senha:cartao_cidadao_Type"/>
+            <xsd:element minOccurs="0" name="DATA_NASCIMENTO">
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:date">
+          </xsd:restriction>
+        </xsd:simpleType>
+            </xsd:element>
+        </xsd:sequence>
+  </xsd:complexType>
+    <xsd:complexType name="conta_nsgd_Type">
+    <xsd:sequence>
+      <xsd:element name="UNIDADE">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+                        <xsd:minInclusive value="0"/>
+                        <xsd:maxInclusive value="9999"/>
+                    </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="PRODUTO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+                        <xsd:minInclusive value="0"/>
+                        <xsd:maxInclusive value="9999"/>
+                    </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="NUMERO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DV">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="TITULAR">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="conta_Type">
+    <xsd:sequence>
+      <xsd:element name="UNIDADE">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+                        <xsd:minInclusive value="0"/>
+                        <xsd:maxInclusive value="9999"/>
+                    </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OPERACAO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+                        <xsd:minInclusive value="0"/>
+                        <xsd:maxInclusive value="999"/>
+                    </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="NUMERO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:int">
+                        <xsd:minInclusive value="0"/>
+                        <xsd:maxInclusive value="99999999"/>
+                    </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DV">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="TITULAR">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+    <xsd:element name="SERVICO_ENTRADA" type="valida_senha:servico_entrada_negocial_Type">
+  </xsd:element>
+    <xsd:element name="SERVICO_SAIDA" type="valida_senha:servico_saida_negocial_Type">
+  </xsd:element>
+    <xsd:complexType name="senha_cartao_credito_e_Type">
+    <xsd:sequence>
+      <xsd:element name="REDE_TRANSMISSORA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="NUMERO_CARTAO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9999999999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="SENHA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="16"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="NSU_ORIGEM">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="TELEFONE" type="valida_senha:telefone_Type"/>
+    </xsd:sequence>
+  </xsd:complexType>
+    <xsd:complexType name="telefone_Type">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="DDD">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:short">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="NUMERO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+    <xsd:complexType name="senha_cartao_credito_s_Type">
+    <xsd:sequence>
+      <xsd:element name="NSU">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999999999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+    <xsd:complexType name="cartao_cidadao_Type">
+    <xsd:sequence>
+      <xsd:element name="TRILHA">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="38"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+    <xsd:element name="VALIDA_SENHA_ENTRADA" type="valida_senha:dados_entrada_Type"/>
+    <xsd:element name="VALIDA_SENHA_SAIDA" type="valida_senha:dados_saida_Type"/>
+</xsd:schema>
